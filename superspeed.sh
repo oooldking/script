@@ -53,12 +53,6 @@ echo
 echo "测试服务器到"
 echo -ne "1.中国电信 2.中国联通 3.中国移动 4.本地默认"
 
-# install speedtest
-if  [ ! -e './speedtest.py' ]; then
-    wget https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
-fi
-chmod a+rx speedtest.py
-
 while :; do echo
         read -p "请输入数字选择： " telecom
         if [[ ! $telecom =~ ^[1-4]$ ]]; then
@@ -335,6 +329,12 @@ if [[ ${telecom} == 3 ]]; then
         fi
     fi
 fi
+
+# install speedtest
+if  [ ! -e './speedtest.py' ]; then
+    wget https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
+fi
+chmod a+rx speedtest.py
 
 result() {
     download=`cat speed.log | awk -F ':' '/Download/{print $2}'`
