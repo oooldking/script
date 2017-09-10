@@ -1,0 +1,2 @@
+# script
+Some Linux scripts
