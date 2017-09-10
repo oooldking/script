@@ -334,7 +334,7 @@ fi
 if  [ ! -e './speedtest.py' ]; then
     wget https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
 fi
-chmod +x speedtest.py
+chmod a+rx speedtest.py
 
 result() {
     download=`cat speed.log | awk -F ':' '/Download/{print $2}'`
