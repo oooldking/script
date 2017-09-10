@@ -346,8 +346,8 @@ result() {
     clear
     echo "$hostby"
     echo "延迟  : $latency"
-    echo "上传  : $download"
-    echo "下载  : $upload"
+    echo "上传  : $upload"
+    echo "下载  : $download"
     echo -ne "\n当前时间: "
     echo $(date +%Y-%m-%d" "%H:%M:%S)
 }
