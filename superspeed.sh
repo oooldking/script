@@ -353,13 +353,13 @@ result() {
 }
 
 if [[ ${telecom} =~ ^[1-3]$ ]]; then
-        python speedtest.py --server ${num} --share | tee speed.log
+    python speedtest.py --server ${num} --share | tee speed.log
     result
     echo "测试到 ${cityName}${telecomName} 完成！"
 fi
 
 if [[ ${telecom} == 4 ]]; then
-        python speedtest.py --server ${num} --share | tee speed.log
+    python speedtest.py --server | tee speed.log
     result
-        echo "本地测试完成！"
+    echo "本地测试完成！"
 fi
