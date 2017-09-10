@@ -359,7 +359,7 @@ if [[ ${telecom} =~ ^[1-3]$ ]]; then
 fi
 
 if [[ ${telecom} == 4 ]]; then
-    python speedtest.py --server | tee speed.log
+    python speedtest.py | tee speed.log
     result
     echo "本地测试完成！"
 fi
