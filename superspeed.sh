@@ -348,8 +348,6 @@ result() {
 	    upload=`cat speed.log | awk -F ':' '/Upload/{print $2}'`
 	    hostby=`cat speed.log | awk -F ':' '/Hosted/{print $1}'`
 	    latency=`cat speed.log | awk -F ':' '/Hosted/{print $2}'`
-	    rm -rf speedtest.py
-	    rm -rf speed.log
 	    clear
 	    echo "$hostby"
 	    echo "延迟  : $latency"
@@ -364,7 +362,7 @@ speed_test(){
 	temp=$(python speedtest.py --server $1 --share)
 	is_error=$(echo "$temp" | grep 'ERROR') 
 	if [[ ${is_error} ]]; then
-		cerror = "ERROR"
+		cerror="ERROR"
 	else
 		local redownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 		local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
@@ -377,14 +375,16 @@ speed_test(){
 
 if [[ ${telecom} =~ ^[1-3]$ ]]; then
     python speedtest.py --server ${num} --share | tee speed.log
-    reslut_temp = $(result)
+    reslut_temp=$(result)
     is_error=$(echo "$reslut_temp" | grep 'ERROR')
 
     if [[ ${is_error} ]]; then
     	exit
     else
-	    echo $reslut_temp
+	    result
 	    echo "测试到 ${cityName}${telecomName} 完成！"
+        rm -rf speedtest.py
+        rm -rf speed.log
 	fi
 fi
 
@@ -392,6 +392,8 @@ if [[ ${telecom} == 4 ]]; then
     python speedtest.py | tee speed.log
     result
     echo "本地测试完成！"
+    rm -rf speedtest.py
+    rm -rf speed.log
 fi
 
 if [[ ${telecom} == 5 ]]; then
