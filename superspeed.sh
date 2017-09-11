@@ -403,7 +403,7 @@ if [[ ${telecom} == 5 ]]; then
 	speed_test '12637' '襄阳电信'
     speed_test '5081' '深圳电信'
 	speed_test '3633' '上海电信'
-	speed_test '3624' '成都电信'
+	speed_test '4624' '成都电信'
 	speed_test '5017' '沈阳联通'
 	speed_test '4863' '西安联通'
 	speed_test '5083' '上海联通'
