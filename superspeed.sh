@@ -15,12 +15,12 @@ SKYBLUE='\033[0;36m'
 PLAIN='\033[0m'
 
 # check root
-[[ $EUID -ne 0 ]] && echo -e "${red}Error:${plain} This script must be run as root!" && exit 1
+[[ $EUID -ne 0 ]] && echo -e "${RED}Error:${PLAIN} This script must be run as root!" && exit 1
 
 # check python
 if  [ ! -e '/usr/bin/python' ]; then
         echo -e
-        read -p "${red}Error:${plain} python is not install. You must be install python command at first.\nDo you want to install? [y/n]" is_install
+        read -p "${RED}Error:${PLAIN} python is not install. You must be install python command at first.\nDo you want to install? [y/n]" is_install
         if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
             if [ "${release}" == "centos" ]; then
                         yum -y install python
@@ -36,7 +36,7 @@ fi
 # check wget
 if  [ ! -e '/usr/bin/wget' ]; then
         echo -e
-        read -p "${red}Error:${plain} wget is not install. You must be install wget command at first.\nDo you want to install? [y/n]" is_install
+        read -p "${RED}Error:${PLAIN} wget is not install. You must be install wget command at first.\nDo you want to install? [y/n]" is_install
         if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
                 if [ "${release}" == "centos" ]; then
                         yum -y install wget
@@ -218,10 +218,10 @@ if [[ ${telecom} == 2 ]]; then
         fi
     fi
     if [[ ${pos} == 2 ]]; then
-        echo -ne "1.上海 2.杭州 3.南宁 4.合肥 5.南昌 6.长沙 7.深圳 8.广州 9.重庆 10.昆明"
+        echo -ne "1.上海 2.杭州 3.南宁 4.合肥 5.南昌 6.长沙 7.深圳 8.广州 9.重庆 10.昆明 11.成都"
         while :; do echo
                 read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^(([1-9])|(1([0])))$ ]]; then
+                if [[ ! $city =~ ^(([1-9])|(1([0-1]{1})))$ ]]; then
                         echo "输入错误! 请输入正确的数字!"
                 else
                         break
@@ -266,6 +266,10 @@ if [[ ${telecom} == 2 ]]; then
         if [[ ${city} == 10 ]]; then
                 num=5103
                 cityName="昆明"
+        fi
+        if [[ ${city} == 11 ]]; then
+                num=2461
+                cityName="成都"
         fi
     fi
 fi
@@ -340,51 +344,45 @@ fi
 chmod a+rx speedtest.py
 
 result() {
-	is_error=$(cat speed.log | grep 'ERROR') 
-	if [[ ${is_error} ]]; then
-		echo "${red}ERROR:${plain} 当前节点不可用，请更换其他节点，或换个时间段再测试。"
-	else
-	    download=`cat speed.log | awk -F ':' '/Download/{print $2}'`
-	    upload=`cat speed.log | awk -F ':' '/Upload/{print $2}'`
-	    hostby=`cat speed.log | awk -F ':' '/Hosted/{print $1}'`
-	    latency=`cat speed.log | awk -F ':' '/Hosted/{print $2}'`
-	    clear
-	    echo "$hostby"
-	    echo "延迟  : $latency"
-	    echo "上传  : $upload"
-	    echo "下载  : $download"
-	    echo -ne "\n当前时间: "
-	    echo $(date +%Y-%m-%d" "%H:%M:%S)
-	fi
+    download=`cat speed.log | awk -F ':' '/Download/{print $2}'`
+    upload=`cat speed.log | awk -F ':' '/Upload/{print $2}'`
+    hostby=`cat speed.log | awk -F ':' '/Hosted/{print $1}'`
+    latency=`cat speed.log | awk -F ':' '/Hosted/{print $2}'`
+    clear
+    echo "$hostby"
+    echo "延迟  : $latency"
+    echo "上传  : $upload"
+    echo "下载  : $download"
+    echo -ne "\n当前时间: "
+    echo $(date +%Y-%m-%d" "%H:%M:%S)
 }
 
 speed_test(){
 	temp=$(python speedtest.py --server $1 --share 2>&1)
 	is_down=$(echo "$temp" | grep 'Download') 
 	if [[ ${is_down} ]]; then
-        local redownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
+        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
         local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
         local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
         local nodeName=$2
 
-        printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${redownload}" "${relatency}"
+        printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
 	else
         local cerror="ERROR"
 	fi
 }
 
 if [[ ${telecom} =~ ^[1-3]$ ]]; then
-    python speedtest.py --server ${num} --share | tee speed.log 2>&1
-    reslut_temp=$(result)
-    is_error=$(echo "$reslut_temp" | grep 'ERROR')
+    python speedtest.py --server ${num} --share 2>/dev/null | tee speed.log 2>/dev/null
+    is_down=$(cat speed.log | grep 'Download')
 
-    if [[ ${is_error} ]]; then
-    	exit
-    else
-	    result
-	    echo "测试到 ${cityName}${telecomName} 完成！"
+    if [[ ${is_down} ]]; then
+        result
+        echo "测试到 ${cityName}${telecomName} 完成！"
         rm -rf speedtest.py
         rm -rf speed.log
+    else
+	    echo -e "\n${RED}ERROR:${PLAIN} 当前节点不可用，请更换其他节点，或换个时间段再测试。"
 	fi
 fi
 
@@ -403,15 +401,16 @@ if [[ ${telecom} == 5 ]]; then
     speed_test '1111' '测试节点'
     speed_test '1122' '测试节点'
 	speed_test '12637' '襄阳电信'
+    speed_test '5081' '深圳电信'
 	speed_test '3633' '上海电信'
 	speed_test '3624' '成都电信'
 	speed_test '5017' '沈阳联通'
-	speed_test '5475' '天津联通'
 	speed_test '4863' '西安联通'
 	speed_test '5083' '上海联通'
 	speed_test '5726' '重庆联通'
 	speed_test '5192' '西安移动'
 	speed_test '4665' '上海移动'
+    speed_test '6715' '宁波移动'
 	speed_test '4575' '成都移动'
 	end=$(date +%s)  
 	rm -rf speedtest.py
