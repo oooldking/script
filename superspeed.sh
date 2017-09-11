@@ -340,35 +340,52 @@ fi
 chmod a+rx speedtest.py
 
 result() {
-    download=`cat speed.log | awk -F ':' '/Download/{print $2}'`
-    upload=`cat speed.log | awk -F ':' '/Upload/{print $2}'`
-    hostby=`cat speed.log | awk -F ':' '/Hosted/{print $1}'`
-    latency=`cat speed.log | awk -F ':' '/Hosted/{print $2}'`
-    rm -rf speedtest.py
-    rm -rf speed.log
-    clear
-    echo "$hostby"
-    echo "延迟  : $latency"
-    echo "上传  : $upload"
-    echo "下载  : $download"
-    echo -ne "\n当前时间: "
-    echo $(date +%Y-%m-%d" "%H:%M:%S)
+	is_error=$(cat speed.log | grep 'ERROR') 
+	if [[ ${is_error} ]]; then
+		echo "${red}ERROR:${plain} 当前节点不可用，请更换其他节点，或换个时间段再测试。"
+	else
+	    download=`cat speed.log | awk -F ':' '/Download/{print $2}'`
+	    upload=`cat speed.log | awk -F ':' '/Upload/{print $2}'`
+	    hostby=`cat speed.log | awk -F ':' '/Hosted/{print $1}'`
+	    latency=`cat speed.log | awk -F ':' '/Hosted/{print $2}'`
+	    rm -rf speedtest.py
+	    rm -rf speed.log
+	    clear
+	    echo "$hostby"
+	    echo "延迟  : $latency"
+	    echo "上传  : $upload"
+	    echo "下载  : $download"
+	    echo -ne "\n当前时间: "
+	    echo $(date +%Y-%m-%d" "%H:%M:%S)
+	fi
 }
 
 speed_test(){
 	temp=$(python speedtest.py --server $1 --share)
-	local redownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
-	local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
-	local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
-	local nodeName=$2
+	is_error=$(echo "$temp" | grep 'ERROR') 
+	if [[ ${is_error} ]]; then
+		cerror = "ERROR"
+	else
+		local redownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
+		local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
+		local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+		local nodeName=$2
 
-	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${redownload}" "${relatency}"
+		printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${redownload}" "${relatency}"
+	fi
 }
 
 if [[ ${telecom} =~ ^[1-3]$ ]]; then
     python speedtest.py --server ${num} --share | tee speed.log
-    result
-    echo "测试到 ${cityName}${telecomName} 完成！"
+    reslut_temp = $(result)
+    is_error=$(echo "$reslut_temp" | grep 'ERROR')
+
+    if [[ ${is_error} ]]; then
+    	exit
+    else
+	    echo $reslut_temp
+	    echo "测试到 ${cityName}${telecomName} 完成！"
+	fi
 fi
 
 if [[ ${telecom} == 4 ]]; then
