@@ -399,9 +399,9 @@ if [[ ${telecom} == 5 ]]; then
 	if [[ $time -gt 60 ]]; then
 		min=$(expr $time / 60)
 		sec=$(expr $time % 60)
-		echo "花费时间：${min} 分 ${sec} 秒"
+		echo -ne "花费时间：${min} 分 ${sec} 秒"
 	else
-		echo "花费时间：${time} 秒"
+		echo -ne "花费时间：${time} 秒"
 	fi
 	echo -ne "\n当前时间: "
     echo $(date +%Y-%m-%d" "%H:%M:%S)
