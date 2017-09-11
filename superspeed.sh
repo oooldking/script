@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Description: One step to test your server's network
+# Description: Test your server's network with Speedtest to China
 #
 # Copyright (C) 2017 - 2017 Oldking <oooldking@gmail.com>
 #
