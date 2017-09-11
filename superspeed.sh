@@ -7,13 +7,20 @@
 # URL: https://www.oldking.net/305.html
 #
 
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+SKYBLUE='\033[0;36m'
+PLAIN='\033[0m'
+
 # check root
 [[ $EUID -ne 0 ]] && echo -e "${red}Error:${plain} This script must be run as root!" && exit 1
 
 # check python
 if  [ ! -e '/usr/bin/python' ]; then
         echo -e
-        read -p "Error: python is not install. You must be install python command at first.\nDo you want to install? [y/n]" is_install
+        read -p "${red}Error:${plain} python is not install. You must be install python command at first.\nDo you want to install? [y/n]" is_install
         if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
             if [ "${release}" == "centos" ]; then
                         yum -y install python
@@ -29,7 +36,7 @@ fi
 # check wget
 if  [ ! -e '/usr/bin/wget' ]; then
         echo -e
-        read -p "Error: wget is not install. You must be install wget command at first.\nDo you want to install? [y/n]" is_install
+        read -p "${red}Error:${plain} wget is not install. You must be install wget command at first.\nDo you want to install? [y/n]" is_install
         if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
                 if [ "${release}" == "centos" ]; then
                         yum -y install wget
@@ -51,11 +58,11 @@ echo "# Github: https://github.com/oooldking                      #"
 echo "#############################################################"
 echo
 echo "测试服务器到"
-echo -ne "1.中国电信 2.中国联通 3.中国移动 4.本地默认"
+echo -ne "1.中国电信 2.中国联通 3.中国移动 4.本地默认 5.全面测速"
 
 while :; do echo
         read -p "请输入数字选择： " telecom
-        if [[ ! $telecom =~ ^[1-4]$ ]]; then
+        if [[ ! $telecom =~ ^[1-5]$ ]]; then
                 echo "输入错误! 请输入正确的数字!"
         else
                 break   
@@ -211,10 +218,10 @@ if [[ ${telecom} == 2 ]]; then
         fi
     fi
     if [[ ${pos} == 2 ]]; then
-        echo -ne "1.上海 2.杭州 3.南宁 4.合肥 5.南昌 6.长沙 7.深圳 8.广州 9.重庆 10.成都 11.昆明"
+        echo -ne "1.上海 2.杭州 3.南宁 4.合肥 5.南昌 6.长沙 7.深圳 8.广州 9.重庆 10.昆明"
         while :; do echo
                 read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^(([1-9])|(1([0-1]{1})))$ ]]; then
+                if [[ ! $city =~ ^(([1-9])|(1([0])))$ ]]; then
                         echo "输入错误! 请输入正确的数字!"
                 else
                         break
@@ -257,10 +264,6 @@ if [[ ${telecom} == 2 ]]; then
                 cityName="重庆"
         fi
         if [[ ${city} == 10 ]]; then
-                num=2461
-                cityName="成都"
-        fi
-        if [[ ${city} == 11 ]]; then
                 num=5103
                 cityName="昆明"
         fi
@@ -352,6 +355,16 @@ result() {
     echo $(date +%Y-%m-%d" "%H:%M:%S)
 }
 
+speed_test(){
+	temp=$(python speedtest.py --server $1 --share)
+	local redownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
+	local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
+	local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+	local nodeName=$2
+
+	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${redownload}" "${relatency}"
+}
+
 if [[ ${telecom} =~ ^[1-3]$ ]]; then
     python speedtest.py --server ${num} --share | tee speed.log
     result
@@ -362,4 +375,33 @@ if [[ ${telecom} == 4 ]]; then
     python speedtest.py | tee speed.log
     result
     echo "本地测试完成！"
+fi
+
+if [[ ${telecom} == 5 ]]; then
+	echo ""
+	printf "%-14s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"
+	start=$(date +%s) 
+	speed_test '12637' '襄阳电信'
+	speed_test '3633' '上海电信'
+	speed_test '3624' '成都电信'
+	speed_test '5017' '沈阳联通'
+	speed_test '5475' '天津联通'
+	speed_test '4863' '西安联通'
+	speed_test '5083' '上海联通'
+	speed_test '5726' '重庆联通'
+	speed_test '5192' '西安移动'
+	speed_test '4665' '上海移动'
+	speed_test '4575' '成都移动'
+	end=$(date +%s)  
+	rm -rf speedtest.py
+	echo ""
+	time=$(( $end - $start ))
+	if [[ $time > 60 ]]; them
+		min=$time/60
+		sec=$time%60
+		echo "花费时间：${min} 分 ${sec} 秒"
+	else
+		echo "花费时间：${time} 秒"
+	fi
+	echo "全面测试完成！"
 fi
