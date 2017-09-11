@@ -359,22 +359,22 @@ result() {
 }
 
 speed_test(){
-	temp=$(python speedtest.py --server $1 --share)
-	is_error=$(echo "$temp" | grep 'ERROR') 
-	if [[ ${is_error} ]]; then
-		cerror="ERROR"
-	else
-		local redownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
-		local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
-		local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
-		local nodeName=$2
+	temp=$(python speedtest.py --server $1 --share 2>&1)
+	is_down=$(echo "$temp" | grep 'Download') 
+	if [[ ${is_down} ]]; then
+        local redownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
+        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
+        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+        local nodeName=$2
 
-		printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${redownload}" "${relatency}"
+        printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${redownload}" "${relatency}"
+	else
+        local cerror="ERROR"
 	fi
 }
 
 if [[ ${telecom} =~ ^[1-3]$ ]]; then
-    python speedtest.py --server ${num} --share | tee speed.log
+    python speedtest.py --server ${num} --share | tee speed.log 2>&1
     reslut_temp=$(result)
     is_error=$(echo "$reslut_temp" | grep 'ERROR')
 
@@ -400,6 +400,8 @@ if [[ ${telecom} == 5 ]]; then
 	echo ""
 	printf "%-14s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"
 	start=$(date +%s) 
+    speed_test '1111' '测试节点'
+    speed_test '1122' '测试节点'
 	speed_test '12637' '襄阳电信'
 	speed_test '3633' '上海电信'
 	speed_test '3624' '成都电信'
