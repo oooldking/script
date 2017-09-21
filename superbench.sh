@@ -140,7 +140,7 @@ tram=$( free -m | awk '/Mem/ {print $2}' )
 uram=$( free -m | awk '/Mem/ {print $3}' )
 swap=$( free -m | awk '/Swap/ {print $2}' )
 uswap=$( free -m | awk '/Swap/ {print $3}' )
-up=$( awk '{a=$1/86400;b=($1%86400)/3600;c=($1%3600)/60} {printf("%d days, %d hour %d min\n",a,b,c)}' /proc/uptime )
+up=$( awk '{a=$1/86400;b=($1%86400)/3600;c=($1%3600)/60} {printf("%d days %d hour %d min\n",a,b,c)}' /proc/uptime )
 load=$( w | head -1 | awk -F'load average:' '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//' )
 opsy=$( get_opsy )
 arch=$( uname -m )
@@ -173,7 +173,7 @@ echo -n "I/O speed( 512M )    : "
 io2=$( io_test 1M 512 )
 echo -e "${YELLOW}$io2${PLAIN}"
 echo -n "I/O speed( 2G )      : "
-io3=$( io_test 32M 64 )
+io3=$( io_test 8M 256 )
 echo -e "${YELLOW}$io3${PLAIN}"
 ioraw1=$( echo $io1 | awk 'NR==1 {print $1}' )
 [ "`echo $io1 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
