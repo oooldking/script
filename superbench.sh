@@ -220,8 +220,9 @@ if [[ ${virtua} ]]; then
 	echo -e "${SKYBLUE}$virtua${PLAIN}"
 else
 	echo -e "${SKYBLUE}No Virt${PLAIN}"
+	echo -ne "Power time of disk   : "
 	install_smart
-	echo -e "Power time of disk   : ${SKYBLUE}$ptime Hours${PLAIN}"
+	echo -e "${SKYBLUE}$ptime Hours${PLAIN}"
 fi
 next
 echo -n "I/O speed( 32M )     : "
