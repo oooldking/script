@@ -67,15 +67,6 @@ if  [ ! -e '/usr/bin/wget' ]; then
         fi
 fi
 
-# install virt-what
-if  [ ! -e '/usr/sbin/virt-what' ]; then
-    if [ "${release}" == "centos" ]; then
-        yum -y install virt-what > /dev/null 2>&1
-    else
-        apt-get -y install virt-what > /dev/null 2>&1
-    fi      
-fi
-
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
@@ -198,7 +189,7 @@ disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot
 disk_total_size=$( calc_disk ${disk_size1[@]} )
 disk_used_size=$( calc_disk ${disk_size2[@]} )
 ptime=$(power_time)
-virtua=$(virt-what)
+
 
 clear
 next
@@ -213,22 +204,34 @@ echo -e "Load average         : ${SKYBLUE}$load${PLAIN}"
 echo -e "OS                   : ${SKYBLUE}$opsy${PLAIN}"
 echo -e "Arch                 : ${SKYBLUE}$arch ($lbit Bit)${PLAIN}"
 echo -e "Kernel               : ${SKYBLUE}$kern${PLAIN}"
+echo -e "Virt-what            : "
+
+# install virt-what
+if  [ ! -e '/usr/sbin/virt-what' ]; then
+    if [ "${release}" == "centos" ]; then
+        yum -y install virt-what > /dev/null 2>&1
+    else
+        apt-get -y install virt-what > /dev/null 2>&1
+    fi      
+fi
+virtua=$(virt-what)
+
 if [[ ${virtua} ]]; then
-	echo -e "Virt-what            : ${SKYBLUE}$virtua${PLAIN}"
+	echo -e "${SKYBLUE}$virtua${PLAIN}"
 else
-	echo -e "Virt-what            : ${SKYBLUE}No Virt${PLAIN}"
+	echo -e "${SKYBLUE}No Virt${PLAIN}"
 	install_smart
 	echo -e "Power time of disk   : ${SKYBLUE}$ptime Hours${PLAIN}"
 fi
 next
-echo -n "I/O speed( 64M )     : "
-io1=$( io_test 64k 1k )
+echo -n "I/O speed( 32M )     : "
+io1=$( io_test 32k 1k )
 echo -e "${YELLOW}$io1${PLAIN}"
-echo -n "I/O speed( 512M )    : "
-io2=$( io_test 1M 512 )
+echo -n "I/O speed( 256M )    : "
+io2=$( io_test 64k 4k )
 echo -e "${YELLOW}$io2${PLAIN}"
 echo -n "I/O speed( 2G )      : "
-io3=$( io_test 32M 64 )
+io3=$( io_test 64k 32k )
 echo -e "${YELLOW}$io3${PLAIN}"
 ioraw1=$( echo $io1 | awk 'NR==1 {print $1}' )
 [ "`echo $io1 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
