@@ -364,6 +364,10 @@ speed_test(){
         local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
         local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
         local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        if [[ ${temp} -gt 1000 ]]; then
+            relatency=" 000.000 ms"
+        fi
         local nodeName=$2
 
         printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"

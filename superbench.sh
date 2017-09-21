@@ -16,6 +16,23 @@ YELLOW='\033[0;33m'
 SKYBLUE='\033[0;36m'
 PLAIN='\033[0m'
 
+# check release
+if [ -f /etc/redhat-release ]; then
+    release="centos"
+elif cat /etc/issue | grep -Eqi "debian"; then
+    release="debian"
+elif cat /etc/issue | grep -Eqi "ubuntu"; then
+    release="ubuntu"
+elif cat /etc/issue | grep -Eqi "centos|red hat|redhat"; then
+    release="centos"
+elif cat /proc/version | grep -Eqi "debian"; then
+    release="debian"
+elif cat /proc/version | grep -Eqi "ubuntu"; then
+    release="ubuntu"
+elif cat /proc/version | grep -Eqi "centos|red hat|redhat"; then
+    release="centos"
+fi
+
 # check root
 [[ $EUID -ne 0 ]] && echo -e "${RED}Error:${PLAIN} This script must be run as root!" && exit 1
 
@@ -50,6 +67,15 @@ if  [ ! -e '/usr/bin/wget' ]; then
         fi
 fi
 
+# install virt-what
+if  [ ! -e '/usr/sbin/virt-what' ]; then
+    if [ "${release}" == "centos" ]; then
+        yum -y install virt-what > /dev/null 2>&1
+    else
+        apt-get -y install virt-what > /dev/null 2>&1
+    fi      
+fi
+
 get_opsy() {
     [ -f /etc/redhat-release ] && awk '{print ($1,$3~/^[0-9]/?$3:$4)}' /etc/redhat-release && return
     [ -f /etc/os-release ] && awk -F'[= "]' '/PRETTY_NAME/{print $3,$4,$5}' /etc/os-release && return
@@ -81,6 +107,10 @@ speed_test(){
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        	if [[ ${temp} -gt 1000 ]]; then
+            	relatency=" 000.000 ms"
+        	fi
 	        local nodeName=$2
 
 	        printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
@@ -131,6 +161,22 @@ calc_disk() {
     echo ${total_size}
 }
 
+power_time() {
+
+	result=$(smartctl -a $(result=$(cat /proc/mounts) && echo $(echo "$result" | awk '/data=ordered/{print $1}') | awk '{print $1}') 2>&1) && power_time=$(echo "$result" | awk '/Power_On/{print $10}') && echo "$power_time"
+}
+
+install_smart() {
+	# install smartctl
+	if  [ ! -e '/usr/sbin/smartctl' ]; then
+	    if [ "${release}" == "centos" ]; then
+	        yum -y install smartmontools > /dev/null 2>&1
+	    else
+	        apt-get -y install smartmontools > /dev/null 2>&1
+	    fi      
+	fi
+}
+
 start=$(date +%s) 
 
 cname=$( awk -F: '/model name/ {name=$2} END {print name}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
@@ -151,6 +197,8 @@ disk_size1=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot
 disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
 disk_total_size=$( calc_disk ${disk_size1[@]} )
 disk_used_size=$( calc_disk ${disk_size2[@]} )
+ptime=$(power_time)
+virtua=$(virt-what)
 
 clear
 next
@@ -165,6 +213,13 @@ echo -e "Load average         : ${SKYBLUE}$load${PLAIN}"
 echo -e "OS                   : ${SKYBLUE}$opsy${PLAIN}"
 echo -e "Arch                 : ${SKYBLUE}$arch ($lbit Bit)${PLAIN}"
 echo -e "Kernel               : ${SKYBLUE}$kern${PLAIN}"
+if [[ ${virtua} ]]; then
+	echo -e "Virt-what            : ${SKYBLUE}$virtua${PLAIN}"
+else
+	echo -e "Virt-what            : ${SKYBLUE}No Virt${PLAIN}"
+	install_smart
+	echo -e "Power time of disk   : ${SKYBLUE}$ptime Hours${PLAIN}"
+fi
 next
 echo -n "I/O speed( 64M )     : "
 io1=$( io_test 64k 1k )
