@@ -170,7 +170,7 @@ echo -n "I/O speed( 64M )     : "
 io1=$( io_test 64k 1k )
 echo -e "${YELLOW}$io1${PLAIN}"
 echo -n "I/O speed( 512M )    : "
-io2=$( io_test 8M 64 )
+io2=$( io_test 1M 512 )
 echo -e "${YELLOW}$io2${PLAIN}"
 echo -n "I/O speed( 2G )      : "
 io3=$( io_test 32M 64 )
