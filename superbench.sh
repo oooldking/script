@@ -183,4 +183,5 @@ else
 fi
 echo -ne "\n当前时间: "
 echo $(date +%Y-%m-%d" "%H:%M:%S)
-echo "全面测试完成！"
+echo "测试完成！"
+next
