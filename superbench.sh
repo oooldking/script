@@ -120,14 +120,14 @@ speed() {
 
     speed_test '' 'Normal Node'
 	speed_test '12637' 'Xiangyang CT'
-	speed_test '3633' 'Shanghai CT'
-	speed_test '4624' 'Chengdu CT'
-	speed_test '4863' "Xi'an CU"
-	speed_test '5083' 'Shanghai CU'
+	speed_test '3633' 'Shanghai  CT'
+	speed_test '4624' 'Chengdu   CT'
+	speed_test '4863' "Xi'an     CU"
+	speed_test '5083' 'Shanghai  CU'
 	speed_test '5726' 'Chongqing CU'
-	speed_test '5192' "Xi'an CM"
-	speed_test '4665' 'Shanghai CM'
-	speed_test '4575' 'Chengdu CM'
+	speed_test '5192' "Xi'an     CM"
+	speed_test '4665' 'Shanghai  CM'
+	speed_test '4575' 'Chengdu   CM'
 	 
 	rm -rf speedtest.py
 }
@@ -251,11 +251,11 @@ time=$(( $end - $start ))
 if [[ $time -gt 60 ]]; then
 	min=$(expr $time / 60)
 	sec=$(expr $time % 60)
-	echo -ne "Total time：${min} 分 ${sec} 秒"
+	echo -ne "Total time  : ${min} 分 ${sec} 秒"
 else
-	echo -ne "Total time：${time} 秒"
+	echo -ne "Total time  : ${time} 秒"
 fi
-echo -ne "\nCurent time: "
+echo -ne "\nCurent time : "
 echo $(date +%Y-%m-%d" "%H:%M:%S)
 echo "Finished！"
 next
