@@ -118,16 +118,16 @@ speed() {
 	fi
 	chmod a+rx speedtest.py
 
-    speed_test '' '默认节点'
-	speed_test '12637' '襄阳电信'
-	speed_test '3633' '上海电信'
-	speed_test '4624' '成都电信'
-	speed_test '4863' '西安联通'
-	speed_test '5083' '上海联通'
-	speed_test '5726' '重庆联通'
-	speed_test '5192' '西安移动'
-	speed_test '4665' '上海移动'
-	speed_test '4575' '成都移动'
+    speed_test '' 'Normal Node'
+	speed_test '12637' 'Xiangyang CT'
+	speed_test '3633' 'Shanghai CT'
+	speed_test '4624' 'Chengdu CT'
+	speed_test '4863' "Xi'an CU"
+	speed_test '5083' 'Shanghai CU'
+	speed_test '5726' 'Chongqing CU'
+	speed_test '5192' "Xi'an CM"
+	speed_test '4665' 'Shanghai CM'
+	speed_test '4575' 'Chengdu CM'
 	 
 	rm -rf speedtest.py
 }
@@ -251,11 +251,11 @@ time=$(( $end - $start ))
 if [[ $time -gt 60 ]]; then
 	min=$(expr $time / 60)
 	sec=$(expr $time % 60)
-	echo -ne "花费时间：${min} 分 ${sec} 秒"
+	echo -ne "Total time：${min} 分 ${sec} 秒"
 else
-	echo -ne "花费时间：${time} 秒"
+	echo -ne "Total time：${time} 秒"
 fi
-echo -ne "\n当前时间: "
+echo -ne "\nCurent time: "
 echo $(date +%Y-%m-%d" "%H:%M:%S)
-echo "测试完成！"
+echo "Finished！"
 next
