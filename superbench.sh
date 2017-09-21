@@ -173,7 +173,7 @@ echo -n "I/O speed( 512M )    : "
 io2=$( io_test 1M 512 )
 echo -e "${YELLOW}$io2${PLAIN}"
 echo -n "I/O speed( 2G )      : "
-io3=$( io_test 8M 256 )
+io3=$( io_test 32M 64 )
 echo -e "${YELLOW}$io3${PLAIN}"
 ioraw1=$( echo $io1 | awk 'NR==1 {print $1}' )
 [ "`echo $io1 | awk 'NR==1 {print $2}'`" == "GB/s" ] && ioraw1=$( awk 'BEGIN{print '$ioraw1' * 1024}' )
