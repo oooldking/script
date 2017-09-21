@@ -6,7 +6,7 @@
 #
 # Thanks: Bench.sh <i@teddysun.com>
 #
-# URL: https://www.oldking.net/305.html
+# URL: https://www.oldking.net/350.html
 #
 
 # Colors
@@ -33,6 +33,21 @@ if  [ ! -e '/usr/bin/python' ]; then
             exit
         fi
         
+fi
+
+# check wget
+if  [ ! -e '/usr/bin/wget' ]; then
+        echo -e
+        read -p "${RED}Error:${PLAIN} wget is not install. You must be install wget command at first.\nDo you want to install? [y/n]" is_install
+        if [[ ${is_install} == "y" || ${is_install} == "Y" ]]; then
+                if [ "${release}" == "centos" ]; then
+                        yum -y install wget
+                else
+                        apt-get -y install wget
+                fi
+        else
+                exit
+        fi
 fi
 
 get_opsy() {
