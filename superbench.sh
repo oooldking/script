@@ -251,9 +251,9 @@ time=$(( $end - $start ))
 if [[ $time -gt 60 ]]; then
 	min=$(expr $time / 60)
 	sec=$(expr $time % 60)
-	echo -ne "Total time  : ${min} 分 ${sec} 秒"
+	echo -ne "Total time  : ${min} min ${sec} sec"
 else
-	echo -ne "Total time  : ${time} 秒"
+	echo -ne "Total time  : ${time} sec"
 fi
 echo -ne "\nCurent time : "
 echo $(date +%Y-%m-%d" "%H:%M:%S)
