@@ -204,7 +204,7 @@ echo -e "Load average         : ${SKYBLUE}$load${PLAIN}"
 echo -e "OS                   : ${SKYBLUE}$opsy${PLAIN}"
 echo -e "Arch                 : ${SKYBLUE}$arch ($lbit Bit)${PLAIN}"
 echo -e "Kernel               : ${SKYBLUE}$kern${PLAIN}"
-echo -ne "Virt-what            : "
+echo -ne "Virt                 : "
 
 # install virt-what
 if  [ ! -e '/usr/sbin/virt-what' ]; then
