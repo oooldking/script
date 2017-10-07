@@ -255,7 +255,7 @@ if [[ $time -gt 60 ]]; then
 else
 	echo -ne "Total time  : ${time} sec"
 fi
-echo -ne "\nCurent time : "
+echo -ne "\nCurrent time : "
 echo $(date +%Y-%m-%d" "%H:%M:%S)
 echo "Finished！"
 next
