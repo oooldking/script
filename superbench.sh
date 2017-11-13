@@ -209,8 +209,10 @@ echo -ne "Virt                 : "
 # install virt-what
 if  [ ! -e '/usr/sbin/virt-what' ]; then
     if [ "${release}" == "centos" ]; then
+    	yum update > /dev/null 2>&1
         yum -y install virt-what > /dev/null 2>&1
     else
+    	apt-get update > /dev/null 2>&1
         apt-get -y install virt-what > /dev/null 2>&1
     fi      
 fi
