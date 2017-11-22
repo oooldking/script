@@ -216,7 +216,7 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
         apt-get -y install virt-what > /dev/null 2>&1
     fi      
 fi
-virtua=$(virt-what)
+virtua=$(virt-what) 2>/dev/null
 
 if [[ ${virtua} ]]; then
 	echo -e "${SKYBLUE}$virtua${PLAIN}"
