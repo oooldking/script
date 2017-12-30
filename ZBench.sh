@@ -46,6 +46,16 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
     fi      
 fi
 
+# Install Besttrace
+if  [ ! -e '/tmp/besttrace' ]; then
+    echo "Installing Besttrace......"
+    dir=$(pwd)
+    cd /tmp/
+    wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/besttrace > /dev/null 2>&1
+    cd $dir
+fi
+chmod a+rx /tmp/besttrace
+
 # Check Python
 if  [ ! -e '/usr/bin/python' ]; then
     echo "Installing Python......"
@@ -240,3 +250,19 @@ speed && next
 printf "%-26s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"
 speed_cn && next
 python /tmp/ZPing.py
+next
+echo "TraceRoute to Shanghai Telecom"
+/tmp/besttrace 61.129.42.6
+next
+echo "TraceRoute to Shanghai Mobile"
+/tmp/besttrace speedtest2.sh.chinamobile.com
+next
+echo "TraceRoute to Guangdong Telecom"
+/tmp/besttrace 121.14.220.240
+next
+echo "TraceRoute to Guangdong Mobile"
+/tmp/besttrace 211.136.192.6
+next
+
+
+
