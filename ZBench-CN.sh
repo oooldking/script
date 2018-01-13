@@ -34,6 +34,13 @@ SKYBLUE='\033[0;36m'
 PLAIN='\033[0m'
 
 
+# Install locales
+
+if [ "${release}" != "centos" ]; then
+    apt-get update > /dev/null 2>&1
+    apt-get -y install locales > /dev/null 2>&1
+fi      
+
 # Install Virt-what
 if  [ ! -e '/usr/sbin/virt-what' ]; then
     echo "Installing Virt-What......"
@@ -41,7 +48,6 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
         yum update > /dev/null 2>&1
         yum -y install virt-what > /dev/null 2>&1
     else
-        apt-get update > /dev/null 2>&1
         apt-get -y install virt-what > /dev/null 2>&1
     fi      
 fi
@@ -92,15 +98,15 @@ fi
 chmod a+rx /tmp/speedtest.py
 
 
-# Install Zping
-if  [ ! -e '/tmp/ZPing.py' ]; then
-    echo "Installing ZPing.py......"
+# Install Zping-CN
+if  [ ! -e '/tmp/ZPing-CN.py' ]; then
+    echo "Installing ZPing-CN.py......"
     dir=$(pwd)
     cd /tmp/
     wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZPing-CN.py > /dev/null 2>&1
     cd $dir
 fi
-chmod a+rx /tmp/ZPing.py
+chmod a+rx /tmp/ZPing-CN.py
 
 #"TraceRoute to Shanghai Telecom"
 /tmp/besttrace 61.129.42.6 > /tmp/sht.txt 2>&1 &
@@ -133,16 +139,16 @@ speed_test() {
 
 speed() {
     speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
-    speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, 东京, 日本'
-    speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, 新加坡'
-    speed_test 'http://speedtest.london.linode.com/100MB-london.bin' 'Linode, 伦敦, 英国'
-    speed_test 'http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin' 'Linode, 法兰克福, 德国'
-    speed_test 'http://speedtest.fremont.linode.com/100MB-fremont.bin' 'Linode, 弗里蒙特, 加拿大'
-    speed_test 'http://speedtest.dal05.softlayer.com/downloads/test100.zip' 'Softlayer, 达拉斯, 得克萨斯'
-    speed_test 'http://speedtest.sea01.softlayer.com/downloads/test100.zip' 'Softlayer, 西雅图, 华盛顿'
-    speed_test 'http://speedtest.fra02.softlayer.com/downloads/test100.zip' 'Softlayer, 法兰克福, 德国'
-    speed_test 'http://speedtest.sng01.softlayer.com/downloads/test100.zip' 'Softlayer, 新加坡'
-    speed_test 'http://speedtest.hkg02.softlayer.com/downloads/test100.zip' 'Softlayer, 香港, 中国'
+    speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
+    speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, Singapore, SG'
+    speed_test 'http://speedtest.london.linode.com/100MB-london.bin' 'Linode, London, UK'
+    speed_test 'http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin' 'Linode, Frankfurt, DE'
+    speed_test 'http://speedtest.fremont.linode.com/100MB-fremont.bin' 'Linode, Fremont, CA'
+    speed_test 'http://speedtest.dal05.softlayer.com/downloads/test100.zip' 'Softlayer, Dallas, TX'
+    speed_test 'http://speedtest.sea01.softlayer.com/downloads/test100.zip' 'Softlayer, Seattle, WA'
+    speed_test 'http://speedtest.fra02.softlayer.com/downloads/test100.zip' 'Softlayer, Frankfurt, DE'
+    speed_test 'http://speedtest.sng01.softlayer.com/downloads/test100.zip' 'Softlayer, Singapore, SG'
+    speed_test 'http://speedtest.hkg02.softlayer.com/downloads/test100.zip' 'Softlayer, HongKong, CN'
 }
 
 speed_test_cn(){
@@ -155,7 +161,7 @@ speed_test_cn(){
             local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
             local nodeName=$2
 
-            printf "${YELLOW}%-25s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
+            printf "${YELLOW}%-29s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
         else
             local cerror="ERROR"
         fi
@@ -172,7 +178,7 @@ speed_test_cn(){
             fi
             local nodeName=$2
 
-            printf "${YELLOW}%-25s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
+            printf "${YELLOW}%-29s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
         else
             local cerror="ERROR"
         fi
@@ -239,11 +245,11 @@ next
 echo -e "CPU 型号             : ${SKYBLUE}$cname${PLAIN}"
 echo -e "CPU 核心数           : ${SKYBLUE}$cores${PLAIN}"
 echo -e "CPU 频率             : ${SKYBLUE}$freq MHz${PLAIN}"
-echo -e "总硬盘大小            : ${SKYBLUE}$disk_total_size GB ($disk_used_size GB Used)${PLAIN}"
-echo -e "总内存大小            : ${SKYBLUE}$tram MB ($uram MB Used)${PLAIN}"
+echo -e "总硬盘大小           : ${SKYBLUE}$disk_total_size GB ($disk_used_size GB Used)${PLAIN}"
+echo -e "总内存大小           : ${SKYBLUE}$tram MB ($uram MB Used)${PLAIN}"
 echo -e "SWAP大小             : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}"
-echo -e "开机时长              : ${SKYBLUE}$up${PLAIN}"
-echo -e "系统负载              : ${SKYBLUE}$load${PLAIN}"
+echo -e "开机时长             : ${SKYBLUE}$up${PLAIN}"
+echo -e "系统负载             : ${SKYBLUE}$load${PLAIN}"
 echo -e "系统                 : ${SKYBLUE}$opsy${PLAIN}"
 echo -e "架构                 : ${SKYBLUE}$arch ($lbit Bit)${PLAIN}"
 echo -e "内核                 : ${SKYBLUE}$kern${PLAIN}"
@@ -259,15 +265,15 @@ fi
 
 next
 io1=$( io_test )
-echo -e "硬盘 I/O(第一次测试)   :${YELLOW}$io1${PLAIN}"
+echo -e "硬盘I/O (第一次测试) : ${YELLOW}$io1${PLAIN}"
 io2=$( io_test )
-echo -e "硬盘 I/O(第二次测试)   :${YELLOW}$io2${PLAIN}"
+echo -e "硬盘I/O (第二次测试) : ${YELLOW}$io2${PLAIN}"
 io3=$( io_test )
-echo -e "硬盘 I/O(第三次测试)   :${YELLOW}$io3${PLAIN}"
+echo -e "硬盘I/O (第三次测试) : ${YELLOW}$io3${PLAIN}"
 next
-printf "%-26s%-18s%-20s%-12s\n" "节点名称" "IP地址" "下载速度" "延迟"
+printf "%-30s%-20s%-24s%-12s\n" "节点名称" "IP地址" "下载速度" "延迟"
 speed && next
-printf "%-26s%-18s%-20s%-12s\n" "节点名称" "上传速度" "下载速度" "延迟"
+printf "%-30s%-22s%-24s%-12s\n" "节点名称" "上传速度" "下载速度" "延迟"
 speed_cn && next
 python /tmp/ZPing-CN.py
 next

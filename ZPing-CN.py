@@ -43,36 +43,36 @@ def use_style(string, mode='', fore='', back=''):
     return '%s%s%s' % (style, string, end)
 
 D = {
-    'Zhengzhou': '61.168.23.74', 
-    'Jinan': 'speedtest1.jnltwy.com', 
-    'Tianjin': 'speedtest1.online.tj.cn', 
-    'Changji': '61.128.107.242',
-    'Lhasa': '221.13.70.244', 
-    'Changchun': 'speedtest2.vicp.cc', 
-    'Shenzhen': '119.147.52.35', 
-    'Lanzhou': 'www.lanzhouunicom.com', 
-    'Xining': '221.207.32.94', 
-    'Hefei': '112.122.10.26',
-    'Wuhan': '113.57.249.2', 
-    'Xiangyang': 'www.xydxcs.com', 
-    'Nanchang': 'speedtest2.wy.jxunicom.com', 
-    'Chongqing': 'speedtest1.cqccn.com', 
-    'Shanghai': 'speedtest2.sh.chinamobile.com',
-    'Huhehaote': 'www.nmwanwang.com',
-    'Urumqi': '4g.xj169.com', 
-    'Hangzhou': '122.229.136.10',
-    'Xi an': 'xatest.wo-xa.com', 
-    'Ningbo': 'ltetest3.139site.com',
-    'Taiyuan': 'speedtest.sxunicomjzjk.cn', 
-    'Suzhou': '218.94.214.42', 
-    'Changsha': 'speedtest01.hn165.com', 
-    'Harbin': '221.212.238.106',
-    'Beijing': 'st1.bjtelecom.net',
-    'Chengdu': 'speed.westidc.com.cn', 
-    'Shenyang': 'speedtest1.online.ln.cn',
-    'Nanjing': '4gnanjing1.speedtest.jsinfo.net', 
-    'Ningxia': '221.199.9.35',
-    'Fuzhou': 'upload1.testspeed.kaopuyun.com'
+    '郑州': '61.168.23.74', 
+    '济南': 'speedtest1.jnltwy.com', 
+    '天津': 'speedtest1.online.tj.cn', 
+    '昌吉': '61.128.107.242',
+    '拉萨': '221.13.70.244', 
+    '长春': 'speedtest2.vicp.cc', 
+    '深圳': '119.147.52.35', 
+    '兰州': 'www.lanzhouunicom.com', 
+    '西宁': '221.207.32.94', 
+    '合肥': '112.122.10.26',
+    '武汉': '113.57.249.2', 
+    '襄阳': 'www.xydxcs.com', 
+    '南昌': 'speedtest2.wy.jxunicom.com', 
+    '重庆': 'speedtest1.cqccn.com', 
+    '上海': 'speedtest2.sh.chinamobile.com',
+    '呼和浩特': 'www.nmwanwang.com',
+    '乌鲁木齐': '4g.xj169.com', 
+    '杭州': '122.229.136.10',
+    '西安': 'xatest.wo-xa.com', 
+    '宁波': 'ltetest3.139site.com',
+    '太原': 'speedtest.sxunicomjzjk.cn', 
+    '苏州': '218.94.214.42', 
+    '长沙': 'speedtest01.hn165.com', 
+    '哈尔滨': '221.212.238.106',
+    '北京': 'st1.bjtelecom.net',
+    '成都': 'speed.westidc.com.cn', 
+    '沈阳': 'speedtest1.online.ln.cn',
+    '南京': '4gnanjing1.speedtest.jsinfo.net', 
+    '宁夏': '221.199.9.35',
+    '福州': 'upload1.testspeed.kaopuyun.com'
     }
 
 recordfile=open("/tmp/ping.txt","w")
@@ -230,16 +230,26 @@ for x in D:
 
     string.append((x,latency_str))
     if len(string) == 3:
-        print("{0:12}: {1:20}{2:12}: {3:20}{4:12}: {5:20}".format(string[0][0],string[0][1],string[1][0],string[1][1],string[2][0],string[2][1]))
+        l1 = str(int(len(string[0][0])/3+12))
+        l2 = str(int(len(string[1][0])/3+12))
+        l3 = str(int(len(string[2][0])/3+12))
+        mystring = "{0:"+l1+"}: {1:20}{2:"+l2+"}: {3:20}{4:"+l3+"}: {5:20}"
+        print(mystring.format(string[0][0],string[0][1],string[1][0],string[1][1],string[2][0],string[2][1]))
         string = list()
 
 
 if len(string) == 2:
-    print("{0:12}: {1:20}{2:12}: {3:20}".format(string[0][0],string[0][1],string[1][0],string[1][1]))
+    l1 = str(int(len(string[0][0])/3+12))
+    l2 = str(int(len(string[1][0])/3+12))
+    mystring = "{0:"+l1+"}: {1:20}{2:"+l2+"}: {3:20}"
+    print(mystring.format(string[0][0],string[0][1],string[1][0],string[1][1]))
 
 if len(string) == 1:
-    print("{0:12}: {1:20}".format(string[0][0],string[0][1]))
-print d
+    l1 = str(int(len(string[0][0])/3+12))
+    mystring = "{0:"+l1+"}: {1:20}"
+    print(mystring.format(string[0][0],string[0][1]))
+
+
 jsonstr = json.dumps(d)
 recordfile.write(jsonstr)
 recordfile.close()
