@@ -75,7 +75,6 @@ D = {
     'Fuzhou': 'upload1.testspeed.kaopuyun.com'
     }
 
-recordfile=open("/tmp/ping.txt","w")
 
 ICMP_ECHO_REQUEST = 8
 DEFAULT_TIMEOUT = 2
@@ -239,6 +238,3 @@ if len(string) == 2:
 
 if len(string) == 1:
     print("{0:12}: {1:20}".format(string[0][0],string[0][1]))
-jsonstr = json.dumps(d)
-recordfile.write(jsonstr)
-recordfile.close()
