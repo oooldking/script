@@ -97,7 +97,7 @@ if  [ ! -e '/tmp/ZPing.py' ]; then
     echo "Installing ZPing.py......"
     dir=$(pwd)
     cd /tmp/
-    wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZPing.py > /dev/null 2>&1
+    wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZPing-CN.py > /dev/null 2>&1
     cd $dir
 fi
 chmod a+rx /tmp/ZPing.py
@@ -133,16 +133,16 @@ speed_test() {
 
 speed() {
     speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
-    speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
-    speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, Singapore, SG'
-    speed_test 'http://speedtest.london.linode.com/100MB-london.bin' 'Linode, London, UK'
-    speed_test 'http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin' 'Linode, Frankfurt, DE'
-    speed_test 'http://speedtest.fremont.linode.com/100MB-fremont.bin' 'Linode, Fremont, CA'
-    speed_test 'http://speedtest.dal05.softlayer.com/downloads/test100.zip' 'Softlayer, Dallas, TX'
-    speed_test 'http://speedtest.sea01.softlayer.com/downloads/test100.zip' 'Softlayer, Seattle, WA'
-    speed_test 'http://speedtest.fra02.softlayer.com/downloads/test100.zip' 'Softlayer, Frankfurt, DE'
-    speed_test 'http://speedtest.sng01.softlayer.com/downloads/test100.zip' 'Softlayer, Singapore, SG'
-    speed_test 'http://speedtest.hkg02.softlayer.com/downloads/test100.zip' 'Softlayer, HongKong, CN'
+    speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, 东京, 日本'
+    speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, 新加坡'
+    speed_test 'http://speedtest.london.linode.com/100MB-london.bin' 'Linode, 伦敦, 英国'
+    speed_test 'http://speedtest.frankfurt.linode.com/100MB-frankfurt.bin' 'Linode, 法兰克福, 德国'
+    speed_test 'http://speedtest.fremont.linode.com/100MB-fremont.bin' 'Linode, 弗里蒙特, 加拿大'
+    speed_test 'http://speedtest.dal05.softlayer.com/downloads/test100.zip' 'Softlayer, 达拉斯, 得克萨斯'
+    speed_test 'http://speedtest.sea01.softlayer.com/downloads/test100.zip' 'Softlayer, 西雅图, 华盛顿'
+    speed_test 'http://speedtest.fra02.softlayer.com/downloads/test100.zip' 'Softlayer, 法兰克福, 德国'
+    speed_test 'http://speedtest.sng01.softlayer.com/downloads/test100.zip' 'Softlayer, 新加坡'
+    speed_test 'http://speedtest.hkg02.softlayer.com/downloads/test100.zip' 'Softlayer, 香港, 中国'
 }
 
 speed_test_cn(){
@@ -181,15 +181,15 @@ speed_test_cn(){
 
 speed_cn() {
 
-    speed_test_cn '12637' 'Xiangyang CT'
-    speed_test_cn '3633' 'Shanghai  CT'
-    speed_test_cn '4624' 'Chengdu   CT'
-    speed_test_cn '4863' "Xi'an     CU"
-    speed_test_cn '5083' 'Shanghai  CU'
-    speed_test_cn '5726' 'Chongqing CU'
-    speed_test_cn '5192' "Xi'an     CM"
-    speed_test_cn '4665' 'Shanghai  CM'
-    speed_test_cn '4575' 'Chengdu   CM'
+    speed_test_cn '12637' '襄阳电信'
+    speed_test_cn '3633' '上海电信'
+    speed_test_cn '4624' '成都电信'
+    speed_test_cn '4863' "西安电信"
+    speed_test_cn '5083' '上海联通'
+    speed_test_cn '5726' '重庆联通'
+    speed_test_cn '5192' "西安移动"
+    speed_test_cn '4665' '上海移动'
+    speed_test_cn '4575' '成都移动'
      
     rm -rf /tmp/speedtest.py
 }
@@ -236,43 +236,40 @@ disk_used_size=$( calc_disk ${disk_size2[@]} )
 
 clear
 next
-echo -e "CPU model            : ${SKYBLUE}$cname${PLAIN}"
-echo -e "Number of cores      : ${SKYBLUE}$cores${PLAIN}"
-echo -e "CPU frequency        : ${SKYBLUE}$freq MHz${PLAIN}"
-echo -e "Total size of Disk   : ${SKYBLUE}$disk_total_size GB ($disk_used_size GB Used)${PLAIN}"
-echo -e "Total amount of Mem  : ${SKYBLUE}$tram MB ($uram MB Used)${PLAIN}"
-echo -e "Total amount of Swap : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}"
-echo -e "System uptime        : ${SKYBLUE}$up${PLAIN}"
-echo -e "Load average         : ${SKYBLUE}$load${PLAIN}"
-echo -e "OS                   : ${SKYBLUE}$opsy${PLAIN}"
-echo -e "Arch                 : ${SKYBLUE}$arch ($lbit Bit)${PLAIN}"
-echo -e "Kernel               : ${SKYBLUE}$kern${PLAIN}"
-echo -ne "Virt                 : "
+echo -e "CPU 型号             : ${SKYBLUE}$cname${PLAIN}"
+echo -e "CPU 核心数           : ${SKYBLUE}$cores${PLAIN}"
+echo -e "CPU 频率             : ${SKYBLUE}$freq MHz${PLAIN}"
+echo -e "总硬盘大小            : ${SKYBLUE}$disk_total_size GB ($disk_used_size GB Used)${PLAIN}"
+echo -e "总内存大小            : ${SKYBLUE}$tram MB ($uram MB Used)${PLAIN}"
+echo -e "SWAP大小             : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}"
+echo -e "开机时长              : ${SKYBLUE}$up${PLAIN}"
+echo -e "系统负载              : ${SKYBLUE}$load${PLAIN}"
+echo -e "系统                 : ${SKYBLUE}$opsy${PLAIN}"
+echo -e "架构                 : ${SKYBLUE}$arch ($lbit Bit)${PLAIN}"
+echo -e "内核                 : ${SKYBLUE}$kern${PLAIN}"
+echo -ne "虚拟化平台           : "
 virtua=$(virt-what) 2>/dev/null
 
 if [[ ${virtua} ]]; then
     echo -e "${SKYBLUE}$virtua${PLAIN}"
 else
     echo -e "${SKYBLUE}No Virt${PLAIN}"
-    echo -ne "Power time of disk   : "
-    install_smart
-    echo -e "${SKYBLUE}$ptime Hours${PLAIN}"
 fi
 
 
 next
 io1=$( io_test )
-echo -e "I/O speed(1st run)   :${YELLOW}$io1${PLAIN}"
+echo -e "硬盘 I/O(第一次测试)   :${YELLOW}$io1${PLAIN}"
 io2=$( io_test )
-echo -e "I/O speed(2nd run)   :${YELLOW}$io2${PLAIN}"
+echo -e "硬盘 I/O(第二次测试)   :${YELLOW}$io2${PLAIN}"
 io3=$( io_test )
-echo -e "I/O speed(3rd run)   :${YELLOW}$io3${PLAIN}"
+echo -e "硬盘 I/O(第三次测试)   :${YELLOW}$io3${PLAIN}"
 next
-printf "%-26s%-18s%-20s%-12s\n" "Node Name" "IP Address" "Download Speed" "Latency"
+printf "%-26s%-18s%-20s%-12s\n" "节点名称" "IP地址" "下载速度" "延迟"
 speed && next
-printf "%-26s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"
+printf "%-26s%-18s%-20s%-12s\n" "节点名称" "上传速度" "下载速度" "延迟"
 speed_cn && next
-python /tmp/ZPing.py
+python /tmp/ZPing-CN.py
 next
 
 
