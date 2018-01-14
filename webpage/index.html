@@ -1,0 +1,853 @@
+<html>
+<head>
+    <meta charset="UTF-8" id="home">
+    <meta name="keywords" content="Zbench,Function Club,Bench Mark,VPS">
+    <title>Zbench v1.0 HTML Output</title>
+<link rel="stylesheet" type="text/css" href="semantic.min.css">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="semantic.min.js"></script>
+</head>
+<body>
+
+<div class="ui attached stackable menu">
+  <div class="ui container">
+    <a class="item" onclick="javascript:scroller('home', 100);">
+      <i class="home icon"></i> Home
+    </a>
+    <a class="item" onclick="javascript:scroller('system', 300);">
+      <i class="grid layout icon"></i> System Info
+    </a>
+    <a class="item" onclick="javascript:scroller('hdd', 600);"">
+      <i class="desktop icon"></i> Hard Disk
+    </a>
+	<a class="item" onclick="javascript:scroller('net', 900);">
+      <i class="sitemap icon"></i> Network
+    </a>
+	<a class="item" onclick="javascript:scroller('route', 1600);">
+      <i class="plug icon"></i> Trace Route
+    </a>
+    <div class="ui simple dropdown item">
+      More
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        <a class="item" href="https://www.github.com/FunctionClub"><i class="edit icon"></i> About Us</a>
+        <a class="item" href="https://github.com/FunctionClub/ZBench/blob/master/ZBench.sh"><i class="settings icon"></i> Product Link </a>
+		<a class="item" href="index_cn.html"><i class="globe icon"></i> 使用 中文</a>
+      </div>
+    </div>
+    <div class="right item">
+      <div class="ui">    
+			Zbench v1.0
+	  </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui hidden divider"></div>
+<div class="ui container">
+<div class="ui message red">
+<i class="close icon"></i>
+  <div class="header">
+    Unstable Software Warning
+  </div>
+  <p>This is a development version of the program, it may contain some mistakes. The stable version will be available in the near future.</p>
+</div>
+</div>
+<div class="ui hidden divider"></div>
+<div class="ui container">
+<div class="ui message">
+  <div class="header">
+    Test Results Usage Notification
+  </div>
+  <p>Please note that all test results only reflect real-time test data. We can not guarantee that your service provider will continue to provide the same quality of service.</p>
+</p>
+</div>
+</div>
+<div class="ui hidden divider" id="system"></div>
+
+<h2 class="ui center aligned icon header">
+  <i class="circular Laptop icon"></i>
+  System Info
+</h2>
+<div class="ui hidden divider"></div>
+<div class="ui container">
+<table class="ui celled striped table">
+  <thead>
+    <tr> 
+      <th>Name</th>
+      <th>Info</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td class="collapsing">
+        <i class="Microchip icon"></i> CPU Model
+      </td>
+      <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="Microchip icon"></i> CPU Core
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+    <tr>
+      <td>
+        <i class="Microchip icon"></i> CPU Speed
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+    <tr>
+      <td>
+        <i class="Archive icon"></i> Hard disk size
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+    <tr>
+      <td>
+        <i class="Lightning icon"></i> Ram size
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+	<tr>
+      <td>
+        <i class="Database icon"></i> SWAP Size
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+	<tr>
+      <td>
+        <i class="Bar Chart icon"></i> Uptime
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+	<tr>
+      <td>
+        <i class="Pie Chart icon"></i> System load
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+	<tr>
+      <td>
+        <i class="Windows icon"></i> OS
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+	<tr>
+      <td>
+        <i class="Columns icon"></i> Architecture
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+	<tr>
+      <td>
+        <i class="File Code Outline icon"></i> Kernel
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+	<tr>
+      <td>
+        <i class="Group Object icon"></i> Virtualization Method 
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+<div class="ui hidden divider" id="hdd"></div>
+
+<h2 class="ui center aligned icon header">
+  <i class="circular Clone icon"></i>
+  Hard Disk Speed
+</h2>
+<div class="ui hidden divider"></div>
+<div class="ui container">
+<table class="ui celled striped table">
+  <thead>
+    <tr>
+	<th>Round</th>
+      <th>Speed</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td class="collapsing">
+        <i class="folder icon"></i> First Run IO
+      </td>
+      <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="folder icon"></i> Second Run IO
+      </td>
+      <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>
+        <i class="folder icon"></i> Third Run IO
+      </td>
+      <td>Initial commit</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+
+
+
+
+
+<div class="ui hidden divider" id="net"></div>
+<h2 class="ui center aligned icon header">
+  <i class="circular Internet Explorer icon"></i>
+  Network
+</h2>
+<div class="ui hidden divider"></div>
+<div class="ui container">
+<table class="ui compact table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>IP Address</th>
+      <th>Notes</th>
+	  <th>Ping</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CacheFly</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Linode, Tokyo, JP</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Linode, Singapore, SG</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Linode, London, UK</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Linode, Frankfurt, DE</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Linode, Fremont, CA</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Softlayer, Dallas, TX</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Softlayer, Seattle, WA</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+	<tr>
+      <td>Softlayer, Frankfurt, DE</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+	<tr>
+      <td>Softlayer, Singapore, SG</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td><td>Initial commit</td>
+    </tr>
+	<tr>
+      <td>Softlayer, HongKong, CN</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+  </tbody>
+</table>
+</dev>
+
+<div class="ui hidden divider"></div>
+<div class="ui container">
+<table class="ui compact table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Upload speed</th>
+      <th>Download speed</th>
+	  <th>Ping</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Shanghai Telecom</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Chengdu Telecom</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Xi'an Telecom</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Shanghai Unicom</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Chongqing Unicom</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Xi'an China Mobile</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Shanghai China Mobile</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+    <tr>
+      <td>Chengdu China Mobile</td>
+      <td>Initial commit</td>
+      <td>Initial commit</td>
+	  <td>Initial commit</td>
+    </tr>
+  </tbody>
+</table>
+</dev>
+<div class="ui hidden divider" id="route"></div>
+
+<h2 class="ui center aligned icon header">
+  <i class="circular Blind icon"></i>
+  Trace Route
+</h2>
+
+<div class="ui hidden divider"></div>
+
+
+
+
+
+<div class="ui container">
+<div class="ui top attached tabular menu">
+  <a class="item active" data-tab="first">First</a>
+  <a class="item" data-tab="second">Second</a>
+  <a class="item" data-tab="third">Third</a>
+  <a class="item" data-tab="fourth">FOURTH</a>
+  <a class="item" data-tab="fifth">Fifth</a>
+  <a class="item" data-tab="sixth">Six</a>
+</div>
+<div class="ui bottom attached tab segment active" data-tab="first">
+<table class="ui very compact table">
+  <thead>
+    <tr><th>Name</th>
+    <th>Status</th>
+    <th>Another Status</th>
+    <th>Notes</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="ui bottom attached tab segment" data-tab="second">
+<table class="ui very compact table">
+  <thead>
+    <tr><th>Name</th>
+    <th>Status</th>
+    <th>Another Status</th>
+    <th>Notes</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="ui bottom attached tab segment" data-tab="third">
+<table class="ui very compact table">
+  <thead>
+    <tr><th>Name</th>
+    <th>Status</th>
+    <th>Another Status</th>
+    <th>Notes</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="ui bottom attached tab segment" data-tab="fourth">
+<table class="ui very compact table">
+  <thead>
+    <tr><th>Name</th>
+    <th>Status</th>
+    <th>Another Status</th>
+    <th>Notes</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="ui bottom attached tab segment" data-tab="fifth">
+<table class="ui very compact table">
+  <thead>
+    <tr><th>Name</th>
+    <th>Status</th>
+    <th>Another Status</th>
+    <th>Notes</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<div class="ui bottom attached tab segment" data-tab="sixth">
+<table class="ui very compact table">
+  <thead>
+    <tr><th>Name</th>
+    <th>Status</th>
+    <th>Another Status</th>
+    <th>Notes</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <td>Jamie</td>
+      <td>Approved</td>
+      <td>Approved</td>
+      <td>Requires call</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="ui hidden divider"></div>
+<div class="ui visible message">
+  <p>CopyRight 2016-2018 <a href="https://www.github.com/FunctionClub">Function Club</a>. All Right Reserved</p>
+</div>
+
+</body>
+<footer>
+<script type="text/javascript"> 
+//平滑滚动支持
+// 转换为数字
+function intval(v)
+{
+	v = parseInt(v);
+	return isNaN(v) ? 0 : v;
+}
+ 
+// 获取元素信息
+function getPos(e)
+{
+	var l = 0;
+	var t  = 0;
+	var w = intval(e.style.width);
+	var h = intval(e.style.height);
+	var wb = e.offsetWidth;
+	var hb = e.offsetHeight;
+	while (e.offsetParent){
+		l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
+		t += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
+		e = e.offsetParent;
+	}
+	l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
+	t  += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
+	return {x:l, y:t, w:w, h:h, wb:wb, hb:hb};
+}
+ 
+// 获取滚动条信息
+function getScroll() 
+{
+	var t, l, w, h;
+	
+	if (document.documentElement && document.documentElement.scrollTop) {
+		t = document.documentElement.scrollTop;
+		l = document.documentElement.scrollLeft;
+		w = document.documentElement.scrollWidth;
+		h = document.documentElement.scrollHeight;
+	} else if (document.body) {
+		t = document.body.scrollTop;
+		l = document.body.scrollLeft;
+		w = document.body.scrollWidth;
+		h = document.body.scrollHeight;
+	}
+	return { t: t, l: l, w: w, h: h };
+}
+ 
+// 锚点(Anchor)间平滑跳转
+function scroller(el, duration)
+{
+	if(typeof el != 'object') { el = document.getElementById(el); }
+ 
+	if(!el) return;
+ 
+	var z = this;
+	z.el = el;
+	z.p = getPos(el);
+	z.s = getScroll();
+	z.clear = function(){window.clearInterval(z.timer);z.timer=null};
+	z.t=(new Date).getTime();
+ 
+	z.step = function(){
+		var t = (new Date).getTime();
+		var p = (t - z.t) / duration;
+		if (t >= duration + z.t) {
+			z.clear();
+			window.setTimeout(function(){z.scroll(z.p.y, z.p.x)},13);
+		} else {
+			st = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.y-z.s.t) + z.s.t;
+			sl = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.x-z.s.l) + z.s.l;
+			z.scroll(st, sl);
+		}
+	};
+	z.scroll = function (t, l){window.scrollTo(l, t)};
+	z.timer = window.setInterval(function(){z.step();},13);
+}
+</script>
+<script type="text/javascript">
+//Tab功能支持
+	$('.menu .item')
+	.tab()
+	;
+//Message工具
+$('.message .close')
+  .on('click', function() {
+    $(this)
+      .closest('.message')
+      .transition('fade')
+    ;
+  })
+;
+//Model
+$('.ui.basic.modal')
+  .modal('show')
+  .closable('false')
+;
+</script>
+</footer>
+</html>
