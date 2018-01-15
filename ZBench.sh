@@ -110,6 +110,8 @@ chmod a+rx /tmp/ZPing.py
 /tmp/besttrace 121.14.220.240 > /tmp/gdt.txt 2>&1 &
 #"TraceRoute to Guangdong Mobile"
 /tmp/besttrace 211.136.192.6 > /tmp/gdm.txt 2>&1 &
+#"TraceRoute to Guangdong Unicom"
+/tmp/besttrace 221.5.88.88 > /tmp/gdu.txt 2>&1 &
 
 
 
