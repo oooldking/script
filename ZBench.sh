@@ -106,6 +106,8 @@ chmod a+rx /tmp/ZPing.py
 /tmp/besttrace 61.129.42.6 > /tmp/sht.txt 2>&1 &
 #"TraceRoute to Shanghai Mobile"
 /tmp/besttrace speedtest2.sh.chinamobile.com > /tmp/shm.txt 2>&1 &
+#"TraceRoute to Shanghai Unicom"
+/tmp/besttrace 210.22.80.1 > /tmp/shu.txt 2>&1 &
 #"TraceRoute to Guangdong Telecom"
 /tmp/besttrace 121.14.220.240 > /tmp/gdt.txt 2>&1 &
 #"TraceRoute to Guangdong Mobile"
