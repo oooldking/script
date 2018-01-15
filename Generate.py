@@ -17,10 +17,7 @@ def traceroute_to_dict(filename):
 		line = content[i]
 		if line[1].isdigit():
 			if line[4] != "*" :
-				l1=float(line.strip().split("  ")[2].replace(" ms",""))
-				l2=float(content[i+1].strip().split("  ")[1].replace(" ms",""))
-				l3=float(content[i+2].strip().split("  ")[1].replace(" ms",""))
-				latency=str(round((l1+l2+l3)/3,2))+" ms"
+				latency=line.strip().split("  ")[2]
 				asn = line.strip().split("  ")[3]
 				route = line.strip().split("  ")[4]
 				ip = line.strip().split("  ")[1]
@@ -34,9 +31,13 @@ def traceroute_to_dict(filename):
 				
 			d[int(step)]=dict()
 			d[int(step)]["ip"]=ip
+			if int(step) < 3:
+				d[int(step)]["ip"]="*.*.*.*(已隐藏)"
 			d[int(step)]["latency"]=latency
 			d[int(step)]["asn"]=asn
 			d[int(step)]["route"]=route
+
+
 	return dict(d)
 
 def dict_to_table(d,tab):
