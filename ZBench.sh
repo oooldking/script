@@ -133,9 +133,15 @@ speed_test() {
     local nodeName=$2
     local latency=$(ping $ipaddress -c 3 | grep avg | awk -F / '{print $5}')" ms"
     printf "${YELLOW}%-26s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${ipaddress}" "${speedtest}" "${latency}"
+
+    #Record Speed Data
+    echo ${ipaddress} >> /tmp/speed.txt
+    echo ${speedtest} >> /tmp/speed.txt
+    echo ${latency} >> /tmp/speed.txt
 }
 
 speed() {
+    rm -rf /tmp/speed.txt && touch /tmp/speed.txt
     speed_test 'http://cachefly.cachefly.net/100mb.test' 'CacheFly'
     speed_test 'http://speedtest.tokyo.linode.com/100MB-tokyo.bin' 'Linode, Tokyo, JP'
     speed_test 'http://speedtest.singapore.linode.com/100MB-singapore.bin' 'Linode, Singapore, SG'
@@ -181,9 +187,17 @@ speed_test_cn(){
             local cerror="ERROR"
         fi
     fi
+
+    #Record Speed_cn Data
+    echo ${reupload} >> /tmp/speed_cn.txt
+    echo ${REDownload} >> /tmp/speed_cn.txt
+    echo ${relatency} >> /tmp/speed_cn.txt
+    
+
 }
 
 speed_cn() {
+    rm -rf /tmp/speed_cn.txt && touch /tmp/speed_cn.txt
 
     speed_test_cn '12637' 'Xiangyang CT'
     speed_test_cn '3633' 'Shanghai  CT'
@@ -257,12 +271,9 @@ virtua=$(virt-what) 2>/dev/null
 if [[ ${virtua} ]]; then
     echo -e "${SKYBLUE}$virtua${PLAIN}"
 else
+    virtua="No Virt"
     echo -e "${SKYBLUE}No Virt${PLAIN}"
-    echo -ne "Power time of disk   : "
-    install_smart
-    echo -e "${SKYBLUE}$ptime Hours${PLAIN}"
 fi
-
 
 next
 io1=$( io_test )
@@ -272,6 +283,28 @@ echo -e "I/O speed(2nd run)   :${YELLOW}$io2${PLAIN}"
 io3=$( io_test )
 echo -e "I/O speed(3rd run)   :${YELLOW}$io3${PLAIN}"
 next
+
+
+##Record All Test data
+rm -rf /tmp/info.txt
+touch /tmp/info.txt
+echo $cname >> /tmp/info.txt
+echo $cores >> /tmp/info.txt
+echo $freq MHz >> /tmp/info.txt
+echo "$disk_total_size GB ($disk_used_size GB 已使用) ">> /tmp/info.txt
+echo "$tram MB ($uram MB 已使用) ">> /tmp/info.txt
+echo "$swap MB ($uswap MB 已使用)" >> /tmp/info.txt
+echo $up >> /tmp/info.txt
+echo $load >> /tmp/info.txt
+echo $opsy >> /tmp/info.txt
+echo "$arch ($lbit 位) ">> /tmp/info.txt
+echo $kern >> /tmp/info.txt
+echo $virtua >> /tmp/info.txt
+echo $io1 >> /tmp/info.txt
+echo $io2 >> /tmp/info.txt
+echo $io3 >> /tmp/info.txt
+
+
 printf "%-26s%-18s%-20s%-12s\n" "Node Name" "IP Address" "Download Speed" "Latency"
 speed && next
 printf "%-26s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"

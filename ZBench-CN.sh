@@ -112,10 +112,14 @@ chmod a+rx /tmp/ZPing-CN.py
 /tmp/besttrace 61.129.42.6 > /tmp/sht.txt 2>&1 &
 #"TraceRoute to Shanghai Mobile"
 /tmp/besttrace speedtest2.sh.chinamobile.com > /tmp/shm.txt 2>&1 &
+#"TraceRoute to Shanghai Unicom"
+/tmp/besttrace 210.22.80.1 > /tmp/shu.txt 2>&1 &
 #"TraceRoute to Guangdong Telecom"
 /tmp/besttrace 121.14.220.240 > /tmp/gdt.txt 2>&1 &
 #"TraceRoute to Guangdong Mobile"
 /tmp/besttrace 211.136.192.6 > /tmp/gdm.txt 2>&1 &
+#"TraceRoute to Guangdong Unicom"
+/tmp/besttrace 221.5.88.88 > /tmp/gdu.txt 2>&1 &
 
 
 
@@ -135,6 +139,11 @@ speed_test() {
     local nodeName=$2
     local latency=$(ping $ipaddress -c 3 | grep avg | awk -F / '{print $5}')" ms"
     printf "${YELLOW}%-26s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${ipaddress}" "${speedtest}" "${latency}"
+
+    #Record Speed Data
+    echo ${ipaddress} >> /tmp/speed.txt
+    echo ${speedtest} >> /tmp/speed.txt
+    echo ${latency} >> /tmp/speed.txt
 }
 
 speed() {
@@ -183,6 +192,11 @@ speed_test_cn(){
             local cerror="ERROR"
         fi
     fi
+
+    #Record Speed_cn Data
+    echo ${reupload} >> /tmp/speed_cn.txt
+    echo ${REDownload} >> /tmp/speed_cn.txt
+    echo ${relatency} >> /tmp/speed_cn.txt
 }
 
 speed_cn() {
@@ -271,6 +285,26 @@ echo -e "硬盘I/O (第二次测试) : ${YELLOW}$io2${PLAIN}"
 io3=$( io_test )
 echo -e "硬盘I/O (第三次测试) : ${YELLOW}$io3${PLAIN}"
 next
+
+##Record All Test data
+rm -rf /tmp/info.txt
+touch /tmp/info.txt
+echo $cname >> /tmp/info.txt
+echo $cores >> /tmp/info.txt
+echo $freq MHz >> /tmp/info.txt
+echo "$disk_total_size GB ($disk_used_size GB 已使用) ">> /tmp/info.txt
+echo "$tram MB ($uram MB 已使用) ">> /tmp/info.txt
+echo "$swap MB ($uswap MB 已使用)" >> /tmp/info.txt
+echo $up >> /tmp/info.txt
+echo $load >> /tmp/info.txt
+echo $opsy >> /tmp/info.txt
+echo "$arch ($lbit 位) ">> /tmp/info.txt
+echo $kern >> /tmp/info.txt
+echo $virtua >> /tmp/info.txt
+echo $io1 >> /tmp/info.txt
+echo $io2 >> /tmp/info.txt
+echo $io3 >> /tmp/info.txt
+
 printf "%-30s%-20s%-24s%-12s\n" "节点名称" "IP地址" "下载速度" "延迟"
 speed && next
 printf "%-30s%-22s%-24s%-12s\n" "节点名称" "上传速度" "下载速度" "延迟"
