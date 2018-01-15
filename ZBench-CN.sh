@@ -33,6 +33,7 @@ YELLOW='\033[0;33m'
 SKYBLUE='\033[0;36m'
 PLAIN='\033[0m'
 
+rm -rf /tmp/report && mkdir /tmp/report
 
 # Install locales
 
@@ -70,7 +71,7 @@ if  [ ! -e '/tmp/besttrace' ]; then
     echo "Installing Besttrace......"
     dir=$(pwd)
     cd /tmp/
-    wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/besttrace > /dev/null 2>&1
+    wget  -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/besttrace > /dev/null 2>&1
     cd $dir
 fi
 chmod a+rx /tmp/besttrace
@@ -92,7 +93,7 @@ if  [ ! -e '/tmp/speedtest.py' ]; then
     echo "Installing SpeedTest......"
     dir=$(pwd)
     cd /tmp/
-    wget https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
+    wget -N --no-check-certificate https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
     cd $dir
 fi
 chmod a+rx /tmp/speedtest.py
@@ -103,7 +104,7 @@ if  [ ! -e '/tmp/ZPing-CN.py' ]; then
     echo "Installing ZPing-CN.py......"
     dir=$(pwd)
     cd /tmp/
-    wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZPing-CN.py > /dev/null 2>&1
+    wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZPing-CN.py > /dev/null 2>&1
     cd $dir
 fi
 chmod a+rx /tmp/ZPing-CN.py
@@ -312,5 +313,25 @@ speed_cn && next
 python /tmp/ZPing-CN.py
 next
 
-wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/Generate.py >> /dev/null 2>&1
-python Generate.py
+wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/Generate.py >> /dev/null 2>&1
+python Generate.py && rm -rf Generate.py && cp /root/report.html /tmp/report/index.html
+echo "您的测评报告已保存在 /root/report.html"
+
+# If use simple http server
+while :; do echo
+  read -p "你想现在查看您的测聘报告吗? [y/n]: " ifreport
+  if [[ ! $ifreport =~ ^[y,n]$ ]]; then
+    echo "输入错误! 请确保你输入的是 'y' 或者 'n'"
+  else
+    break
+  fi
+done
+
+if [[ $ifreport == 'y' ]];then
+    echo ""
+    myip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
+    echo "访问 http://${myip}:8081/index.html 查看您的测试报告，按 Ctrl + C 退出" 
+	cd /tmp/report
+    python -m SimpleHTTPServer 8001
+    iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8001 -j ACCEPT
+fi

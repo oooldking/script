@@ -33,6 +33,7 @@ YELLOW='\033[0;33m'
 SKYBLUE='\033[0;36m'
 PLAIN='\033[0m'
 
+rm -rf /tmp/report && mkdir /tmp/report
 
 # Install Virt-what
 if  [ ! -e '/usr/sbin/virt-what' ]; then
@@ -64,7 +65,7 @@ if  [ ! -e '/tmp/besttrace' ]; then
     echo "Installing Besttrace......"
     dir=$(pwd)
     cd /tmp/
-    wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/besttrace > /dev/null 2>&1
+    wget  -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/besttrace > /dev/null 2>&1
     cd $dir
 fi
 chmod a+rx /tmp/besttrace
@@ -86,7 +87,7 @@ if  [ ! -e '/tmp/speedtest.py' ]; then
     echo "Installing SpeedTest......"
     dir=$(pwd)
     cd /tmp/
-    wget https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
+    wget  -N --no-check-certificate https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
     cd $dir
 fi
 chmod a+rx /tmp/speedtest.py
@@ -97,7 +98,7 @@ if  [ ! -e '/tmp/ZPing.py' ]; then
     echo "Installing ZPing.py......"
     dir=$(pwd)
     cd /tmp/
-    wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZPing.py > /dev/null 2>&1
+    wget  -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/ZPing.py > /dev/null 2>&1
     cd $dir
 fi
 chmod a+rx /tmp/ZPing.py
@@ -314,5 +315,25 @@ next
 
 
 
-wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/Generate.py >> /dev/null 2>&1
-python Generate.py
+wget  -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/Generate.py >> /dev/null 2>&1
+python Generate.py && rm -rf Generate.py && cp /root/report.html /tmp/report/index.html
+echo "Your bench data is saved to /root/report.html"
+
+# If use simple http server
+while :; do echo
+  read -p "Do you want to check your Test Report? [y/n]: " ifreport
+  if [[ ! $ifreport =~ ^[y,n]$ ]]; then
+    echo "Input error! Please only input 'y' or 'n'"
+  else
+    break
+  fi
+done
+
+if [[ $ifreport == 'y' ]];then
+    echo ""
+    myip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
+    echo "Visit http://${myip}:8081/index.html to see your report，Press Ctrl + C to exit." 
+	cd /tmp/report
+    python -m SimpleHTTPServer 8001
+    iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8001 -j ACCEPT
+fi
