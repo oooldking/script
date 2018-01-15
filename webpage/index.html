@@ -1,7 +1,7 @@
 <html>
 <head>
     <meta charset="UTF-8" id="home">
-    <meta name="keywords" content="Zbench,Function Club,Bench Mark,VPS">
+    <meta name="keywords" content="Zbench,Function Club,Bench Mark,VPS,主机博客,测评,测试脚本">
     <title>Zbench v1.0 HTML Output</title>
 <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/semantic-ui/2.2.13/semantic.min.css">
 <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
@@ -12,32 +12,31 @@
 <div class="ui attached stackable menu">
   <div class="ui container">
     <a class="item" onclick="javascript:scroller('home', 100);">
-      <i class="home icon"></i> Home
+      <i class="home icon"></i> 主页
     </a>
     <a class="item" onclick="javascript:scroller('system', 300);">
-      <i class="grid layout icon"></i> System Info
+      <i class="grid layout icon"></i> 系统信息
     </a>
-    <a class="item" onclick="javascript:scroller('hdd', 600);"">
-      <i class="desktop icon"></i> Hard Disk
+    <a class="item" onclick="javascript:scroller('hdd', 600);">
+      <i class="desktop icon"></i> 硬盘 I/O
     </a>
 	<a class="item" onclick="javascript:scroller('net', 900);">
-      <i class="sitemap icon"></i> Network
+      <i class="sitemap icon"></i> 网络测试
     </a>
 	<a class="item" onclick="javascript:scroller('route', 1600);">
-      <i class="plug icon"></i> Trace Route
+      <i class="plug icon"></i> 路由追踪
     </a>
     <div class="ui simple dropdown item">
-      More
+      更多
       <i class="dropdown icon"></i>
       <div class="menu">
-        <a class="item" href="https://www.github.com/FunctionClub"><i class="edit icon"></i> About Us</a>
-        <a class="item" href="https://github.com/FunctionClub/ZBench/blob/master/ZBench.sh"><i class="settings icon"></i> Product Link </a>
-		<a class="item" href="index_cn.html"><i class="globe icon"></i> 使用 中文</a>
+        <a class="item" href="https://www.github.com/FunctionClub"><i class="edit icon"></i> 关于我们</a>
+        <a class="item" href="https://github.com/FunctionClub/ZBench/"><i class="github icon"></i>Github </a>
       </div>
     </div>
     <div class="right item">
       <div class="ui">    
-			Zbench v1.0
+			<a href="https://github.com/FunctionClub/ZBench/">ZBench v1.0-Beta</a>
 	  </div>
     </div>
   </div>
@@ -48,18 +47,18 @@
 <div class="ui message red">
 <i class="close icon"></i>
   <div class="header">
-    Unstable Software Warning
+    您正在使用的是开发中的项目。
   </div>
-  <p>This is a development version of the program, it may contain some mistakes. The stable version will be available in the near future.</p>
+  <p>此程序正处于开发版, 我们无法保证在运行过程中不会出错. 我们将在近期测试后放出正式版，敬请期待.</p>
 </div>
 </div>
 <div class="ui hidden divider"></div>
 <div class="ui container">
 <div class="ui message">
   <div class="header">
-    Test Results Usage Notification
+    测试数据准确性说明
   </div>
-  <p>Please note that all test results only reflect real-time test data. We can not guarantee that your service provider will continue to provide the same quality of service.</p>
+  <p>请注意，所有的测试数据为测试时的实时数据. 我们不保证您的服务商会在日后一直使用保持完全相同的服务。数据仅供参考.</p>
 </p>
 </div>
 </div>
@@ -67,96 +66,96 @@
 
 <h2 class="ui center aligned icon header">
   <i class="circular Laptop icon"></i>
-  System Info
+  系统信息
 </h2>
 <div class="ui hidden divider"></div>
 <div class="ui container">
 <table class="ui celled striped table">
   <thead>
     <tr> 
-      <th>Name</th>
-      <th>Info</th>
+      <th>项目</th>
+      <th>数据</th>
   </tr></thead>
   <tbody>
     <tr>
       <td class="collapsing">
-        <i class="Microchip icon"></i> CPU Model
+        <i class="Microchip icon"></i> CPU 型号
       </td>
       <td>Initial commit</td>
     </tr>
     <tr>
       <td>
-        <i class="Microchip icon"></i> CPU Core
-      </td>
-      <td>Initial commit</td>
-      
-    </tr>
-    <tr>
-      <td>
-        <i class="Microchip icon"></i> CPU Speed
+        <i class="Microchip icon"></i> CPU 核心数
       </td>
       <td>Initial commit</td>
       
     </tr>
     <tr>
       <td>
-        <i class="Archive icon"></i> Hard disk size
+        <i class="Microchip icon"></i> CPU 主频
       </td>
       <td>Initial commit</td>
       
     </tr>
     <tr>
       <td>
-        <i class="Lightning icon"></i> Ram size
+        <i class="Archive icon"></i> 硬盘大小
+      </td>
+      <td>Initial commit</td>
+      
+    </tr>
+    <tr>
+      <td>
+        <i class="Lightning icon"></i> 内存大小
       </td>
       <td>Initial commit</td>
       
     </tr>
 	<tr>
       <td>
-        <i class="Database icon"></i> SWAP Size
+        <i class="Database icon"></i> SWAP 交换空间大小
       </td>
       <td>Initial commit</td>
       
     </tr>
 	<tr>
       <td>
-        <i class="Bar Chart icon"></i> Uptime
+        <i class="Bar Chart icon"></i> 在线时长
       </td>
       <td>Initial commit</td>
       
     </tr>
 	<tr>
       <td>
-        <i class="Pie Chart icon"></i> System load
+        <i class="Pie Chart icon"></i> 系统负载
       </td>
       <td>Initial commit</td>
       
     </tr>
 	<tr>
       <td>
-        <i class="Windows icon"></i> OS
+        <i class="Windows icon"></i> 系统
       </td>
       <td>Initial commit</td>
       
     </tr>
 	<tr>
       <td>
-        <i class="Columns icon"></i> Architecture
+        <i class="Columns icon"></i> 架构
       </td>
       <td>Initial commit</td>
       
     </tr>
 	<tr>
       <td>
-        <i class="File Code Outline icon"></i> Kernel
+        <i class="File Code Outline icon"></i> 核心
       </td>
       <td>Initial commit</td>
       
     </tr>
 	<tr>
       <td>
-        <i class="Group Object icon"></i> Virtualization Method 
+        <i class="Group Object icon"></i> 虚拟化技术
       </td>
       <td>Initial commit</td>
       
@@ -171,32 +170,32 @@
 
 <h2 class="ui center aligned icon header">
   <i class="circular Clone icon"></i>
-  Hard Disk Speed
+  硬盘 I/O
 </h2>
 <div class="ui hidden divider"></div>
 <div class="ui container">
 <table class="ui celled striped table">
   <thead>
     <tr>
-	<th>Round</th>
-      <th>Speed</th>
+	<th>次数</th>
+      <th>速度</th>
   </tr></thead>
   <tbody>
     <tr>
       <td class="collapsing">
-        <i class="folder icon"></i> First Run IO
+        <i class="folder icon"></i> 第一次测试
       </td>
       <td>Initial commit</td>
     </tr>
     <tr>
       <td>
-        <i class="folder icon"></i> Second Run IO
+        <i class="folder icon"></i> 第二次测试
       </td>
       <td>Initial commit</td>
     </tr>
     <tr>
       <td>
-        <i class="folder icon"></i> Third Run IO
+        <i class="folder icon"></i> 第三次测试
       </td>
       <td>Initial commit</td>
     </tr>
@@ -213,17 +212,17 @@
 <div class="ui hidden divider" id="net"></div>
 <h2 class="ui center aligned icon header">
   <i class="circular Internet Explorer icon"></i>
-  Network
+  网络测试
 </h2>
 <div class="ui hidden divider"></div>
 <div class="ui container">
-<table class="ui compact table">
+<table class="ui compact striped table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>IP Address</th>
-      <th>Notes</th>
-	  <th>Ping</th>
+      <th>节点</th>
+      <th>IP 地址</th>
+      <th>下载速度</th>
+	  <th>延迟</th>
     </tr>
   </thead>
   <tbody>
@@ -234,60 +233,60 @@
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Linode, Tokyo, JP</td>
+      <td>Linode 日本</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Linode, Singapore, SG</td>
+      <td>Linode 新加坡</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Linode, London, UK</td>
+      <td>Linode 英国</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Linode, Frankfurt, DE</td>
+      <td>Linode 法兰克福</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Linode, Fremont, CA</td>
+      <td>Linode 加拿大</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Softlayer, Dallas, TX</td>
+      <td>Softlayer 达拉斯</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Softlayer, Seattle, WA</td>
+      <td>Softlayer 西雅图</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
 	<tr>
-      <td>Softlayer, Frankfurt, DE</td>
+      <td>Softlayer 法兰克福</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
 	<tr>
-      <td>Softlayer, Singapore, SG</td>
+      <td>Softlayer 新加坡</td>
       <td>Initial commit</td>
       <td>Initial commit</td><td>Initial commit</td>
     </tr>
 	<tr>
-      <td>Softlayer, HongKong, CN</td>
+      <td>Softlayer 香港</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
@@ -298,60 +297,60 @@
 
 <div class="ui hidden divider"></div>
 <div class="ui container">
-<table class="ui compact table">
+<table class="ui compact striped table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Upload speed</th>
-      <th>Download speed</th>
-	  <th>Ping</th>
+      <th>节点</th>
+      <th>上传速度</th>
+      <th>下载速度</th>
+	  <th>延迟</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Shanghai Telecom</td>
+      <td>上海电信</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Chengdu Telecom</td>
+      <td>成都电信</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Xi'an Telecom</td>
+      <td>西安电信</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Shanghai Unicom</td>
+      <td>上海联通</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Chongqing Unicom</td>
+      <td>重庆联通</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Xi'an China Mobile</td>
+      <td>西安移动</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Shanghai China Mobile</td>
+      <td>上海移动</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
     </tr>
     <tr>
-      <td>Chengdu China Mobile</td>
+      <td>成都移动</td>
       <td>Initial commit</td>
       <td>Initial commit</td>
 	  <td>Initial commit</td>
@@ -363,7 +362,7 @@
 
 <h2 class="ui center aligned icon header">
   <i class="circular Blind icon"></i>
-  Trace Route
+  路由追踪
 </h2>
 
 <div class="ui hidden divider"></div>
@@ -374,30 +373,33 @@
 
 <div class="ui container">
 <div class="ui top attached tabular menu">
-  <a class="item active" data-tab="first">First</a>
-  <a class="item" data-tab="second">Second</a>
-  <a class="item" data-tab="third">Third</a>
-  <a class="item" data-tab="fourth">FOURTH</a>
-  <a class="item" data-tab="fifth">Fifth</a>
-  <a class="item" data-tab="sixth">Six</a>
+  <a class="item active" data-tab="first">上海移动</a>
+  <a class="item" data-tab="second">上海电信</a>
+  <a class="item" data-tab="third">上海联通</a>
+  <a class="item" data-tab="fourth">广东移动</a>
+  <a class="item" data-tab="fifth">广东电信</a>
+  <a class="item" data-tab="sixth">广东联通</a>
 </div>
 <div class="ui bottom attached tab segment active" data-tab="first">
-<table class="ui very compact table">
+<table class="ui very compact striped table">
   <thead>
-    <tr><th>Name</th>
-    <th>Status</th>
-    <th>Another Status</th>
-    <th>Notes</th>
+    <tr><th>跳数</th>
+    <th>IP</th>
+    <th>路由</th>
+    <th>AS Number</th>
+    <th>延迟</th>
   </tr></thead>
   <tbody>
     <tr>
       <td>John</td>
       <td>Approved</td>
       <td>Approved</td>
+      <td>Approved</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Jamie</td>
+      <td>Approved</td>
       <td>Approved</td>
       <td>Approved</td>
       <td>Requires call</td>
@@ -406,10 +408,12 @@
       <td>John</td>
       <td>Approved</td>
       <td>Approved</td>
+      <td>Approved</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Jamie</td>
+      <td>Approved</td>
       <td>Approved</td>
       <td>Approved</td>
       <td>Requires call</td>
@@ -418,10 +422,12 @@
       <td>John</td>
       <td>Approved</td>
       <td>Approved</td>
+      <td>Approved</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Jamie</td>
+      <td>Approved</td>
       <td>Approved</td>
       <td>Approved</td>
       <td>Requires call</td>
@@ -430,10 +436,12 @@
       <td>John</td>
       <td>Approved</td>
       <td>Approved</td>
+      <td>Approved</td>
       <td>None</td>
     </tr>
     <tr>
       <td>Jamie</td>
+      <td>Approved</td>
       <td>Approved</td>
       <td>Approved</td>
       <td>Requires call</td>
@@ -442,309 +450,354 @@
 </table>
 </div>
 <div class="ui bottom attached tab segment" data-tab="second">
-<table class="ui very compact table">
-  <thead>
-    <tr><th>Name</th>
-    <th>Status</th>
-    <th>Another Status</th>
-    <th>Notes</th>
-  </tr></thead>
-  <tbody>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="ui very compact striped table">
+    <thead>
+      <tr><th>跳数</th>
+      <th>IP</th>
+      <th>路由</th>
+      <th>AS Number</th>
+      <th>延迟</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="ui bottom attached tab segment" data-tab="third">
-<table class="ui very compact table">
-  <thead>
-    <tr><th>Name</th>
-    <th>Status</th>
-    <th>Another Status</th>
-    <th>Notes</th>
-  </tr></thead>
-  <tbody>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="ui very compact striped table">
+    <thead>
+      <tr><th>跳数</th>
+      <th>IP</th>
+      <th>路由</th>
+      <th>AS Number</th>
+      <th>延迟</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="ui bottom attached tab segment" data-tab="fourth">
-<table class="ui very compact table">
-  <thead>
-    <tr><th>Name</th>
-    <th>Status</th>
-    <th>Another Status</th>
-    <th>Notes</th>
-  </tr></thead>
-  <tbody>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="ui very compact striped table">
+    <thead>
+      <tr><th>跳数</th>
+      <th>IP</th>
+      <th>路由</th>
+      <th>AS Number</th>
+      <th>延迟</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="ui bottom attached tab segment" data-tab="fifth">
-<table class="ui very compact table">
-  <thead>
-    <tr><th>Name</th>
-    <th>Status</th>
-    <th>Another Status</th>
-    <th>Notes</th>
-  </tr></thead>
-  <tbody>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="ui very compact striped table">
+    <thead>
+      <tr><th>跳数</th>
+      <th>IP</th>
+      <th>路由</th>
+      <th>AS Number</th>
+      <th>延迟</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="ui bottom attached tab segment" data-tab="sixth">
-<table class="ui very compact table">
-  <thead>
-    <tr><th>Name</th>
-    <th>Status</th>
-    <th>Another Status</th>
-    <th>Notes</th>
-  </tr></thead>
-  <tbody>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-    <tr>
-      <td>John</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>None</td>
-    </tr>
-    <tr>
-      <td>Jamie</td>
-      <td>Approved</td>
-      <td>Approved</td>
-      <td>Requires call</td>
-    </tr>
-  </tbody>
-</table>
+  <table class="ui very compact striped table">
+    <thead>
+      <tr><th>跳数</th>
+      <th>IP</th>
+      <th>路由</th>
+      <th>AS Number</th>
+      <th>延迟</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>None</td>
+      </tr>
+      <tr>
+        <td>Jamie</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Approved</td>
+        <td>Requires call</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 </div>
 <div class="ui hidden divider"></div>
 <div class="ui visible message">
-  <p>CopyRight 2016-2018 <a href="https://www.github.com/FunctionClub">Function Club</a>. All Right Reserved</p>
+  <p>CopyRight 2016-2018 <a href="https://www.github.com/FunctionClub">Function Club</a>. All Right Reserved.   Published By <a href="https://www.zhujiboke.com">主机博客</a></p>
 </div>
 
 </body>
