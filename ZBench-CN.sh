@@ -312,6 +312,5 @@ speed_cn && next
 python /tmp/ZPing-CN.py
 next
 
-
-
-
+wget https://raw.githubusercontent.com/FunctionClub/ZBench/master/Generate.py >> /dev/null 2>&1
+python Generate.py

@@ -584,19 +584,19 @@ speed_cn = change_to_list("/tmp/speed_cn.txt")
 shm = traceroute_to_dict("/tmp/shm.txt")
 shm_html = dict_to_table(shm,"first")
 
-sht = traceroute_to_dict("/tmp/sht.txt.txt")
+sht = traceroute_to_dict("/tmp/sht.txt")
 sht_html = dict_to_table(sht,"second")
 
-shu = traceroute_to_dict("/tmp/shu.txt.txt")
+shu = traceroute_to_dict("/tmp/shu.txt")
 shu_html = dict_to_table(shu,"third")
 
-gdm = traceroute_to_dict("/tmp/gdm.txt.txt")
+gdm = traceroute_to_dict("/tmp/gdm.txt")
 gdm_html = dict_to_table(gdm,"fourth")
 
-gdt = traceroute_to_dict("/tmp/gdt.txt.txt")
+gdt = traceroute_to_dict("/tmp/gdt.txt")
 gdt_html = dict_to_table(gdt,"fifth")
 
-gdu = traceroute_to_dict("/tmp/gdu.txt.txt")
+gdu = traceroute_to_dict("/tmp/gdu.txt")
 gdu_html = dict_to_table(gdu,"sixth")
 
 
