@@ -319,7 +319,7 @@ echo "您的测评报告已保存在 /root/report.html"
 
 # If use simple http server
 while :; do echo
-  read -p "你想现在查看您的测聘报告吗? [y/n]: " ifreport
+  read -p "你想现在查看您的测评报告吗? [y/n]: " ifreport
   if [[ ! $ifreport =~ ^[y,n]$ ]]; then
     echo "输入错误! 请确保你输入的是 'y' 或者 'n'"
   else
