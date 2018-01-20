@@ -40,6 +40,27 @@ def traceroute_to_dict(filename):
 
 	return dict(d)
 
+def traceroute_to_table(filename):
+  d = traceroute_to_dict(filename)
+  string = ""
+  for i in sorted(d.keys()):
+    x = d[i]
+    template = """
+  <tr>
+  <td>{}</td>
+  <td>{}</td>
+  <td>{}</td>
+  <td>{}</td>
+  <td>{}</td>
+  </tr>
+  """
+    string = string + template.format(i,x["ip"],x["route"],x["asn"],x["latency"]) + "\n"
+    
+    writefile = open(filename + "_table","w")
+    writefile.write(string)
+    writefile.close()
+
+
 def dict_to_table(d,tab):
 
     table_class = "ui bottom attached tab segment"
@@ -583,21 +604,27 @@ speed = change_to_list("/tmp/speed.txt")
 speed_cn = change_to_list("/tmp/speed_cn.txt")
 
 shm = traceroute_to_dict("/tmp/shm.txt")
+traceroute_to_table("/tmp/shm.txt")
 shm_html = dict_to_table(shm,"first")
 
 sht = traceroute_to_dict("/tmp/sht.txt")
+traceroute_to_table("/tmp/sht.txt")
 sht_html = dict_to_table(sht,"second")
 
 shu = traceroute_to_dict("/tmp/shu.txt")
+traceroute_to_table("/tmp/shu.txt")
 shu_html = dict_to_table(shu,"third")
 
 gdm = traceroute_to_dict("/tmp/gdm.txt")
+traceroute_to_table("/tmp/gdm.txt")
 gdm_html = dict_to_table(gdm,"fourth")
 
 gdt = traceroute_to_dict("/tmp/gdt.txt")
+traceroute_to_table("/tmp/gdt.txt")
 gdt_html = dict_to_table(gdt,"fifth")
 
 gdu = traceroute_to_dict("/tmp/gdu.txt")
+traceroute_to_table("/tmp/gdu.txt")
 gdu_html = dict_to_table(gdu,"sixth")
 
 
