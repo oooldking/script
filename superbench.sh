@@ -83,7 +83,7 @@ next() {
 
 speed_test(){
 	if [[ $1 == '' ]]; then
-		temp=$(python speedtest.py --share 2>&1)
+		temp=$(python /tmp/speedtest.py --share 2>&1)
 		is_down=$(echo "$temp" | grep 'Download') 
 		if [[ ${is_down} ]]; then
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
@@ -96,7 +96,7 @@ speed_test(){
 	        local cerror="ERROR"
 		fi
 	else
-		temp=$(python speedtest.py --server $1 --share 2>&1)
+		temp=$(python /tmp/speedtest.py --server $1 --share 2>&1)
 		is_down=$(echo "$temp" | grep 'Download') 
 		if [[ ${is_down} ]]; then
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
@@ -117,24 +117,26 @@ speed_test(){
 
 speed() {
 	# install speedtest
-	if  [ ! -e './speedtest.py' ]; then
-	    wget https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
+	if  [ ! -e '/tmp/speedtest.py' ]; then
+	    wget -P /tmp https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
 	fi
-	chmod a+rx speedtest.py
+	chmod a+rx /tmp/speedtest.py
 
     speed_test '' 'Normal Node'
-	speed_test '4595' 'Zhengzhou CT'
-	speed_test '5316' 'Nanjing   CT'
+    speed_test '4595' 'Zhengzhou CT'
+    speed_test '7509' 'Kunming   CT'
 	speed_test '3633' 'Shanghai  CT'
 	speed_test '4624' 'Chengdu   CT'
+	speed_test '5017' 'Shenyang  CU'
 	speed_test '4863' "Xi'an     CU"
 	speed_test '5083' 'Shanghai  CU'
 	speed_test '5726' 'Chongqing CU'
 	speed_test '5292' "Xi'an     CM"
-	speed_test '4665' 'Shanghai  CM'
+	speed_test '16314' 'Shandong  CM'
+	speed_test '6715' 'Ningbo    CM'
 	speed_test '4575' 'Chengdu   CM'
 	 
-	rm -rf speedtest.py
+	rm -rf /tmp/speedtest.py
 }
 
 

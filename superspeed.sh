@@ -339,9 +339,9 @@ fi
 
 # install speedtest
 if  [ ! -e './speedtest.py' ]; then
-    wget https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
+    wget -P /tmp https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
 fi
-chmod a+rx speedtest.py
+chmod a+rx /tmp/speedtest.py
 
 result() {
     download=`cat speed.log | awk -F ':' '/Download/{print $2}'`
@@ -358,7 +358,7 @@ result() {
 }
 
 speed_test(){
-	temp=$(python speedtest.py --server $1 --share 2>&1)
+	temp=$(python /tmp/speedtest.py --server $1 --share 2>&1)
 	is_down=$(echo "$temp" | grep 'Download') 
 	if [[ ${is_down} ]]; then
         local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
@@ -377,7 +377,7 @@ speed_test(){
 }
 
 if [[ ${telecom} =~ ^[1-3]$ ]]; then
-    python speedtest.py --server ${num} --share 2>/dev/null | tee speed.log 2>/dev/null
+    python /tmp/speedtest.py --server ${num} --share 2>/dev/null | tee speed.log 2>/dev/null
     is_down=$(cat speed.log | grep 'Download')
 
     if [[ ${is_down} ]]; then
@@ -391,7 +391,7 @@ if [[ ${telecom} =~ ^[1-3]$ ]]; then
 fi
 
 if [[ ${telecom} == 4 ]]; then
-    python speedtest.py | tee speed.log
+    python /tmp/speedtest.py | tee speed.log
     result
     echo "本地测试完成！"
     rm -rf speedtest.py
@@ -403,8 +403,7 @@ if [[ ${telecom} == 5 ]]; then
 	printf "%-14s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"
 	start=$(date +%s) 
     speed_test '4595' '郑州电信'
-    speed_test '5316' '南京电信'
-    speed_test '5081' '深圳电信'
+    speed_test '7509' '昆明电信'
 	speed_test '3633' '上海电信'
 	speed_test '4624' '成都电信'
 	speed_test '5017' '沈阳联通'
