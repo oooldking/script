@@ -402,7 +402,8 @@ if [[ ${telecom} == 5 ]]; then
 	echo ""
 	printf "%-14s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"
 	start=$(date +%s) 
-	speed_test '12637' '襄阳电信'
+    speed_test '4595' '郑州电信'
+    speed_test '5316' '南京电信'
     speed_test '5081' '深圳电信'
 	speed_test '3633' '上海电信'
 	speed_test '4624' '成都电信'
@@ -410,7 +411,7 @@ if [[ ${telecom} == 5 ]]; then
 	speed_test '4863' '西安联通'
 	speed_test '5083' '上海联通'
 	speed_test '5726' '重庆联通'
-	speed_test '5192' '西安移动'
+	speed_test '5292' '西安移动'
 	speed_test '4665' '上海移动'
     speed_test '6715' '宁波移动'
 	speed_test '4575' '成都移动'
