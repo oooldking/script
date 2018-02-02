@@ -412,7 +412,7 @@ if [[ ${telecom} == 5 ]]; then
 	speed_test '5083' '上海联通'
 	speed_test '5726' '重庆联通'
 	speed_test '5292' '西安移动'
-	speed_test '4665' '上海移动'
+	speed_test '16314' '山东移动'
     speed_test '6715' '宁波移动'
 	speed_test '4575' '成都移动'
 	end=$(date +%s)  
