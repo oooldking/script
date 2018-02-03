@@ -118,7 +118,7 @@ speed_test(){
 speed() {
 	# install speedtest
 	if  [ ! -e '/tmp/speedtest.py' ]; then
-	    wget -P /tmp https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
+	    wget --no-check-certificate -P /tmp https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
 	fi
 	chmod a+rx /tmp/speedtest.py
 
