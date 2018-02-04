@@ -6,7 +6,7 @@ if  [ ! -e '/usr/bin/wget' ]; then
     echo "Error: wget command not found. You must be install wget command at first."
     exit 1
 fi
-
+read -p "请输入你的服务器提供商: " Provider
 
 # Check release
 if [ -f /etc/redhat-release ]; then
@@ -63,7 +63,22 @@ else
     apt-get -y install ca-certificates > /dev/null 2>&1
 fi
 
+# Install uuid
+echo "Installing uuid......"
+if [ "${release}" == "centos" ]; then
+    yum -y install uuid > /dev/null 2>&1
+else
+    apt-get -y install uuid > /dev/null 2>&1
+fi
 
+
+# Install curl
+echo "Installing curl......"
+if [ "${release}" == "centos" ]; then
+    yum -y install curl > /dev/null 2>&1
+else
+    apt-get -y install curl > /dev/null 2>&1
+fi
 
 
 # Install Besttrace
@@ -305,6 +320,7 @@ echo $virtua >> /tmp/info.txt
 echo $io1 >> /tmp/info.txt
 echo $io2 >> /tmp/info.txt
 echo $io3 >> /tmp/info.txt
+AKEY=$( uuid )
 
 printf "%-30s%-20s%-24s%-12s\n" "节点名称" "IP地址" "下载速度" "延迟"
 speed && next
@@ -313,8 +329,65 @@ speed_cn && next
 python /tmp/ZPing-CN.py
 next
 
+NetCFspeec=$( sed -n "2p" /tmp/speed.txt )
+NetCFping=$( sed -n "3p" /tmp/speed.txt )
+NetLJPspeed=$( sed -n "5p" /tmp/speed.txt )
+NetLJPping=$( sed -n "6p" /tmp/speed.txt )
+NetLSGspeed=$( sed -n "8p" /tmp/speed.txt )
+NetLSGping=$( sed -n "9p" /tmp/speed.txt )
+NetLUKspeed=$( sed -n "11p" /tmp/speed.txt )
+NetLUKping=$( sed -n "12p" /tmp/speed.txt )
+NetLDEspeed=$( sed -n "14p" /tmp/speed.txt )
+NetLDEping=$( sed -n "15p" /tmp/speed.txt )
+NetLCAspeed=$( sed -n "17p" /tmp/speed.txt )
+NetLCAping=$( sed -n "18p" /tmp/speed.txt )
+NetSTXspeed=$( sed -n "20p" /tmp/speed.txt )
+NetSTXping=$( sed -n "21p" /tmp/speed.txt )
+NetSWAspeed=$( sed -n "23p" /tmp/speed.txt )
+NetSWAping=$( sed -n "24p" /tmp/speed.txt )
+NetSDEspeed=$( sed -n "26p" /tmp/speed.txt )
+NetSDEping=$( sed -n "27p" /tmp/speed.txt )
+NetSSGspeed=$( sed -n "29p" /tmp/speed.txt )
+NetSSGping=$( sed -n "30p" /tmp/speed.txt )
+NetSCNspeed=$( sed -n "32p" /tmp/speed.txt )
+NetSCNping=$( sed -n "33p" /tmp/speed.txt )
+
+
+NetUPST=$( sed -n "4p" /tmp/speed_cn.txt )
+NetDWST=$( sed -n "5p" /tmp/speed_cn.txt )
+NetPiST=$( sed -n "6p" /tmp/speed_cn.txt )
+NetUPCT=$( sed -n "7p" /tmp/speed_cn.txt )
+NetDWCT=$( sed -n "8p" /tmp/speed_cn.txt )
+NetPiCT=$( sed -n "9p" /tmp/speed_cn.txt )
+NetUPXT=$( sed -n "10p" /tmp/speed_cn.txt )
+NetDWXT=$( sed -n "11p" /tmp/speed_cn.txt )
+NetPiXT=$( sed -n "12p" /tmp/speed_cn.txt )
+NetUPSU=$( sed -n "13p" /tmp/speed_cn.txt )
+NetDWSU=$( sed -n "14p" /tmp/speed_cn.txt )
+NetPiSU=$( sed -n "15p" /tmp/speed_cn.txt )
+NetUPCU=$( sed -n "16p" /tmp/speed_cn.txt )
+NetDWCU=$( sed -n "17p" /tmp/speed_cn.txt )
+NetPiCU=$( sed -n "18p" /tmp/speed_cn.txt )
+NetUPXM=$( sed -n "19p" /tmp/speed_cn.txt )
+NetDWXM=$( sed -n "20p" /tmp/speed_cn.txt )
+NetPiXM=$( sed -n "21p" /tmp/speed_cn.txt )
+NetUPSM=$( sed -n "22p" /tmp/speed_cn.txt )
+NetDWSM=$( sed -n "23p" /tmp/speed_cn.txt )
+NetPiSM=$( sed -n "24p" /tmp/speed_cn.txt )
+NetUPCM=$( sed -n "25p" /tmp/speed_cn.txt )
+NetDWCM=$( sed -n "26p" /tmp/speed_cn.txt )
+NetPiCM=$( sed -n "27p" /tmp/speed_cn.txt )
 wget -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/Generate.py >> /dev/null 2>&1
 python Generate.py && rm -rf Generate.py && cp /root/report.html /tmp/report/index.html
+TSM=$( cat /tmp/shm.txt_table )
+TST=$( cat /tmp/sht.txt_table )
+TSU=$( cat /tmp/shu.txt_table )
+TGM=$( cat /tmp/gdm.txt_table )
+TGT=$( cat /tmp/gdt.txt_table )
+TGU=$( cat /tmp/gdu.txt_table )
+curl 'http://sg.api.zbench.kirito.moe/action.php' --data "CPUmodel=$cname &CPUspeed=$freq MHz &CPUcore=$cores &HDDsize=$disk_total_size GB ($disk_used_size GB 已使用) &RAMsize=$tram MB ($uram MB 已使用)&SWAPsize=$swap MB ($uswap MB 已使用)&UPtime= $up&Arch=1&systemload=$load&OS= $opsy &Arch=$arch ($lbit 位)&Kernel=$kern &Virmethod=$virtua &IOa=$io1&IOb=$io2&IOc=$io3&NetCFspeec=$NetCFspeec&NetCFping=$NetCFping&NetLJPspeed=$NetLJPspeed&NetLJPping=$NetLJPping&NetLSGspeed=$NetLSGspeed&NetLSGping=$NetLSGping&NetLUKspeed=$NetLUKspeed&NetLUKping=$NetLUKping&NetLDEspeed=$NetLDEspeed&NetLDEping=$NetLDEping&NetLCAspeed=$NetLCAspeed&NetLCAping=$NetLCAping&NetSTXspeed=$NetSTXspeed&NetSTXping=$NetSTXping&NetSWAspeed=$NetSWAspeed&NetSWAping=$NetSWAping&NetSDEspeed=$NetSDEspeed&NetSDEping=$NetSDEping&NetSSGspeed=$NetSSGspeed&NetSSGping=$NetSSGping&NetSCNspeed=$NetSCNspeed&NetSCNping=$NetSCNping&NetUPST=$NetUPST&NetDWST=$NetDWST&NetPiST=$NetPiST&NetUPCT=$NetUPCT&NetDWCT=$NetDWCT&NetPiCT=$NetPiCT&NetUPXT=$NetUPXT&NetDWXT=$NetDWXT&NetPiXT=$NetPiXT&NetUPSU=$NetUPSU&NetDWSU=$NetDWSU&NetPiSU=$NetPiSU&NetUPCU=$NetUPCU&NetDWCU=$NetDWCU&NetPiCU=$NetPiCU&NetUPXM=$NetUPXM&NetDWXM=$NetDWXM&NetPiXM=$NetPiXM&NetUPSM=$NetUPSM&NetDWSM=$NetDWSM&NetPiSM=$NetPiSM&NetUPCM=$NetUPCM&NetDWCM=$NetDWCM&NetPiCM=$NetPiCM&TSM=$TSM&TST=$TST&TSU=$TSU&TGM=$TGM&TGT=$TGT&TGU=$TGU&AKEY=$AKEY&Provider=$Provider"
+IKEY=$(curl "http://sg.api.zbench.kirito.moe/getkey.php?AKEY=$AKEY" 2>/dev/null)
+echo "在线查看测评报告：https://zbench.kirito.moe/record-cn.php?IKEY=$IKEY"
 echo "您的测评报告已保存在 /root/report.html"
 
 # If use simple http server
