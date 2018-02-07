@@ -123,7 +123,7 @@ speed() {
 	chmod a+rx /tmp/speedtest.py
 
     speed_test '' 'Normal Node'
-    speed_test '4595' 'Zhengzhou CT'
+    speed_test '6435' 'Xiangyang CT'
     speed_test '7509' 'Kunming   CT'
 	speed_test '3633' 'Shanghai  CT'
 	speed_test '4624' 'Chengdu   CT'
