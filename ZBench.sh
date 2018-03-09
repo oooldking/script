@@ -35,6 +35,8 @@ PLAIN='\033[0m'
 
 rm -rf /tmp/report && mkdir /tmp/report
 
+echo "Installing required packages, please wait..."
+
 # Install Virt-what
 if  [ ! -e '/usr/sbin/virt-what' ]; then
     echo "Installing Virt-What......"
