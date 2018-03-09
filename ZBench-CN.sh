@@ -53,7 +53,7 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
     fi      
 fi
 
-
+echo "正在安装必要的依赖，请耐心等待..."
 
 # Install ca-certificates
 echo "Installing ca-certificates......"
