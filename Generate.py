@@ -8,37 +8,37 @@ def change_to_list(filename):
 
 def traceroute_to_dict(filename):
 
-	txtfile = open(filename,"r")
-	content = txtfile.read().strip().split("\n")[1:]
-	d=dict()
+    txtfile = open(filename,"r")
+    content = txtfile.read().strip().split("\n")[1:]
+    d=dict()
 
-	for i in range(len(content)):
-		
-		line = content[i]
-		if line[1].isdigit():
-			if line[4] != "*" :
-				latency=line.strip().split("  ")[2]
-				asn = line.strip().split("  ")[3]
-				route = line.strip().split("  ")[4]
-				ip = line.strip().split("  ")[1]
-				step = line[0:2]
-			else:
-				latency="*"
-				asn = "*"
-				route = "*"
-				ip = "*"
-				step = line[0:2]
-				
-			d[int(step)]=dict()
-			d[int(step)]["ip"]=ip
-			if int(step) < 3:
-				d[int(step)]["ip"]="*.*.*.*(已隐藏)"
-			d[int(step)]["latency"]=latency
-			d[int(step)]["asn"]=asn
-			d[int(step)]["route"]=route
+    for i in range(len(content)):
+
+        line = content[i]
+        if line[1].isdigit():
+            if line[4] != "*" :
+                latency=line.strip().split("  ")[2]
+                asn = line.strip().split("  ")[3]
+                route = line.strip().split("  ")[4]
+                ip = line.strip().split("  ")[1]
+                step = line[0:2]
+            else:
+                latency="*"
+                asn = "*"
+                route = "*"
+                ip = "*"
+                step = line[0:2]
+
+            d[int(step)]=dict()
+            d[int(step)]["ip"]=ip
+            if int(step) < 3:
+                d[int(step)]["ip"]="*.*.*.*(已隐藏)"
+            d[int(step)]["latency"]=latency
+            d[int(step)]["asn"]=asn
+            d[int(step)]["route"]=route
 
 
-	return dict(d)
+    return dict(d)
 
 def traceroute_to_table(filename):
   d = traceroute_to_dict(filename)
@@ -125,10 +125,10 @@ html = """
     <a class="item" onclick="javascript:scroller('hdd', 600);">
       <i class="desktop icon"></i> 硬盘 I/O
     </a>
-	<a class="item" onclick="javascript:scroller('net', 900);">
+    <a class="item" onclick="javascript:scroller('net', 900);">
       <i class="sitemap icon"></i> 网络测试
     </a>
-	<a class="item" onclick="javascript:scroller('route', 1600);">
+    <a class="item" onclick="javascript:scroller('route', 1600);">
       <i class="plug icon"></i> 路由追踪
     </a>
     <div class="ui simple dropdown item">
@@ -141,8 +141,8 @@ html = """
     </div>
     <div class="right item">
       <div class="ui">    
-			<a href="https://github.com/FunctionClub/ZBench/">ZBench v1.0-Beta</a>
-	  </div>
+            <a href="https://github.com/FunctionClub/ZBench/">ZBench v1.0-Beta</a>
+      </div>
     </div>
   </div>
 </div>
@@ -216,49 +216,49 @@ html = """
       <td>{4}</td>
       
     </tr>
-	<tr>
+    <tr>
       <td>
         <i class="Database icon"></i> SWAP 交换空间大小
       </td>
       <td>{5}</td>
       
     </tr>
-	<tr>
+    <tr>
       <td>
         <i class="Bar Chart icon"></i> 在线时长
       </td>
       <td>{6}</td>
       
     </tr>
-	<tr>
+    <tr>
       <td>
         <i class="Pie Chart icon"></i> 系统负载
       </td>
       <td>{7}</td>
       
     </tr>
-	<tr>
+    <tr>
       <td>
         <i class="Windows icon"></i> 系统
       </td>
       <td>{8}</td>
       
     </tr>
-	<tr>
+    <tr>
       <td>
         <i class="Columns icon"></i> 架构
       </td>
       <td>{9}</td>
       
     </tr>
-	<tr>
+    <tr>
       <td>
         <i class="File Code Outline icon"></i> 核心
       </td>
       <td>{10}</td>
       
     </tr>
-	<tr>
+    <tr>
       <td>
         <i class="Group Object icon"></i> 虚拟化技术
       </td>
@@ -282,7 +282,7 @@ html = """
 <table class="ui celled striped table">
   <thead>
     <tr>
-	<th>次数</th>
+    <th>次数</th>
       <th>速度</th>
   </tr></thead>
   <tbody>
@@ -327,7 +327,7 @@ html = """
       <th>节点</th>
       <th>IP 地址</th>
       <th>下载速度</th>
-	  <th>延迟</th>
+      <th>延迟</th>
     </tr>
   </thead>
   <tbody>
@@ -335,66 +335,66 @@ html = """
       <td>CacheFly</td>
       <td>{15}</td>
       <td>{16}</td>
-	  <td>{17}</td>
+      <td>{17}</td>
     </tr>
     <tr>
       <td>Linode 日本</td>
       <td>{18}</td>
       <td>{19}</td>
-	  <td>{20}</td>
+      <td>{20}</td>
     </tr>
     <tr>
       <td>Linode 新加坡</td>
       <td>{21}</td>
       <td>{22}</td>
-	  <td>{23}</td>
+      <td>{23}</td>
     </tr>
     <tr>
       <td>Linode 英国</td>
       <td>{24}</td>
       <td>{25}</td>
-	  <td>{26}</td>
+      <td>{26}</td>
     </tr>
     <tr>
       <td>Linode 法兰克福</td>
       <td>{27}</td>
       <td>{28}</td>
-	  <td>{29}</td>
+      <td>{29}</td>
     </tr>
     <tr>
       <td>Linode 加拿大</td>
       <td>{30}</td>
       <td>{31}</td>
-	  <td>{32}</td>
+      <td>{32}</td>
     </tr>
     <tr>
       <td>Softlayer 达拉斯</td>
       <td>{33}</td>
       <td>{34}</td>
-	  <td>{35}</td>
+      <td>{35}</td>
     </tr>
     <tr>
       <td>Softlayer 西雅图</td>
       <td>{36}</td>
       <td>{37}</td>
-	  <td>{38}</td>
+      <td>{38}</td>
     </tr>
-	<tr>
+    <tr>
       <td>Softlayer 法兰克福</td>
       <td>{39}</td>
       <td>{40}</td>
-	  <td>{41}</td>
+      <td>{41}</td>
     </tr>
-	<tr>
+    <tr>
       <td>Softlayer 新加坡</td>
       <td>{42}</td>
       <td>{43}</td><td>{44}</td>
     </tr>
-	<tr>
+    <tr>
       <td>Softlayer 香港</td>
       <td>{45}</td>
       <td>{46}</td>
-	  <td>{47}</td>
+      <td>{47}</td>
     </tr>
   </tbody>
 </table>
@@ -408,7 +408,7 @@ html = """
       <th>节点</th>
       <th>上传速度</th>
       <th>下载速度</th>
-	  <th>延迟</th>
+      <th>延迟</th>
     </tr>
   </thead>
   <tbody>
@@ -416,49 +416,49 @@ html = """
       <td>上海电信</td>
       <td>{48}</td>
       <td>{49}</td>
-	  <td>{50}</td>
+      <td>{50}</td>
     </tr>
     <tr>
       <td>成都电信</td>
       <td>{51}</td>
       <td>{52}</td>
-	  <td>{53}</td>
+      <td>{53}</td>
     </tr>
     <tr>
       <td>西安电信</td>
       <td>{54}</td>
       <td>{55}</td>
-	  <td>{56}</td>
+      <td>{56}</td>
     </tr>
     <tr>
       <td>上海联通</td>
       <td>{57}</td>
       <td>{58}</td>
-	  <td>{59}</td>
+      <td>{59}</td>
     </tr>
     <tr>
       <td>重庆联通</td>
       <td>{60}</td>
       <td>{61}</td>
-	  <td>{62}</td>
+      <td>{62}</td>
     </tr>
     <tr>
       <td>西安移动</td>
       <td>{63}</td>
       <td>{64}</td>
-	  <td>{65}</td>
+      <td>{65}</td>
     </tr>
     <tr>
       <td>上海移动</td>
       <td>{66}</td>
       <td>{67}</td>
-	  <td>{68}</td>
+      <td>{68}</td>
     </tr>
     <tr>
       <td>成都移动</td>
       <td>{69}</td>
       <td>{70}</td>
-	  <td>{71}</td>
+      <td>{71}</td>
     </tr>
   </tbody>
 </table>
@@ -499,83 +499,83 @@ footer = """
 // 转换为数字
 function intval(v)
 {
-	v = parseInt(v);
-	return isNaN(v) ? 0 : v;
+    v = parseInt(v);
+    return isNaN(v) ? 0 : v;
 }
  
 // 获取元素信息
 function getPos(e)
 {
-	var l = 0;
-	var t  = 0;
-	var w = intval(e.style.width);
-	var h = intval(e.style.height);
-	var wb = e.offsetWidth;
-	var hb = e.offsetHeight;
-	while (e.offsetParent){
-		l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
-		t += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
-		e = e.offsetParent;
-	}
-	l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
-	t  += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
-	return {x:l, y:t, w:w, h:h, wb:wb, hb:hb};
+    var l = 0;
+    var t  = 0;
+    var w = intval(e.style.width);
+    var h = intval(e.style.height);
+    var wb = e.offsetWidth;
+    var hb = e.offsetHeight;
+    while (e.offsetParent){
+        l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
+        t += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
+        e = e.offsetParent;
+    }
+    l += e.offsetLeft + (e.currentStyle?intval(e.currentStyle.borderLeftWidth):0);
+    t  += e.offsetTop  + (e.currentStyle?intval(e.currentStyle.borderTopWidth):0);
+    return {x:l, y:t, w:w, h:h, wb:wb, hb:hb};
 }
  
 // 获取滚动条信息
 function getScroll() 
 {
-	var t, l, w, h;
-	
-	if (document.documentElement && document.documentElement.scrollTop) {
-		t = document.documentElement.scrollTop;
-		l = document.documentElement.scrollLeft;
-		w = document.documentElement.scrollWidth;
-		h = document.documentElement.scrollHeight;
-	} else if (document.body) {
-		t = document.body.scrollTop;
-		l = document.body.scrollLeft;
-		w = document.body.scrollWidth;
-		h = document.body.scrollHeight;
-	}
-	return { t: t, l: l, w: w, h: h };
+    var t, l, w, h;
+    
+    if (document.documentElement && document.documentElement.scrollTop) {
+        t = document.documentElement.scrollTop;
+        l = document.documentElement.scrollLeft;
+        w = document.documentElement.scrollWidth;
+        h = document.documentElement.scrollHeight;
+    } else if (document.body) {
+        t = document.body.scrollTop;
+        l = document.body.scrollLeft;
+        w = document.body.scrollWidth;
+        h = document.body.scrollHeight;
+    }
+    return { t: t, l: l, w: w, h: h };
 }
  
 // 锚点(Anchor)间平滑跳转
 function scroller(el, duration)
 {
-	if(typeof el != 'object') { el = document.getElementById(el); }
+    if(typeof el != 'object') { el = document.getElementById(el); }
  
-	if(!el) return;
+    if(!el) return;
  
-	var z = this;
-	z.el = el;
-	z.p = getPos(el);
-	z.s = getScroll();
-	z.clear = function(){window.clearInterval(z.timer);z.timer=null};
-	z.t=(new Date).getTime();
+    var z = this;
+    z.el = el;
+    z.p = getPos(el);
+    z.s = getScroll();
+    z.clear = function(){window.clearInterval(z.timer);z.timer=null};
+    z.t=(new Date).getTime();
  
-	z.step = function(){
-		var t = (new Date).getTime();
-		var p = (t - z.t) / duration;
-		if (t >= duration + z.t) {
-			z.clear();
-			window.setTimeout(function(){z.scroll(z.p.y, z.p.x)},13);
-		} else {
-			st = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.y-z.s.t) + z.s.t;
-			sl = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.x-z.s.l) + z.s.l;
-			z.scroll(st, sl);
-		}
-	};
-	z.scroll = function (t, l){window.scrollTo(l, t)};
-	z.timer = window.setInterval(function(){z.step();},13);
+    z.step = function(){
+        var t = (new Date).getTime();
+        var p = (t - z.t) / duration;
+        if (t >= duration + z.t) {
+            z.clear();
+            window.setTimeout(function(){z.scroll(z.p.y, z.p.x)},13);
+        } else {
+            st = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.y-z.s.t) + z.s.t;
+            sl = ((-Math.cos(p*Math.PI)/2) + 0.5) * (z.p.x-z.s.l) + z.s.l;
+            z.scroll(st, sl);
+        }
+    };
+    z.scroll = function (t, l){window.scrollTo(l, t)};
+    z.timer = window.setInterval(function(){z.step();},13);
 }
 </script>
 <script type="text/javascript">
 //Tab功能支持
-	$('.menu .item')
-	.tab()
-	;
+    $('.menu .item')
+    .tab()
+    ;
 //Message工具
 $('.message .close')
   .on('click', function() {
