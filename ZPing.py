@@ -7,12 +7,6 @@
  2. http://www.pythoner.com/357.html
 '''
 
-import os 
-import socket
-import struct
-import select
-import json
-import time
 import commands
 
 def ping(host):
