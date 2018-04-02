@@ -41,7 +41,6 @@ echo "Installing required packages, please wait..."
 if  [ ! -e '/usr/sbin/virt-what' ]; then
     echo "Installing Virt-What......"
     if [ "${release}" == "centos" ]; then
-        yum update > /dev/null 2>&1
         yum -y install virt-what > /dev/null 2>&1
     else
         apt-get update > /dev/null 2>&1
@@ -50,14 +49,6 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
 fi
 
 
-
-# Install ca-certificates
-echo "Installing ca-certificates......"
-if [ "${release}" == "centos" ]; then
-    yum -y install ca-certificates > /dev/null 2>&1
-else
-    apt-get -y install ca-certificates > /dev/null 2>&1
-fi
 
 # Install uuid
 echo "Installing uuid......"
