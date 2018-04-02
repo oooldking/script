@@ -10,7 +10,7 @@
 import commands
 
 def ping(host):
-    cmd = "ping "+ str(host) + " -c1 -W 1"
+    cmd = "ping "+ str(host) + " -c2 -W 2"
     result = commands.getoutput(cmd)
     result = result.split()
     result = result[-2].split("/")[0]
