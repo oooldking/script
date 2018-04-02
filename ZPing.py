@@ -61,7 +61,7 @@ D = {
     'Nanchang': 'speedtest2.wy.jxunicom.com', 
     'Chongqing': 'speedtest1.cqccn.com', 
     'Shanghai': 'speedtest2.sh.chinamobile.com',
-    'Huhehaote': 'www.nmwanwang.com',
+    'Huhehaote': '222.74.1.200',
     'Urumqi': '61.128.114.133',
     'Hangzhou': '122.229.136.10',
     'Xi an': 'xatest.wo-xa.com', 

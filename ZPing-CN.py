@@ -62,7 +62,7 @@ D = {
     '南昌': 'speedtest2.wy.jxunicom.com',
     '重庆': 'speedtest1.cqccn.com',
     '上海': 'speedtest2.sh.chinamobile.com',
-    '呼和浩特': 'www.nmwanwang.com',
+    '呼和浩特': '222.74.1.200	',
     '乌鲁木齐': '61.128.114.133',
     '杭州': '122.229.136.10',
     '西安': 'xatest.wo-xa.com',
