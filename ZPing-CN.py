@@ -15,7 +15,7 @@ def ping(host):
     result = result.split()
     result = result[-2].split("/")[0]
     if result.isalpha():
-	result = False
+        result = False
     return float(result)
 
 
@@ -47,34 +47,34 @@ def use_style(string, mode='', fore='', back=''):
     return '%s%s%s' % (style, string, end)
 
 D = {
-    '郑州': '61.168.23.74', 
-    '济南': 'speedtest1.jnltwy.com', 
-    '天津': 'speedtest1.online.tj.cn', 
+    '郑州': '61.168.23.74',
+    '济南': 'speedtest1.jnltwy.com',
+    '天津': 'speedtest1.online.tj.cn',
     '昌吉': '61.128.107.242',
-    '拉萨': '221.13.70.244', 
-    '长春': 'speedtest2.vicp.cc', 
-    '深圳': '119.147.52.35', 
-    '兰州': 'www.lanzhouunicom.com', 
-    '西宁': '221.207.32.94', 
+    '拉萨': '221.13.70.244',
+    '长春': 'speedtest2.vicp.cc',
+    '深圳': '119.147.52.35',
+    '兰州': 'www.lanzhouunicom.com',
+    '西宁': '221.207.32.94',
     '合肥': '112.122.10.26',
-    '武汉': '113.57.249.2', 
-    '襄阳': 'www.xydxcs.com', 
-    '南昌': 'speedtest2.wy.jxunicom.com', 
-    '重庆': 'speedtest1.cqccn.com', 
+    '武汉': '113.57.249.2',
+    '襄阳': 'www.xydxcs.com',
+    '南昌': 'speedtest2.wy.jxunicom.com',
+    '重庆': 'speedtest1.cqccn.com',
     '上海': 'speedtest2.sh.chinamobile.com',
     '呼和浩特': 'www.nmwanwang.com',
-    '乌鲁木齐': '4g.xj169.com', 
+    '乌鲁木齐': '4g.xj169.com',
     '杭州': '122.229.136.10',
-    '西安': 'xatest.wo-xa.com', 
+    '西安': 'xatest.wo-xa.com',
     '宁波': 'ltetest3.139site.com',
-    '太原': 'speedtest.sxunicomjzjk.cn', 
-    '苏州': '218.94.214.42', 
-    '长沙': 'speedtest01.hn165.com', 
+    '太原': 'speedtest.sxunicomjzjk.cn',
+    '苏州': '218.94.214.42',
+    '长沙': 'speedtest01.hn165.com',
     '哈尔滨': '221.212.238.106',
     '北京': 'st1.bjtelecom.net',
-    '成都': 'speed.westidc.com.cn', 
+    '成都': 'speed.westidc.com.cn',
     '沈阳': 'speedtest1.online.ln.cn',
-    '南京': '4gnanjing1.speedtest.jsinfo.net', 
+    '南京': '4gnanjing1.speedtest.jsinfo.net',
     '宁夏': '221.199.9.35',
     '福州': 'upload1.testspeed.kaopuyun.com'
     }
@@ -87,8 +87,8 @@ d=dict()
 for x in D:
     host=D[x]
     result = ping(host)
-	
-	
+
+
     if result == False:
         latency_str = use_style(str("Fail"), fore='red')
     elif float(result) <= 60:
@@ -98,7 +98,7 @@ for x in D:
     else:
         latency_str = use_style(str(round(result,2))+" ms", fore='red')
 
-	d[x] = float(result)
+    d[x] = float(result)
 
     string.append((x,latency_str))
     if len(string) == 3:
