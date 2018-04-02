@@ -15,7 +15,7 @@ def ping(host):
     result = result.split()
     result = result[-2].split("/")[0]
     if result.isalpha():
-	result = False
+        result = False
     return float(result)
 
 STYLE = {
@@ -85,8 +85,8 @@ d=dict()
 for x in D:
     host=D[x]
     result = ping(host)
-	
-	
+
+
     if result == False:
         latency_str = use_style(str("Fail"), fore='red')
     elif float(result) <= 60:
@@ -96,7 +96,7 @@ for x in D:
     else:
         latency_str = use_style(str(round(result,2))+" ms", fore='red')
 
-	d[x] = float(result)
+    d[x] = float(result)
 
     string.append((x,latency_str))
     if len(string) == 3:
