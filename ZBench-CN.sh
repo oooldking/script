@@ -35,32 +35,19 @@ PLAIN='\033[0m'
 
 rm -rf /tmp/report && mkdir /tmp/report
 
-# Install locales
+echo "正在安装必要的依赖，请耐心等待..."
 
-if [ "${release}" != "centos" ]; then
-    apt-get update > /dev/null 2>&1
-    apt-get -y install locales > /dev/null 2>&1
-fi      
+
 
 # Install Virt-what
 if  [ ! -e '/usr/sbin/virt-what' ]; then
     echo "Installing Virt-What......"
     if [ "${release}" == "centos" ]; then
-        yum update > /dev/null 2>&1
         yum -y install virt-what > /dev/null 2>&1
     else
+        apt-get update
         apt-get -y install virt-what > /dev/null 2>&1
     fi      
-fi
-
-echo "正在安装必要的依赖，请耐心等待..."
-
-# Install ca-certificates
-echo "Installing ca-certificates......"
-if [ "${release}" == "centos" ]; then
-    yum -y install ca-certificates > /dev/null 2>&1
-else
-    apt-get -y install ca-certificates > /dev/null 2>&1
 fi
 
 # Install uuid
