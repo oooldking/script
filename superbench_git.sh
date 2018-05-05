@@ -27,6 +27,7 @@ about () {
 	echo ""
 	echo " Intro: https://www.oldking.net/350.html"
 	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
+	echo " The previous version: superbench_old.sh"
 	echo ""
 }
 
