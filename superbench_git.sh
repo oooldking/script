@@ -21,7 +21,7 @@ about () {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.0.2 (6 May 2018)                  / "
+	echo " \                   v1.0.2 (6 May 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -144,8 +144,8 @@ speed_test(){
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
 	        local nodeName=$2
 
-	        local idown=$(echo "$REDownload" | awk '{print $1}')
-	        if [[ $(awk -v num1=$idown -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') ]]; then
+	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
+	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
 	        	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
 	        fi
 		else
@@ -164,8 +164,8 @@ speed_test(){
         	fi
 	        local nodeName=$2
 
-	        local idown=$(echo "$REDownload" | awk '{print $1}')
-	        if [[ $(awk -v num1=$idown -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') ]]; then
+	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
+	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
 	        	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
 			fi
 		else
@@ -271,7 +271,7 @@ ip_info(){
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
 	echo -e " Organization         : ${GREEN}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, $country / ${GREEN}$countryCode${PLAIN}" | tee -a $log
+	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
 
@@ -285,7 +285,7 @@ ip_info2(){
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn${PLAIN}" | tee -a $log
 	echo -e " Organization         : ${SKYBLUE}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, $country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
 
@@ -379,9 +379,9 @@ print_io() {
 
 print_system_info() {
 	echo -e " CPU Model            : ${SKYBLUE}$cname${PLAIN}" | tee -a $log
-	echo -e " CPU Cores            : ${GREEN}$cores Cores ${SKYBLUE}@ $freq MHz${PLAIN}" | tee -a $log
-	echo -e " CPU Cache            : ${SKYBLUE}$corescache${PLAIN}" | tee -a $log
-	echo -e " OS                   : ${SKYBLUE}$opsy $arch ($lbit Bit) ${GREEN}$virtual${PLAIN}" | tee -a $log
+	echo -e " CPU Cores            : ${GREEN}$cores Cores ${SKYBLUE}@ $freq MHz $arch${PLAIN}" | tee -a $log
+	echo -e " CPU Cache            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
+	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${GREEN}$virtual${PLAIN}" | tee -a $log
 	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
 	echo -e " Total size of Disk   : ${GREEN}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
 	echo -e " Total amount of Mem  : ${GREEN}$tram MB ${SKYBLUE}($uram MB Used)${PLAIN}" | tee -a $log
@@ -433,8 +433,8 @@ get_system_info() {
 }
 
 print_intro() {
-	printf ' Superbench.sh v1.0 -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf ' Mode  : %s\n' $mode_name | tee -a $log
+	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.2 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
@@ -480,7 +480,7 @@ cleanup() {
 }
 
 bench_all(){
-	mode_name="standard"
+	mode_name="Standard"
 	about;
 	benchinit;
 	clear
@@ -501,7 +501,7 @@ bench_all(){
 }
 
 fast_bench(){
-	mode_name="fast"
+	mode_name="Fast"
 	about;
 	benchinit;
 	clear
