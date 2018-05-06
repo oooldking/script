@@ -21,13 +21,13 @@ about () {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.0.1 (6 May 2018)                  / "
+	echo " \                   v1.0.2 (6 May 2018)                  / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
 	echo " Intro: https://www.oldking.net/350.html"
 	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
-	echo " The previous version: superbench_old.sh"
+	echo " The Previous Version: superbench_old.sh"
 	echo ""
 }
 
@@ -183,8 +183,10 @@ speed_test(){
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
 	        local nodeName=$2
-
-	        printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
+	        local idown=$(echo "$REDownload" | awk '{print $1}')
+	        if [[ $(awk -v num1=$idown -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') ]]; then
+	        	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
+	        fi
 		else
 	        local cerror="ERROR"
 		fi
@@ -201,7 +203,10 @@ speed_test(){
         	fi
 	        local nodeName=$2
 
-	        printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
+	        local idown=$(echo "$REDownload" | awk '{print $1}')
+	        if [[ $(awk -v num1=$idown -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') ]]; then
+	        	printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
+			fi
 		else
 	        local cerror="ERROR"
 		fi
@@ -306,8 +311,8 @@ ip_info(){
 	region=$(echo $result | jq '.regionName' | sed 's/\"//g')
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${SKYBLUE}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, $country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " Organization         : ${GREEN}$org${PLAIN}" | tee -a $log
+	echo -e " Location             : ${SKYBLUE}$city, $country / ${GREEN}$countryCode${PLAIN}" | tee -a $log
 	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 }
 
@@ -417,12 +422,12 @@ print_io() {
 
 print_system_info() {
 	echo -e " CPU Model            : ${SKYBLUE}$cname${PLAIN}" | tee -a $log
-	echo -e " CPU Cores            : ${SKYBLUE}$cores Cores @ $freq MHz${PLAIN}" | tee -a $log
+	echo -e " CPU Cores            : ${GREEN}$cores Cores ${SKYBLUE}@ $freq MHz${PLAIN}" | tee -a $log
 	echo -e " CPU Cache            : ${SKYBLUE}$corescache${PLAIN}" | tee -a $log
-	echo -e " OS                   : ${SKYBLUE}$opsy $arch ($lbit Bit)${PLAIN}" | tee -a $log
-	echo -e " Kernel               : ${SKYBLUE}$virtual / $kern${PLAIN}" | tee -a $log
-	echo -e " Total size of Disk   : ${SKYBLUE}$disk_total_size GB ($disk_used_size GB Used)${PLAIN}" | tee -a $log
-	echo -e " Total amount of Mem  : ${SKYBLUE}$tram MB ($uram MB Used)${PLAIN}" | tee -a $log
+	echo -e " OS                   : ${SKYBLUE}$opsy $arch ($lbit Bit) ${GREEN}$virtual${PLAIN}" | tee -a $log
+	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
+	echo -e " Total size of Disk   : ${GREEN}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
+	echo -e " Total amount of Mem  : ${GREEN}$tram MB ${SKYBLUE}($uram MB Used)${PLAIN}" | tee -a $log
 	echo -e " Total amount of Swap : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
 	echo -e " System uptime        : ${SKYBLUE}$up${PLAIN}" | tee -a $log
 	echo -e " Load average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
