@@ -131,16 +131,16 @@ benchinit() {
 	#fi
 
 	# install jq
-	if  [ ! -e '/usr/bin/jq' ]; then
-		echo " Installing Jq ..."
-		if [ "${release}" == "centos" ]; then
-		    yum update > /dev/null 2>&1
-		    yum -y install jq > /dev/null 2>&1
-		else
-		    apt-get update > /dev/null 2>&1
-		    apt-get -y install jq > /dev/null 2>&1
-		fi      
-	fi
+	#if  [ ! -e '/usr/bin/jq' ]; then
+	# 	echo " Installing Jq ..."
+    #		if [ "${release}" == "centos" ]; then
+	#	    yum update > /dev/null 2>&1
+	#	    yum -y install jq > /dev/null 2>&1
+	#	else
+	#	    apt-get update > /dev/null 2>&1
+	#	    apt-get -y install jq > /dev/null 2>&1
+	#	fi      
+	#fi
 
 	# install speedtest-cli
 	if  [ ! -e 'speedtest.py' ]; then
@@ -148,6 +148,13 @@ benchinit() {
 		wget --no-check-certificate https://raw.github.com/sivel/speedtest-cli/master/speedtest.py > /dev/null 2>&1
 	fi
 	chmod a+rx speedtest.py
+
+	# install ip_info.py
+	if  [ ! -e 'ip_info.py' ]; then
+		echo " Installing IP_info.py ..."
+		wget --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/ip_info.py > /dev/null 2>&1
+	fi
+	chmod a+rx ip_info.py
 
 	# install fast.com-cli
 	if  [ ! -e 'fast_com.py' ]; then
@@ -330,6 +337,25 @@ ip_info2(){
 	echo -e " Organization         : ${SKYBLUE}$org${PLAIN}" | tee -a $log
 	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+}
+
+ip_info3(){
+	# use python tool
+	country=$(python ip_info.py country)
+	city=$(python ip_info.py city)
+	isp=$(python ip_info.py isp)
+	as_tmp=$(python ip_info.py as)
+	asn=$(echo $as_tmp | awk -F ' ' '{print $1}')
+	org=$(python ip_info.py org)
+	countryCode=$(python ip_info.py countryCode)
+	region=$(python ip_info.py regionName)
+
+	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
+	echo -e " Organization         : ${GREEN}$org${PLAIN}" | tee -a $log
+	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+
+	rm -rf ip_info.py
 }
 
 virt_check(){
@@ -529,8 +555,8 @@ get_ip_whois_org_name(){
 cleanup() {
 	rm -f test_file_*;
 	rm -f speedtest.py;
-	rm -f fast_com*
-	
+	rm -f fast_com*;
+	rm -rf ip_info.py
 }
 
 bench_all(){
@@ -543,7 +569,7 @@ bench_all(){
 	next;
 	get_system_info;
 	print_system_info;
-	ip_info;
+	ip_info3;
 	next;
 	print_io;
 	next;
@@ -564,7 +590,7 @@ fast_bench(){
 	next;
 	get_system_info;
 	print_system_info;
-	ip_info;
+	ip_info3;
 	next;
 	print_io fast;
 	next;
@@ -591,7 +617,7 @@ case $1 in
 	'speed'|'-speed'|'--speed'|'-speedtest'|'--speedtest'|'-speedcheck'|'--speedcheck' )
 		about;benchinit;next;print_speedtest;next;;
 	'ip'|'-ip'|'--ip'|'geoip'|'-geoip'|'--geoip' )
-		about;benchinit;next;ip_info;next;;
+		about;benchinit;next;ip_info3;next;;
 	'bench'|'-a'|'--a'|'-all'|'--all'|'-bench'|'--bench' )
 		bench_all;;
 	'about'|'-about'|'--about' )
