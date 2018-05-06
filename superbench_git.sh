@@ -9,7 +9,6 @@
 # URL: https://www.oldking.net/350.html
 #
 
-# Colors
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -21,7 +20,7 @@ about () {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.0.2 (6 May 2018)                 / "
+	echo " \                   v1.0.3 (6 May 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -34,9 +33,10 @@ about () {
 cancel () {
 	echo ""
 	next;
-	cleanup;
 	echo " Abort ..."
 	echo " Cleanup ..."
+	cleanup;
+	echo " Done"
 	exit
 }
 
@@ -69,7 +69,8 @@ benchinit() {
 	                else
 	                	apt-get update > /dev/null 2>&1
 	                    apt-get -y install python > /dev/null 2>&1
-	                fi    
+	                fi
+	        
 	fi
 
 	if  [ ! -e '/usr/bin/curl' ]; then
@@ -153,6 +154,7 @@ speed_test(){
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+
 	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
         	if [[ ${temp} -gt 1000 ]]; then
             	relatency=" 000.000 ms"
@@ -365,10 +367,10 @@ print_system_info() {
 	echo -e " CPU Cache            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
 	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${GREEN}$virtual${PLAIN}" | tee -a $log
 	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
-	echo -e " Total size of Disk   : ${GREEN}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
-	echo -e " Total amount of Mem  : ${GREEN}$tram MB ${SKYBLUE}($uram MB Used)${PLAIN}" | tee -a $log
-	echo -e " Total amount of Swap : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
-	echo -e " System uptime        : ${SKYBLUE}$up${PLAIN}" | tee -a $log
+	echo -e " Total Space          : ${GREEN}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
+	echo -e " Total RAM            : ${GREEN}$tram MB ${SKYBLUE}($uram MB Used)${PLAIN}" | tee -a $log
+	echo -e " Total SWAP           : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
+	echo -e " Uptime               : ${SKYBLUE}$up${PLAIN}" | tee -a $log
 	echo -e " Load average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
 }
 
@@ -382,7 +384,9 @@ print_end_time() {
 	else
 		echo -ne " Finished in  : ${time} sec" | tee -a $log
 	fi
+
 	printf '\n' | tee -a $log
+
 	bj_time=$(curl -s http://cgi.im.qq.com/cgi-bin/cgi_svrtime)
 
 	if [[ $(echo $bj_time | grep "html") ]]; then
@@ -407,6 +411,7 @@ get_system_info() {
 	arch=$( uname -m )
 	lbit=$( getconf LONG_BIT )
 	kern=$( uname -r )
+
 	disk_size1=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $2}' ))
 	disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
 	disk_total_size=$( calc_disk ${disk_size1[@]} )
@@ -416,7 +421,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.2 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.3 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
@@ -448,17 +453,11 @@ log_preupload() {
 	$(cat superbench.log 2>&1 | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" > $log_up)
 }
 
-get_ip_whois_org_name(){
-	result=$(curl -s https://rest.db.ripe.net/search.json?query-string=$(curl -s ip.sb))
-	org_name=$(echo $result | jq '.objects.object[1].attributes.attribute[1]' | sed 's/\"//g')
-    echo $org_name;
-}
-
 cleanup() {
 	rm -f test_file_*;
 	rm -f speedtest.py;
 	rm -f fast_com*;
-	rm -rf ip_info.py
+	rm -f ip_info.py
 }
 
 bench_all(){
@@ -503,9 +502,6 @@ fast_bench(){
 	cleanup;
 }
 
-
-
-
 log="$HOME/superbench.log"
 true > $log
 
@@ -540,8 +536,6 @@ case $1 in
 *)
     bench_all;;
 esac
-
-
 
 if [[  ! $is_share == "share" ]]; then
 	case $2 in
