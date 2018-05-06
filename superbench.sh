@@ -21,7 +21,7 @@ about () {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.0 (24 Feb 2018)                  / "
+	echo " \                   v1.0.1 (6 May 2018)                  / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -336,6 +336,8 @@ virt_check(){
 	if grep docker /proc/1/cgroup -qa; then
 	    virtual="Docker"
 	elif grep lxc /proc/1/cgroup -qa; then
+		virtual="Lxc"
+	elif grep -qa container=lxc /proc/1/environ; then
 		virtual="Lxc"
 	elif [[ -f /proc/user_beancounters ]]; then
 		virtual="OpenVZ"
