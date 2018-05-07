@@ -456,7 +456,7 @@ print_system_info() {
 	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${GREEN}$virtual${PLAIN}" | tee -a $log
 	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
 	echo -e " Total Space          : ${GREEN}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
-	echo -e " Total RAM            : ${GREEN}$tram MB ${SKYBLUE}($uram MB Used)${PLAIN}" | tee -a $log
+	echo -e " Total RAM            : ${GREEN}$tram MB ${SKYBLUE}($uram MB Used $bram MB Buff)${PLAIN}" | tee -a $log
 	echo -e " Total SWAP           : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
 	echo -e " Uptime               : ${SKYBLUE}$up${PLAIN}" | tee -a $log
 	echo -e " Load average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
@@ -495,6 +495,7 @@ get_system_info() {
 	corescache=$( awk -F: '/cache size/ {cache=$2} END {print cache}' /proc/cpuinfo | sed 's/^[ \t]*//;s/[ \t]*$//' )
 	tram=$( free -m | awk '/Mem/ {print $2}' )
 	uram=$( free -m | awk '/Mem/ {print $3}' )
+	bram=$( free -m | awk '/Mem/ {print $6}' )
 	swap=$( free -m | awk '/Swap/ {print $2}' )
 	uswap=$( free -m | awk '/Swap/ {print $3}' )
 	up=$( awk '{a=$1/86400;b=($1%86400)/3600;c=($1%3600)/60} {printf("%d days %d hour %d min\n",a,b,c)}' /proc/uptime )
@@ -628,9 +629,9 @@ case $1 in
    	'io'|'-io'|'--io'|'-drivespeed'|'--drivespeed' )
 		next;print_io;next;;
 	'speed'|'-speed'|'--speed'|'-speedtest'|'--speedtest'|'-speedcheck'|'--speedcheck' )
-		about;benchinit;next;print_speedtest;next;;
+		about;benchinit;next;print_speedtest;next;cleanup;;
 	'ip'|'-ip'|'--ip'|'geoip'|'-geoip'|'--geoip' )
-		about;benchinit;next;ip_info3;next;;
+		about;benchinit;next;ip_info3;next;cleanup;;
 	'bench'|'-a'|'--a'|'-all'|'--all'|'-bench'|'--bench' )
 		bench_all;;
 	'about'|'-about'|'--about' )
