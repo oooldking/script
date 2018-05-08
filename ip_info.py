@@ -4,6 +4,8 @@
 import urllib2
 import json
 import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 ip_api = urllib2.urlopen(r'http://ip-api.com/json')
 
