@@ -48,7 +48,7 @@ def use_style(string, mode='', fore='', back=''):
 D = {
     'Zhengzhou': '61.168.23.74', 
     'Jinan': '202.102.152.3',
-    'Tianjin': 'speedtest1.online.tj.cn', 
+    'Tianjin': '219.150.32.132', 
     'Changji': '61.128.107.242',
     'Lhasa': '221.13.70.244', 
     'Changchun': '202.98.0.68',
