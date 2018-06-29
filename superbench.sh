@@ -150,19 +150,13 @@ benchinit() {
 	fi
 	chmod a+rx speedtest.py
 
-	# install ip_info.py
-	if  [ ! -e 'ip_info.py' ]; then
-		echo " Installing IP_info.py ..."
-		wget --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/ip_info.py > /dev/null 2>&1
-	fi
-	chmod a+rx ip_info.py
 
-	# install ipip.py
-	if  [ ! -e 'ipip.py' ]; then
-		echo " Installing ipip.py ..."
-		wget --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/ipip.py > /dev/null 2>&1
+	# install tools.py
+	if  [ ! -e 'tools.py' ]; then
+		echo " Installing tools.py ..."
+		wget --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/tools.py > /dev/null 2>&1
 	fi
-	chmod a+rx ipip.py
+	chmod a+rx tools.py
 
 	# install fast.com-cli
 	if  [ ! -e 'fast_com.py' ]; then
@@ -373,22 +367,24 @@ ip_info3(){
 
 ip_info4(){
 	echo $(curl -4 -s https://api.ip.la/en?json) > ip_json.json
-	country=$(python ipip.py country_name)
-	city=$(python ipip.py city)
-	isp=$(python ip_info.py isp)
-	as_tmp=$(python ip_info.py as)
+	country=$(python tools.py ipip country_name)
+	city=$(python tools.py ipip city)
+	isp=$(python tools.py geoip isp)
+	as_tmp=$(python tools.py geoip as)
 	asn=$(echo $as_tmp | awk -F ' ' '{print $1}')
-	org=$(python ip_info.py org)
-	countryCode=$(python ipip.py country_code)
-	region=$(python ipip.py province)
+	org=$(python tools.py geoip org)
+	countryCode=$(python tools.py ipip country_code)
+	region=$(python tools.py ipip province)
+	if [ !city ]; then
+		city=${region}
+	fi
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
-	echo -e " Organization         : ${GREEN}$org${PLAIN}" | tee -a $log
-	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " Organization         : ${YELLOW}$org${PLAIN}" | tee -a $log
+	echo -e " Location             : ${SKYBLUE}$city, ${YELLOW}$country / $countryCode${PLAIN}" | tee -a $log
 	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
 
-	rm -rf ip_info.py
-	rm -rf ipip.py
+	rm -rf tools.py
 	rm -rf ip_json.json
 }
 
@@ -412,6 +408,8 @@ virt_check(){
 	elif [[ -f /proc/user_beancounters ]]; then
 		virtual="OpenVZ"
 	elif [[ "$virtualx" == *kvm-clock* ]]; then
+		virtual="KVM"
+	elif [[ "$cname" == *KVM* ]]; then
 		virtual="KVM"
 	elif [[ "$virtualx" == *"VMware Virtual Platform"* ]]; then
 		virtual="VMware"
@@ -551,8 +549,13 @@ get_system_info() {
 	#ipv6=$( wget -qO- -t1 -T2 ipv6.icanhazip.com )
 	disk_size1=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $2}' ))
 	disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
-	disk_total_size=$( calc_disk ${disk_size1[@]} )
-	disk_used_size=$( calc_disk ${disk_size2[@]} )
+	#disk_total_size=$( calc_disk ${disk_size1[@]} )
+	#disk_used_size=$( calc_disk ${disk_size2[@]} )
+	tmp=$(python tools.py disk 0)
+	disk_total_size=$(echo $tmp | grep -Eo '[0-9]+')
+	tmp=$(python tools.py disk 1)
+	disk_used_size=$(echo $tmp | grep -Eo '[0-9]+')
+
 	virt_check
 }
 
@@ -614,8 +617,7 @@ cleanup() {
 	rm -f test_file_*;
 	rm -f speedtest.py;
 	rm -f fast_com*;
-	rm -f ip_info.py;
-	rm -f ipip.py;
+	rm -f tools.py;
 	rm -f ip_json.json
 }
 
