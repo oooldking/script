@@ -16,7 +16,7 @@ YELLOW='\033[0;33m'
 SKYBLUE='\033[0;36m'
 PLAIN='\033[0m'
 
-about () {
+about() {
 	echo ""
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
@@ -31,7 +31,7 @@ about () {
 	echo ""
 }
 
-cancel () {
+cancel() {
 	echo ""
 	next;
 	echo " Abort ..."
@@ -156,6 +156,13 @@ benchinit() {
 		wget --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/ip_info.py > /dev/null 2>&1
 	fi
 	chmod a+rx ip_info.py
+
+	# install ipip.py
+	if  [ ! -e 'ipip.py' ]; then
+		echo " Installing ipip.py ..."
+		wget --no-check-certificate https://raw.githubusercontent.com/oooldking/script/master/ipip.py > /dev/null 2>&1
+	fi
+	chmod a+rx ipip.py
 
 	# install fast.com-cli
 	if  [ ! -e 'fast_com.py' ]; then
@@ -360,12 +367,37 @@ ip_info3(){
 	rm -rf ip_info.py
 }
 
+ip_info4(){
+	echo $(curl -4 -s https://api.ip.la/en?json) > ip_json.json
+	country=$(python ipip.py country_name)
+	city=$(python ipip.py city)
+	isp=$(python ip_info.py isp)
+	as_tmp=$(python ip_info.py as)
+	asn=$(echo $as_tmp | awk -F ' ' '{print $1}')
+	org=$(python ip_info.py org)
+	countryCode=$(python ipip.py country_code)
+	region=$(python ipip.py province)
+
+	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
+	echo -e " Organization         : ${GREEN}$org${PLAIN}" | tee -a $log
+	echo -e " Location             : ${SKYBLUE}$city, ${GREEN}$country / $countryCode${PLAIN}" | tee -a $log
+	echo -e " Region               : ${SKYBLUE}$region${PLAIN}" | tee -a $log
+
+	rm -rf ip_info.py
+	rm -rf ipip.py
+	rm -rf ip_json.json
+}
+
 virt_check(){
 	if hash ifconfig 2>/dev/null; then
 		eth=$(ifconfig)
 	fi
 
 	virtualx=$(dmesg) 2>/dev/null
+
+	sys_manu=$(dmidecode -s system-manufacturer) 2>/dev/null
+	sys_product=$(dmidecode -s system-product-name) 2>/dev/null
+	sys_ver=$(dmidecode -s system-version) 2>/dev/null
 	
 	if grep docker /proc/1/cgroup -qa; then
 	    virtual="Docker"
@@ -385,6 +417,14 @@ virt_check(){
 		virtual="VirtualBox"
 	elif [[ -e /proc/xen ]]; then
 		virtual="Xen"
+	elif [[ "$sys_manu" == *"Microsoft Corporation"* ]]; then
+		if [[ "$sys_product" == *"Virtual Machine"* ]]; then
+			if [[ "$sys_ver" == *"7.0"* || "$sys_ver" == *"Hyper-V" ]]; then
+				virtual="Hyper-V"
+			else
+				virtual="Microsoft Virtual Machine"
+			fi
+		fi
 	else
 		virtual="Dedicated"
 	fi
@@ -570,7 +610,9 @@ cleanup() {
 	rm -f test_file_*;
 	rm -f speedtest.py;
 	rm -f fast_com*;
-	rm -f ip_info.py
+	rm -f ip_info.py;
+	rm -f ipip.py;
+	rm -f ip_json.json
 }
 
 bench_all(){
@@ -583,7 +625,7 @@ bench_all(){
 	next;
 	get_system_info;
 	print_system_info;
-	ip_info3;
+	ip_info4;
 	next;
 	print_io;
 	next;
@@ -592,6 +634,7 @@ bench_all(){
 	print_end_time;
 	next;
 	cleanup;
+	sharetest ubuntu;
 }
 
 fast_bench(){
@@ -604,7 +647,7 @@ fast_bench(){
 	next;
 	get_system_info;
 	print_system_info;
-	ip_info3;
+	ip_info4;
 	next;
 	print_io fast;
 	next;
@@ -631,7 +674,7 @@ case $1 in
 	'speed'|'-speed'|'--speed'|'-speedtest'|'--speedtest'|'-speedcheck'|'--speedcheck' )
 		about;benchinit;next;print_speedtest;next;cleanup;;
 	'ip'|'-ip'|'--ip'|'geoip'|'-geoip'|'--geoip' )
-		about;benchinit;next;ip_info3;next;cleanup;;
+		about;benchinit;next;ip_info4;next;cleanup;;
 	'bench'|'-a'|'--a'|'-all'|'--all'|'-bench'|'--bench' )
 		bench_all;;
 	'about'|'-about'|'--about' )
