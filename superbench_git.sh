@@ -438,9 +438,9 @@ get_system_info() {
 	#disk_total_size=$( calc_disk ${disk_size1[@]} )
 	#disk_used_size=$( calc_disk ${disk_size2[@]} )
 	tmp=$(python tools.py disk 0)
-	disk_total_size=$(echo $tmp | sed s/^G//)
+	disk_total_size=$(echo $tmp | sed s/G//)
 	tmp=$(python tools.py disk 1)
-	disk_used_size=$(echo $tmp | sed s/^G//)
+	disk_used_size=$(echo $tmp | sed s/G//)
 
 	virt_check
 }
