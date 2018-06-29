@@ -547,8 +547,8 @@ get_system_info() {
 	lbit=$( getconf LONG_BIT )
 	kern=$( uname -r )
 	#ipv6=$( wget -qO- -t1 -T2 ipv6.icanhazip.com )
-	disk_size1=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $2}' ))
-	disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
+	disk_size1=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|udev|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $2}' ))
+	disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|udev|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
 	disk_total_size=$( calc_disk ${disk_size1[@]} )
 	disk_used_size=$( calc_disk ${disk_size2[@]} )
 
