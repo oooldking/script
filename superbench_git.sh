@@ -433,14 +433,10 @@ get_system_info() {
 	lbit=$( getconf LONG_BIT )
 	kern=$( uname -r )
 
-	disk_size1=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $2}' ))
-	disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
-	#disk_total_size=$( calc_disk ${disk_size1[@]} )
-	#disk_used_size=$( calc_disk ${disk_size2[@]} )
-	tmp=$(python tools.py disk 0)
-	disk_total_size=$(echo $tmp | sed s/G//)
-	tmp=$(python tools.py disk 1)
-	disk_used_size=$(echo $tmp | sed s/G//)
+	disk_size1=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $2}' ))
+	disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
+	disk_total_size=$( calc_disk ${disk_size1[@]} )
+	disk_used_size=$( calc_disk ${disk_size2[@]} )
 
 	virt_check
 }
