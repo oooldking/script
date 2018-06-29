@@ -21,7 +21,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.0.4 (7 May 2018)                 / "
+	echo " \                  v1.0.6 (29 Jun 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -552,16 +552,16 @@ get_system_info() {
 	#disk_total_size=$( calc_disk ${disk_size1[@]} )
 	#disk_used_size=$( calc_disk ${disk_size2[@]} )
 	tmp=$(python tools.py disk 0)
-	disk_total_size=$(echo $tmp | grep -Eo '[0-9]+')
+	disk_total_size=$(echo $tmp | sed s/^G//)
 	tmp=$(python tools.py disk 1)
-	disk_used_size=$(echo $tmp | grep -Eo '[0-9]+')
+	disk_used_size=$(echo $tmp | sed s/^G//)
 
 	virt_check
 }
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.4 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.6 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
