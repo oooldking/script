@@ -20,7 +20,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.0.6 (29 Jun 2018)                 / "
+	echo " \                   v1.0.7 (5 Jul 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -266,7 +266,7 @@ ip_info4(){
 	org=$(python tools.py geoip org)
 	countryCode=$(python tools.py ipip country_code)
 	region=$(python tools.py ipip province)
-	if [ !city ]; then
+	if [ ! $city ]; then
 		city=${region}
 	fi
 
@@ -341,7 +341,7 @@ freedisk() {
 	elif [[ $freespace -gt 128 ]]; then
 		printf "%s" $((128*2))
 	else
-		printf 1
+		printf "1"
 	fi
 }
 
@@ -443,7 +443,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.6 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.7 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
