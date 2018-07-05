@@ -257,7 +257,7 @@ install_smart() {
 }
 
 ip_info4(){
-	echo $(curl -4 -s https://api.ip.la/en?json) > ip_json.json
+	echo $(curl -4 -s http://api.ip.la/en?json) > ip_json.json
 	country=$(python tools.py ipip country_name)
 	city=$(python tools.py ipip city)
 	isp=$(python tools.py geoip isp)
@@ -331,7 +331,13 @@ power_time_check(){
 }
 
 freedisk() {
-	freespace=$( df -m . | awk 'NR==2 {print $4}' )
+	spacename=$( df -m . | awk 'NR==2 {print $1}' )
+	spacenamelength=$(echo ${spacename} | awk '{print length($0)}')
+	if [[ $spacenamelength -gt 20 ]]; then
+		freespace=$( df -m . | awk 'NR==3 {print $3}' )
+	else
+		freespace=$( df -m . | awk 'NR==2 {print $4}' )
+	fi
 	if [[ $freespace -gt 1024 ]]; then
 		printf "%s" $((1024*2))
 	elif [[ $freespace -gt 512 ]]; then
