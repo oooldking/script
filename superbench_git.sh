@@ -266,7 +266,7 @@ ip_info4(){
 	org=$(python tools.py geoip org)
 	countryCode=$(python tools.py ipip country_code)
 	region=$(python tools.py ipip province)
-	if [ ! $city ]; then
+	if [ -z "$city" ]; then
 		city=${region}
 	fi
 

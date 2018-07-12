@@ -321,7 +321,7 @@ ip_info(){
 	org=$(echo $result | jq '.org' | sed 's/\"//g')
 	countryCode=$(echo $result | jq '.countryCode' | sed 's/\"//g')
 	region=$(echo $result | jq '.regionName' | sed 's/\"//g')
-	if [ ! $city ]; then
+	if [ -z "$city" ]; then
 		city=${region}
 	fi
 
