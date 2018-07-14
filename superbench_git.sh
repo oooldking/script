@@ -289,7 +289,7 @@ virt_check(){
 
 	virtualx=$(dmesg) 2>/dev/null
 
-    if  [ ! -e '/usr/bin/dmidecode' ]; then
+    if  [ $(which dmidecode) ]; then
 		sys_manu=$(dmidecode -s system-manufacturer) 2>/dev/null
 		sys_product=$(dmidecode -s system-product-name) 2>/dev/null
 		sys_ver=$(dmidecode -s system-version) 2>/dev/null
