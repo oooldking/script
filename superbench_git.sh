@@ -184,6 +184,8 @@ print_speedtest() {
 	speed_test '4665' 'Shanghai  CM'
 	speed_test '5292' "Xi'an     CM"
 	speed_test '4575' 'Chengdu   CM'
+	speed_test '6168' 'Kunming   CM'
+	speed_test '6611' 'Guangzhou CM'
 	 
 	rm -rf speedtest.py
 }
