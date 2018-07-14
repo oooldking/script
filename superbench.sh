@@ -21,7 +21,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.0.7 (5 Jul 2018)                 / "
+	echo " \                  v1.0.8 (14 Jul 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -210,7 +210,7 @@ speed_test(){
 	        #local relatency=$(pingtest $3)
 	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
         	if [[ ${temp} -gt 1000 ]]; then
-            	relatency=" 000.000 ms"
+            	relatency=" 0.000 ms"
         	fi
 	        local nodeName=$2
 
@@ -227,6 +227,7 @@ speed_test(){
 print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
+    speed_fast_com
     speed_test '3633' 'Shanghai  CT'
     speed_test '4741' 'Beijing   CT'
     speed_test '7509' 'Hangzhou  CT'
@@ -261,8 +262,8 @@ speed_fast_com() {
 	        temp1=$(echo "$temp" | awk -F ':' '/Result/{print $2}')
 	        temp2=$(echo "$temp1" | awk -F ' ' '/Mbps/{print $1}')
 	        local REDownload="$temp2 Mbit/s"
-	        local reupload="00.00 Mbit/s"
-	        local relatency="000.000 ms"
+	        local reupload="0.00 Mbit/s"
+	        local relatency="0.000 ms"
 	        local nodeName="Fast.com"
 
 	        printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
@@ -570,7 +571,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.7 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.8 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
