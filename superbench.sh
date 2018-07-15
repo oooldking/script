@@ -454,9 +454,9 @@ freedisk() {
 	spacename=$( df -m . | awk 'NR==2 {print $1}' )
 	spacenamelength=$(echo ${spacename} | awk '{print length($0)}')
 	if [[ $spacenamelength -gt 20 ]]; then
-		freespace=$( df -m . | awk 'NR==2 {print $4}' )
-	else
 		freespace=$( df -m . | awk 'NR==3 {print $3}' )
+	else
+		freespace=$( df -m . | awk 'NR==2 {print $4}' )
 	fi
 	if [[ $freespace -gt 1024 ]]; then
 		printf "%s" $((1024*2))
