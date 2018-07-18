@@ -20,7 +20,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.0.8 (14 Jul 2018)                 / "
+	echo " \                  v1.0.9 (18 Jul 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -340,12 +340,9 @@ power_time_check(){
 }
 
 freedisk() {
-	spacename=$( df -m . | awk 'NR==2 {print $1}' )
-	spacenamelength=$(echo ${spacename} | awk '{print length($0)}')
-	if [[ $spacenamelength -gt 20 ]]; then
-		freespace=$( df -m . | awk 'NR==3 {print $3}' )
-	else
-		freespace=$( df -m . | awk 'NR==2 {print $4}' )
+	freespace=$( df -m . | awk 'NR==2 {print $4}' )
+	if [[ $freespace == "" ]]; then
+		$freespace=$( df -m . | awk 'NR==3 {print $3}' )
 	fi
 	if [[ $freespace -gt 1024 ]]; then
 		printf "%s" $((1024*2))
@@ -458,7 +455,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.8 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.9 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
