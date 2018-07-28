@@ -47,7 +47,7 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
     else
         apt-get update
         apt-get -y install virt-what > /dev/null 2>&1
-    fi      
+    fi
 fi
 
 # Install uuid
@@ -166,7 +166,7 @@ speed() {
 speed_test_cn(){
     if [[ $1 == '' ]]; then
         temp=$(python /tmp/speedtest.py --share 2>&1)
-        is_down=$(echo "$temp" | grep 'Download') 
+        is_down=$(echo "$temp" | grep 'Download')
         if [[ ${is_down} ]]; then
             local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
             local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
@@ -179,7 +179,7 @@ speed_test_cn(){
         fi
     else
         temp=$(python /tmp/speedtest.py --server $1 --share 2>&1)
-        is_down=$(echo "$temp" | grep 'Download') 
+        is_down=$(echo "$temp" | grep 'Download')
         if [[ ${is_down} ]]; then
             local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
             local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
@@ -210,10 +210,10 @@ speed_cn() {
     speed_test_cn '4863' "西安电信"
     speed_test_cn '5083' '上海联通'
     speed_test_cn '5726' '重庆联通'
-    speed_test_cn '5192' "西安移动"
-    speed_test_cn '4665' '上海移动'
-    speed_test_cn '4575' '成都移动'
-     
+    speed_test_cn '4751' "北京电信"
+    speed_test_cn '5145' '北京联通'
+    speed_test_cn '6132' '湖南电信'
+
     rm -rf /tmp/speedtest.py
 }
 
@@ -390,7 +390,7 @@ done
 if [[ $ifreport == 'y' ]];then
     echo ""
     myip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
-    echo "访问 http://${myip}:8001/index.html 查看您的测试报告，按 Ctrl + C 退出" 
+    echo "访问 http://${myip}:8001/index.html 查看您的测试报告，按 Ctrl + C 退出"
 	cd /tmp/report
     python -m SimpleHTTPServer 8001
     iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8001 -j ACCEPT

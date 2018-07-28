@@ -45,7 +45,7 @@ if  [ ! -e '/usr/sbin/virt-what' ]; then
     else
         apt-get update > /dev/null 2>&1
         apt-get -y install virt-what > /dev/null 2>&1
-    fi      
+    fi
 fi
 
 
@@ -167,7 +167,7 @@ speed() {
 speed_test_cn(){
     if [[ $1 == '' ]]; then
         temp=$(python /tmp/speedtest.py --share 2>&1)
-        is_down=$(echo "$temp" | grep 'Download') 
+        is_down=$(echo "$temp" | grep 'Download')
         if [[ ${is_down} ]]; then
             local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
             local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
@@ -180,7 +180,7 @@ speed_test_cn(){
         fi
     else
         temp=$(python /tmp/speedtest.py --server $1 --share 2>&1)
-        is_down=$(echo "$temp" | grep 'Download') 
+        is_down=$(echo "$temp" | grep 'Download')
         if [[ ${is_down} ]]; then
             local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
             local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
@@ -201,7 +201,7 @@ speed_test_cn(){
     echo ${reupload} >> /tmp/speed_cn.txt
     echo ${REDownload} >> /tmp/speed_cn.txt
     echo ${relatency} >> /tmp/speed_cn.txt
-    
+
 
 }
 
@@ -214,10 +214,10 @@ speed_cn() {
     speed_test_cn '4863' "Xi'an     CU"
     speed_test_cn '5083' 'Shanghai  CU'
     speed_test_cn '5726' 'Chongqing CU'
-    speed_test_cn '5192' "Xi'an     CM"
-    speed_test_cn '4665' 'Shanghai  CM'
-    speed_test_cn '4575' 'Chengdu   CM'
-     
+    speed_test_cn '5192' "Beijing   CT"
+    speed_test_cn '4665' 'Beijing   CT'
+    speed_test_cn '4575' 'Hunan     CT'
+
     rm -rf /tmp/speedtest.py
 }
 
@@ -399,7 +399,7 @@ done
 if [[ $ifreport == 'y' ]];then
     echo ""
     myip=`curl -m 10 -s http://members.3322.org/dyndns/getip`
-    echo "Visit http://${myip}:8001/index.html to see your report，Press Ctrl + C to exit." 
+    echo "Visit http://${myip}:8001/index.html to see your report，Press Ctrl + C to exit."
 	cd /tmp/report
     python -m SimpleHTTPServer 8001
     iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8001 -j ACCEPT
