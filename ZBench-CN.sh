@@ -8,6 +8,27 @@ if  [ ! -e '/usr/bin/wget' ]; then
 fi
 read -p "请输入你的服务器提供商: " Provider
 
+# Get IP
+OwnerIP=$(who am i | awk '{print $NF}' | sed -e 's/[()]//g')
+while :; do echo
+  read -p "请确认你所在地的IP:${OwnerIP} [y/n]: " ifOwnerIP
+  if [[ ! ${ifOwnerIP} =~ ^[y,n]$ ]]; then
+    echo "输入错误! 请确保你输入的是 'y' 或者 'n'"
+  else
+    break
+  fi
+done
+if [[ ${ifOwnerIP} == "n" ]]; then
+  while :; do echo
+    read -p "请输入你所在地的IP: " OwnerIP
+    if [[ ! ${OwnerIP} ]]; then
+      echo "输入错误!IP地址不能为空！"
+    else
+      break
+    fi
+  done
+fi
+
 # Check release
 if [ -f /etc/redhat-release ]; then
     release="centos"
@@ -123,6 +144,10 @@ chmod a+rx /tmp/ZPing-CN.py
 /tmp/besttrace 211.136.192.6 > /tmp/gdm.txt 2>&1 &
 #"TraceRoute to Guangdong Unicom"
 /tmp/besttrace 221.5.88.88 > /tmp/gdu.txt 2>&1 &
+if [[ ! ${OwnerIP} ]]; then
+#"TraceRoute to Owner's Network"
+/tmp/besttrace ${OwnerIP} > /tmp/own.txt 2>&1 &
+fi
 
 
 
