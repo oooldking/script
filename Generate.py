@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+import urllib
+import urllib2
+
+
 def change_to_list(filename):
     content = open(filename,"r").read().strip()
     return list(content.split("\n"))
@@ -17,16 +21,27 @@ def traceroute_to_dict(filename):
         line = content[i]
         if line[1].isdigit():
             if line[4] != "*" :
-                latency=line.strip().split("  ")[2]
-                asn = line.strip().split("  ")[3]
-                route = line.strip().split("  ")[4]
                 ip = line.strip().split("  ")[1]
+                asn = line.strip().split("  ")[3]
+                iptest = ip.strip().split(" ")[0]
+                url = "http://ip-api.com/csv/" + iptest
+                req = urllib2.Request(url)
+                res_data = urllib2.urlopen(req)
+                res = res_data.read()
+                if res.strip().split(",")[0] == "success" :
+					isp=res.strip().split(",")[11]
+					asn=res.strip().split(",")[12]
+                else:
+					isp= "*"
+                latency=line.strip().split("  ")[2]
+                route = line.strip().split("  ")[4]
                 step = line[0:2]
             else:
                 latency="*"
                 asn = "*"
                 route = "*"
                 ip = "*"
+                isp= "*"
                 step = line[0:2]
 
             d[int(step)]=dict()
@@ -36,7 +51,7 @@ def traceroute_to_dict(filename):
             d[int(step)]["latency"]=latency
             d[int(step)]["asn"]=asn
             d[int(step)]["route"]=route
-
+            d[int(step)]["isp"]=isp
 
     return dict(d)
 
@@ -52,9 +67,10 @@ def traceroute_to_table(filename):
   <td>{}</td>
   <td>{}</td>
   <td>{}</td>
+  <td>{}</td>
   </tr>
   """
-    string = string + template.format(i,x["ip"],x["route"],x["asn"],x["latency"]) + "\n"
+    string = string + template.format(i,x["ip"],x["route"],x["isp"],x["asn"],x["latency"]) + "\n"
     
     writefile = open(filename + "_table","w")
     writefile.write(string)
@@ -75,6 +91,7 @@ def dict_to_table(d,tab):
     <tr><th>跳数</th>
     <th>IP</th>
     <th>路由</th>
+	<th>ISP</th>
     <th>AS Number</th>
     <th>延迟</th>
   </tr></thead>
@@ -90,10 +107,10 @@ def dict_to_table(d,tab):
       <td>{2}</td>
       <td>{3}</td>
       <td>{4}</td>
+	  <td>{5}</td>
     </tr>
         
-        """.format(step,d[step]["ip"],d[step]["route"],d[step]["asn"],d[step]["latency"])
-
+        """.format(step,d[step]["ip"],d[step]["route"],d[step]["isp"],d[step]["asn"],d[step]["latency"])
     table_html = table_html + """
       </tbody>
 </table>
@@ -479,6 +496,7 @@ html = """
   <a class="item" data-tab="fourth">广东移动</a>
   <a class="item" data-tab="fifth">广东电信</a>
   <a class="item" data-tab="sixth">广东联通</a>
+  <a class="item" data-tab="seventh">所在地IP</a>
 </div>
 
 """
@@ -627,6 +645,9 @@ gdu = traceroute_to_dict("/tmp/gdu.txt")
 traceroute_to_table("/tmp/gdu.txt")
 gdu_html = dict_to_table(gdu,"sixth")
 
+own = traceroute_to_dict("/tmp/own.txt")
+traceroute_to_table("/tmp/own.txt")
+own_html = dict_to_table(own,"seventh")
 
 html = html.format(info[0],info[1],info[2],info[3],info[4],info[5],info[6],info[7],info[8],info[9],info[10],info[11],info[12],info[13],info[14], \
 
@@ -640,7 +661,7 @@ speed_cn[13],speed_cn[14],speed_cn[15],speed_cn[16],speed_cn[17],\
 
 speed_cn[18],speed_cn[19],speed_cn[20],speed_cn[21],speed_cn[22],speed_cn[23])
 
-html = html + shm_html + sht_html + shu_html + gdm_html + gdt_html + gdu_html + footer
+html = html + shm_html + sht_html + shu_html + gdm_html + gdt_html + gdu_html + own_html + footer
 
 web = open("/root/report.html","w")
 

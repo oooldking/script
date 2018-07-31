@@ -8,6 +8,29 @@ if  [ ! -e '/usr/bin/wget' ]; then
 fi
 read -p "Please Enter Your Host Provider: " Provider
 
+
+# Get IP
+OwnerIP=$(who am i | awk '{print $NF}' | sed -e 's/[()]//g')
+while :; do echo
+  read -p "Please Confirm Your Client IP:${OwnerIP} [y/n]: " ifOwnerIP
+  if [[ ! ${ifOwnerIP} =~ ^[y,n]$ ]]; then
+    echo "Input error! Please only input 'y' or 'n'"
+  else
+    break
+  fi
+done
+if [[ ${ifOwnerIP} == "n" ]]; then
+  while :; do echo
+    read -p "Please Enter Your Client IP: " OwnerIP
+    if [[ ! ${OwnerIP} ]]; then
+      echo "Input error! Cannot be void!"
+    else
+      break
+    fi
+  done
+fi
+
+
 # Check release
 if [ -f /etc/redhat-release ]; then
     release="centos"
@@ -123,6 +146,9 @@ chmod a+rx /tmp/ZPing.py
 /tmp/besttrace 211.136.192.6 > /tmp/gdm.txt 2>&1 &
 #"TraceRoute to Guangdong Unicom"
 /tmp/besttrace 221.5.88.88 > /tmp/gdu.txt 2>&1 &
+#"TraceRoute to Owner's Network"
+/tmp/besttrace ${OwnerIP} > /tmp/own.txt 2>&1 &
+
 
 
 
@@ -371,6 +397,7 @@ NetPiSM=$( sed -n "24p" /tmp/speed_cn.txt )
 NetUPCM=$( sed -n "25p" /tmp/speed_cn.txt )
 NetDWCM=$( sed -n "26p" /tmp/speed_cn.txt )
 NetPiCM=$( sed -n "27p" /tmp/speed_cn.txt )
+
 
 wget  -N --no-check-certificate https://raw.githubusercontent.com/FunctionClub/ZBench/master/Generate.py >> /dev/null 2>&1
 python Generate.py && rm -rf Generate.py && cp /root/report.html /tmp/report/index.html
