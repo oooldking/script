@@ -144,10 +144,8 @@ chmod a+rx /tmp/ZPing-CN.py
 /tmp/besttrace 211.136.192.6 > /tmp/gdm.txt 2>&1 &
 #"TraceRoute to Guangdong Unicom"
 /tmp/besttrace 221.5.88.88 > /tmp/gdu.txt 2>&1 &
-if [[ ! ${OwnerIP} ]]; then
 #"TraceRoute to Owner's Network"
 /tmp/besttrace ${OwnerIP} > /tmp/own.txt 2>&1 &
-fi
 
 
 
