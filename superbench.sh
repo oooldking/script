@@ -588,7 +588,7 @@ print_intro() {
 
 sharetest() {
 	echo " Share result:" | tee -a $log
-	echo " $result_speed" | tee -a $log
+	echo " · $result_speed" | tee -a $log
 	log_preupload
 	case $1 in
 	'ubuntu')
@@ -603,7 +603,7 @@ sharetest() {
 	esac
 
 	# print result info
-	echo " $share_link" | tee -a $log
+	echo " · $share_link" | tee -a $log
 	next
 	echo ""
 	rm -f $log_up
