@@ -20,7 +20,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.0.9 (18 Jul 2018)                 / "
+	echo " \                  v1.1.0 (14 Aug 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -133,7 +133,8 @@ next() {
 speed_test(){
 	if [[ $1 == '' ]]; then
 		temp=$(python speedtest.py --share 2>&1)
-		is_down=$(echo "$temp" | grep 'Download') 
+		is_down=$(echo "$temp" | grep 'Download')
+		result_speed=$(echo "$temp" | awk -F ' ' '/results/{print $3}')
 		if [[ ${is_down} ]]; then
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
@@ -183,7 +184,6 @@ print_speedtest() {
 	speed_test '4863' "Xi'an     CU"
 	speed_test '5726' 'Chongqing CU'
 	speed_test '4665' 'Shanghai  CM'
-	speed_test '5292' "Xi'an     CM"
 	speed_test '4575' 'Chengdu   CM'
 	speed_test '6168' 'Kunming   CM'
 	speed_test '6611' 'Guangzhou CM'
@@ -455,11 +455,13 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.0.9 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.0 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
 sharetest() {
+	echo " Share result:" | tee -a $log
+	echo " $result_speed" | tee -a $log
 	log_preupload
 	case $1 in
 	'ubuntu')
@@ -473,7 +475,6 @@ sharetest() {
 		share_link=$( curl -sF c=@- https://ptpb.pw/?u=1 < $log );;
 	esac
 
-	echo " Share result:" | tee -a $log
 	echo " $share_link" | tee -a $log
 	next
 	echo ""
