@@ -21,7 +21,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.0 (14 Aug 2018)                 / "
+	echo " \                  v1.1.1 (27 Aug 2018)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -192,6 +192,11 @@ speed_test(){
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
+
+	        temp=$(echo "$relatency" | awk -F '.' '{print $1}')
+        	if [[ ${temp} -gt 50 ]]; then
+            	relatency=" (*)"${relatency}
+        	fi
 	        local nodeName=$2
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
@@ -229,8 +234,8 @@ print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '3633' 'Shanghai  CT'
-    speed_test '4741' 'Beijing   CT'
+    speed_test '5316' 'Nanjing   CT'
+    speed_test '4751' 'Beijing   CT'
     speed_test '7509' 'Hangzhou  CT'
 	speed_test '4624' 'Chengdu   CT'
 	speed_test '5083' 'Shanghai  CU'
@@ -582,7 +587,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.0 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.1 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
