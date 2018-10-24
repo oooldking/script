@@ -160,7 +160,7 @@ speed_test(){
 	        local REDownload=$(echo "$temp" | awk -F ':' '/Download/{print $2}')
 	        local reupload=$(echo "$temp" | awk -F ':' '/Upload/{print $2}')
 	        local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
-            relatency=" 0.000 ms"
+            relatency=" - "
 	        local nodeName=$2
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
@@ -211,7 +211,7 @@ speed_fast_com() {
 	        temp2=$(echo "$temp1" | awk -F ' ' '/Mbps/{print $1}')
 	        local REDownload="$temp2 Mbit/s"
 	        local reupload="0.00 Mbit/s"
-	        local relatency="0.000 ms"
+	        local relatency="-"
 	        local nodeName="Fast.com"
 
 	        printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log

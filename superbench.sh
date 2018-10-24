@@ -216,7 +216,7 @@ speed_test(){
 	        #local relatency=$(pingtest $3)
 	        #temp=$(echo "$relatency" | awk -F '.' '{print $1}')
         	#if [[ ${temp} -gt 1000 ]]; then
-            	relatency=" 0.000 ms"
+            	relatency=" - "
         	#fi
 	        local nodeName=$2
 
@@ -268,7 +268,7 @@ speed_fast_com() {
 	        temp2=$(echo "$temp1" | awk -F ' ' '/Mbps/{print $1}')
 	        local REDownload="$temp2 Mbit/s"
 	        local reupload="0.00 Mbit/s"
-	        local relatency="0.000 ms"
+	        local relatency="-"
 	        local nodeName="Fast.com"
 
 	        printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload}" "${REDownload}" "${relatency}" | tee -a $log
