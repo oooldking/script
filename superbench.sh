@@ -526,7 +526,8 @@ print_system_info() {
 	echo -e " Total RAM            : ${YELLOW}$tram MB ${SKYBLUE}($uram MB Used $bram MB Buff)${PLAIN}" | tee -a $log
 	echo -e " Total SWAP           : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
 	echo -e " Uptime               : ${SKYBLUE}$up${PLAIN}" | tee -a $log
-	echo -e " Load average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
+	echo -e " Load Average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
+	echo -e " TCP CC               : ${YELLOW}$tcpctrl${PLAIN}" | tee -a $log
 }
 
 print_end_time() {
@@ -576,6 +577,8 @@ get_system_info() {
 	disk_size2=($( LANG=C df -hPl | grep -wvE '\-|none|tmpfs|overlay|shm|udev|devtmpfs|by-uuid|chroot|Filesystem' | awk '{print $3}' ))
 	disk_total_size=$( calc_disk ${disk_size1[@]} )
 	disk_used_size=$( calc_disk ${disk_size2[@]} )
+	#tcp congestion control
+	tcpctrl=$( sysctl net.ipv4.tcp_congestion_control | awk -F ' ' '{print $3}' )
 
 	#tmp=$(python tools.py disk 0)
 	#disk_total_size=$(echo $tmp | sed s/G//)
