@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Description: Auto system info & I/O test & network to China script
+# Description: Choose a faster mirror for Linux script
 #
 # Copyright (C) 2017 - 2018 Oldking <oooldking@gmail.com>
 #
@@ -24,6 +24,7 @@ getAbout() {
 	echo " Intro: https://www.oldking.net/697.html"
 	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
 	echo -e " Version: ${GREEN}1.0.0${PLAIN} (30 Oct 2018)"
+	echo " Usage: wget -qO- git.io/superupdate.sh | bash"
 	echo ""
 }
 
