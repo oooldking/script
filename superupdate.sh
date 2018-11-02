@@ -23,7 +23,7 @@ getAbout() {
 	echo ""
 	echo " Intro: https://www.oldking.net/697.html"
 	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
-	echo -e " Version: ${GREEN}1.0.1${PLAIN} (2 Nov 2018)"
+	echo -e " Version: ${GREEN}1.0.2${PLAIN} (2 Nov 2018)"
 	echo " Usage: wget -qO- git.io/superupdate.sh | bash"
 	echo ""
 }
@@ -127,7 +127,7 @@ setUbuntu(){
 	echo "deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse" >>/etc/apt/sources.list
 
 	[ "$ubuntuVersion" == '14.04' ] && sed -i 's/xenial/trusty/'g /etc/apt/sources.list
-	[ "$ubuntuVersion" == '16.06' ] && 
+	[ "$ubuntuVersion" == '16.06' ] && echo -n ""
 	[ "$ubuntuVersion" == '18.04' ] && sed -i 's/xenial/bionic/'g /etc/apt/sources.list
 }
 
