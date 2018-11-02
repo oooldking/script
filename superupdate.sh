@@ -23,7 +23,7 @@ getAbout() {
 	echo ""
 	echo " Intro: https://www.oldking.net/697.html"
 	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
-	echo -e " Version: ${GREEN}1.0.2${PLAIN} (2 Nov 2018)"
+	echo -e " Version: ${GREEN}1.0.3${PLAIN} (2 Nov 2018)"
 	echo " Usage: wget -qO- git.io/superupdate.sh | bash"
 	echo ""
 }
@@ -176,7 +176,7 @@ setSources(){
 	updateInit
 	case "$release" in
 		debian)
-			case $1 in
+			case $para in
 				'fastly'|'-fastly'|'--fastly' )
 					setDebian;;
 			    'cn'|'-cn'|'--cn' )
@@ -194,7 +194,7 @@ setSources(){
 			esac
 			apt-get update;;
 		ubuntu)
-			case $1 in
+			case $para in
 				'restore'|'-restore'|'--restore' )
 					restore;;
 			*)
@@ -202,7 +202,7 @@ setSources(){
 			esac
 			apt-get update;;
 		centos)
-			case $1 in
+			case $para in
 				'restore'|'-restore'|'--restore' )
 					restore;;
 			*)
@@ -212,5 +212,6 @@ setSources(){
 	esac
 }
 
+para=$1
 setSources
 echo -e "${GREEN}Done${PLAIN}"
