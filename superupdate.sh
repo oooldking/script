@@ -23,7 +23,7 @@ getAbout() {
 	echo ""
 	echo " Intro: https://www.oldking.net/697.html"
 	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
-	echo -e " Version: ${GREEN}1.0.0${PLAIN} (30 Oct 2018)"
+	echo -e " Version: ${GREEN}1.0.1${PLAIN} (2 Nov 2018)"
 	echo " Usage: wget -qO- git.io/superupdate.sh | bash"
 	echo ""
 }
