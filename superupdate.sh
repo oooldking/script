@@ -110,7 +110,7 @@ setDebian(){
 
 setUbuntu(){
 	if [[ -f /etc/apt/sources.list.bak ]]; then
-		echo -e "${GREEN}sources.list.bak exists${PLAIN}"
+		echo -e " ${GREEN}sources.list.bak exists${PLAIN}"
 	else
 		mv /etc/apt/sources.list{,.bak}
 	fi
@@ -133,7 +133,7 @@ setUbuntu(){
 
 setCentos(){
 	if [ -f /etc/yum.repos.d/CentOS-Base.repo.bak ]; then
-		echo -e "${GREEN}CentOS-Base.repo.bak exists${PLAIN}"
+		echo -e " ${GREEN}CentOS-Base.repo.bak exists${PLAIN}"
 	else
 		mv /etc/yum.repos.d/CentOS-Base.repo{,.bak}
 	fi
@@ -194,9 +194,21 @@ setSources(){
 			esac
 			apt-get update;;
 		ubuntu)
-			setUbuntu;apt-get update;;
+			case $1 in
+				'restore'|'-restore'|'--restore' )
+					restore;;
+			*)
+			setUbuntu;
+			esac
+			apt-get update;;
 		centos)
-			setCentos;yum makecache;;
+			case $1 in
+				'restore'|'-restore'|'--restore' )
+					restore;;
+			*)
+			setCentos;
+			esac
+			yum makecache;;
 	esac
 }
 
