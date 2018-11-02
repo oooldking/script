@@ -104,7 +104,7 @@ setDebian(){
 	echo "deb-src http://cdn-fastly.deb.debian.org/debian-security/ jessie/updates main non-free contrib" >>/etc/apt/sources.list
 
 	[ "$debianVersion" == '7' ] && sed -i 's/jessie/wheezy/'g /etc/apt/sources.list
-	[ "$debianVersion" == '8' ] && 
+	[ "$debianVersion" == '8' ] && echo -n ""
 	[ "$debianVersion" == '9' ] && sed -i 's/jessie/stretch/'g /etc/apt/sources.list
 }
 
