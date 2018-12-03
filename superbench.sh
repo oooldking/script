@@ -540,13 +540,7 @@ print_end_time() {
 	#echo $(date +%Y-%m-%d" "%H:%M:%S)
 	printf '\n' | tee -a $log
 	#utc_time=$(date -u '+%F %T')
-	#bj_time=$(date +%Y-%m-%d" "%H:%M:%S -d '+8 hours')
-	bj_time=$(curl -s http://cgi.im.qq.com/cgi-bin/cgi_svrtime)
-	#utc_time=$(date +"$bj_time" -d '-8 hours')
-
-	if [[ $(echo $bj_time | grep "html") ]]; then
-		bj_time=$(date -u +%Y-%m-%d" "%H:%M:%S -d '+8 hours')
-	fi
+	bj_time=$(TZ=Asia/Shanghai date +%Y-%m-%d" "%H:%M:%S)
 	echo " Timestamp    : $bj_time GMT+8" | tee -a $log
 	#echo " Finished!"
 	echo " Results      : $log"
