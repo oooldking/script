@@ -370,7 +370,7 @@ ip_info3() {
 }
 
 ip_info4() {
-	echo $(curl -4 -s https://api.ip.la/en?json) >ip_json.json
+	echo $(curl -4 -s https://api.ip.la/en\?json) >ip_json.json
 	country=$(python tools.py ipip country_name)
 	city=$(python tools.py ipip city)
 	isp=$(python tools.py geoip isp)
@@ -606,7 +606,7 @@ sharetest() {
 		share_link=$(curl -sF 'clbin=<-' https://clbin.com <$log)
 		;;
 	'ptpb')
-		share_link=$(curl -sF c=@- https://ptpb.pw/?u=1 <$log)
+		share_link=$(curl -sF c=@- https://ptpb.pw/\?u=1 <$log)
 		;;
 	esac
 
@@ -626,7 +626,7 @@ log_preupload() {
 
 get_ip_whois_org_name() {
 	#ip=$(curl -s ip.sb)
-	result=$(curl -s https://rest.db.ripe.net/search.json?query-string=$(curl -s ip.sb))
+	result=$(curl -s https://rest.db.ripe.net/search.json\?query-string=$(curl -s ip.sb))
 	#org_name=$(echo $result | jq '.objects.object.[1].attributes.attribute.[1].value' | sed 's/\"//g')
 	org_name=$(echo $result | jq '.objects.object[1].attributes.attribute[1]' | sed 's/\"//g')
 	echo $org_name
