@@ -20,12 +20,12 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                  v1.1.3 (25 Oct 2018)                 / "
+	echo " \                   v1.1.4 (1 Jan 2019)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
 	echo " Intro: https://www.oldking.net/350.html"
-	echo " Copyright (C) 2018 Oldking oooldking@gmail.com"
+	echo " Copyright (C) 2019 Oldking oooldking@gmail.com"
 	echo " The Previous Version: superbench_old.sh"
 	echo ""
 }
@@ -261,17 +261,27 @@ install_smart() {
 }
 
 ip_info4(){
-	echo $(curl -4 -s http://api.ip.la/en?json) > ip_json.json
-	country=$(python tools.py ipip country_name)
-	city=$(python tools.py ipip city)
+	ip_date=$(curl -4 -s http://api.ip.la/en?json)
+	echo $ip_date > ip_json.json
 	isp=$(python tools.py geoip isp)
 	as_tmp=$(python tools.py geoip as)
 	asn=$(echo $as_tmp | awk -F ' ' '{print $1}')
 	org=$(python tools.py geoip org)
-	countryCode=$(python tools.py ipip country_code)
-	region=$(python tools.py ipip province)
-	if [ -z "$city" ]; then
-		city=${region}
+	if [ -z "ip_date" ]; then
+		echo $ip_date
+		echo "hala"
+		country=$(python tools.py ipip country_name)
+		city=$(python tools.py ipip city)
+		countryCode=$(python tools.py ipip country_code)
+		region=$(python tools.py ipip province)
+		if [ -z "$city" ]; then
+			city=${region}
+		fi
+	else
+		country=
+		city=
+		countryCode=
+		region="ipip.net api error"
 	fi
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
@@ -400,9 +410,9 @@ print_system_info() {
 	echo -e " CPU Cache            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
 	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${YELLOW}$virtual${PLAIN}" | tee -a $log
 	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
-	echo -e " Total Space          : ${YELLOW}$disk_total_size GB ${SKYBLUE}($disk_used_size GB Used)${PLAIN}" | tee -a $log
-	echo -e " Total RAM            : ${YELLOW}$tram MB ${SKYBLUE}($uram MB Used $bram MB Buff)${PLAIN}" | tee -a $log
-	echo -e " Total SWAP           : ${SKYBLUE}$swap MB ($uswap MB Used)${PLAIN}" | tee -a $log
+	echo -e " Total Space          : ${SKYBLUE}$disk_used_size GB / ${YELLOW}$disk_total_size GB ${PLAIN}" | tee -a $log
+	echo -e " Total RAM            : ${SKYBLUE}$uram MB / ${YELLOW}$tram MB ${SKYBLUE}($bram MB Buff)${PLAIN}" | tee -a $log
+	echo -e " Total SWAP           : ${SKYBLUE}$uswap MB / $swap MB${PLAIN}" | tee -a $log
 	echo -e " Uptime               : ${SKYBLUE}$up${PLAIN}" | tee -a $log
 	echo -e " Load Average         : ${SKYBLUE}$load${PLAIN}" | tee -a $log
 	echo -e " TCP CC               : ${YELLOW}$tcpctrl${PLAIN}" | tee -a $log
@@ -459,7 +469,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.3 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.4 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
