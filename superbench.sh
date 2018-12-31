@@ -27,7 +27,7 @@ about() {
 	echo ""
 	echo " Intro: https://www.oldking.net/350.html"
 	echo " Copyright (C) 2019 Oldking oooldking@gmail.com"
-	echo " The Previous Version: superbench_old.sh"
+	echo -e " ${RED}Happy New Year!${PLAIN}"
 	echo ""
 }
 
@@ -387,14 +387,14 @@ ip_info4(){
 		city=$(python tools.py ipip city)
 		countryCode=$(python tools.py ipip country_code)
 		region=$(python tools.py ipip province)
-		if [ -z "$city" ]; then
-			city=${region}
-		fi
 	else
-		country=
-		city=
-		countryCode=
-		region="ipip.net api error"
+		country=$(python tools.py geoip country)
+		city=$(python tools.py geoip city)
+		countryCode=$(python tools.py geoip countryCode)
+		region=$(python tools.py geoip regionName)	
+	fi
+	if [ -z "$city" ]; then
+		city=${region}
 	fi
 
 	echo -e " ASN & ISP            : ${SKYBLUE}$asn, $isp${PLAIN}" | tee -a $log
