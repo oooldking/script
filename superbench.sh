@@ -235,9 +235,9 @@ print_speedtest() {
     speed_test '' 'Speedtest.net'
     speed_fast_com
     speed_test '5316' 'Nanjing   CT'
-    speed_test '4751' 'Beijing   CT'
+    speed_test '12637' 'Xiangyang CT'
     speed_test '7509' 'Hangzhou  CT'
-	speed_test '4624' 'Chengdu   CT'
+	speed_test '19076' 'Chongqing CT'
 	speed_test '5083' 'Shanghai  CU'
 	speed_test '4863' "Xi'an     CU"
 	speed_test '5726' 'Chongqing CU'
