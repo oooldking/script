@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
-#
-# Description: Test your server's network with Speedtest to China
-#
-# Copyright (C) 2017 - 2017 Oldking <oooldking@gmail.com>
-#
-# URL: https://www.oldking.net/305.html
-#
 
 # Colors
 RED='\033[0;31m'
@@ -50,292 +43,22 @@ fi
 
 
 clear
-echo "#############################################################"
-echo "# Description: Test your server's network with Speedtest    #"
-echo "# Intro:  https://www.oldking.net/305.html                  #"
-echo "# Author: Oldking <oooldking@gmail.com>                     #"
-echo "# Github: https://github.com/oooldking                      #"
-echo "#############################################################"
-echo
-echo "测试服务器到"
-echo -ne "1.中国电信 2.中国联通 3.中国移动 4.本地默认 5.全面测速"
+echo "测速节点更新日期: 2019/06/09"
+echo "查看当前所有节点:"
+echo "https://github.com/ernisn/superspeed/blob/master/ServerList.md"
+echo "是否进行全面测速? (失效的测速节点会自动跳过)"
+echo -ne "1.确认测速 2.取消测速"
 
 while :; do echo
         read -p "请输入数字选择： " telecom
-        if [[ ! $telecom =~ ^[1-5]$ ]]; then
+        if [[ ! $telecom =~ ^[1-2]$ ]]; then
                 echo "输入错误! 请输入正确的数字!"
         else
                 break   
         fi
 done
 
-if [[ ${telecom} == 1 ]]; then
-        telecomName="电信"
-        echo -e "\n选择最靠近你的方位"
-    echo -ne "1.北方 2.南方"
-    while :; do echo
-            read -p "请输入数字选择： " pos
-            if [[ ! $pos =~ ^[1-2]$ ]]; then
-                    echo "输入错误! 请输入正确的数字!"
-            else
-                    break
-            fi
-    done
-    echo -e "\n选择最靠近你的城市"
-    if [[ ${pos} == 1 ]]; then
-        echo -ne "1.郑州 2.襄阳"
-        while :; do echo
-                read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^[1-2]$ ]]; then
-                        echo "输入错误! 请输入正确的数字!"
-                else
-                        break
-            fi
-        done
-        if [[ ${city} == 1 ]]; then
-                num=4595
-                cityName="郑州"
-        fi
-        if [[ ${city} == 2 ]]; then
-                num=12637
-                cityName="襄阳"
-        fi
-    fi
-    if [[ ${pos} == 2 ]]; then
-        echo -ne "1.上海 2.杭州 3.南宁 4.南昌 5.长沙 6.深圳 7.重庆 8.成都"
-        while :; do echo
-                read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^[1-8]$ ]]; then
-                        echo "输入错误! 请输入正确的数字!"
-                else
-                        break
-            fi
-        done
-        if [[ ${city} == 1 ]]; then
-                num=3633
-                cityName="上海"
-        fi
-        if [[ ${city} == 2 ]]; then
-                num=7509
-                cityName="杭州"
-        fi
-        if [[ ${city} == 3 ]]; then
-                num=10305
-                cityName="南宁"
-        fi
-        if [[ ${city} == 4 ]]; then
-                num=7230
-                cityName="南昌"
-        fi
-        if [[ ${city} == 5 ]]; then
-                num=6132
-                cityName="长沙"
-        fi
-        if [[ ${city} == 6 ]]; then
-                num=5081
-                cityName="深圳"
-        fi
-        if [[ ${city} == 7 ]]; then
-                num=6592
-                cityName="重庆"
-        fi
-        if [[ ${city} == 8 ]]; then
-                num=4624
-                cityName="成都"
-        fi
-    fi
-fi
-
-if [[ ${telecom} == 2 ]]; then
-        telecomName="联通"
-    echo -ne "\n1.北方 2.南方"
-    while :; do echo
-            read -p "请输入数字选择： " pos
-            if [[ ! $pos =~ ^[1-2]$ ]]; then
-                    echo "输入错误! 请输入正确的数字!"
-            else
-                    break
-            fi
-    done
-    echo -e "\n选择最靠近你的城市"
-    if [[ ${pos} == 1 ]]; then
-        echo -ne "1.沈阳 2.长春 3.哈尔滨 4.天津 5.济南 6.北京 7.郑州 8.西安 9.太原 10.宁夏 11.兰州 12.西宁"
-        while :; do echo
-                read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^(([1-9])|(1([0-2]{1})))$ ]]; then
-                        echo "输入错误! 请输入正确的数字!"
-                else
-                        break
-            fi
-        done
-        if [[ ${city} == 1 ]]; then
-                num=5017
-                cityName="沈阳"
-        fi
-        if [[ ${city} == 2 ]]; then
-                num=9484
-                cityName="长春"
-        fi
-        if [[ ${city} == 3 ]]; then
-                num=5460
-                cityName="哈尔滨"
-        fi
-        if [[ ${city} == 4 ]]; then
-                num=5475
-                cityName="天津"
-        fi
-        if [[ ${city} == 5 ]]; then
-                num=5039
-                cityName="济南"
-        fi
-        if [[ ${city} == 6 ]]; then
-                num=5145
-                cityName="北京"
-        fi
-        if [[ ${city} == 7 ]]; then
-                num=5131
-                cityName="郑州"
-        fi
-        if [[ ${city} == 8 ]]; then
-                num= 4863
-                cityName="西安"
-        fi
-        if [[ ${city} == 9 ]]; then
-                num=12868
-                cityName="太原"
-        fi
-        if [[ ${city} == 10 ]]; then
-                num=5509
-                cityName="宁夏"
-        fi
-        if [[ ${city} == 11 ]]; then
-                num=4690
-                cityName="兰州"
-        fi
-        if [[ ${city} == 12 ]]; then
-                num=5992
-                cityName="西宁"
-        fi
-    fi
-    if [[ ${pos} == 2 ]]; then
-        echo -ne "1.上海 2.杭州 3.南宁 4.合肥 5.南昌 6.长沙 7.深圳 8.广州 9.重庆 10.昆明 11.成都"
-        while :; do echo
-                read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^(([1-9])|(1([0-1]{1})))$ ]]; then
-                        echo "输入错误! 请输入正确的数字!"
-                else
-                        break
-            fi
-        done
-        if [[ ${city} == 1 ]]; then
-                num=5083
-                cityName="上海"
-        fi
-        if [[ ${city} == 2 ]]; then
-                num=5300
-                cityName="杭州"
-        fi
-        if [[ ${city} == 3 ]]; then
-                num=5674
-                cityName="南宁"
-        fi
-        if [[ ${city} == 4 ]]; then
-                num=5724
-                cityName="合肥"
-        fi
-        if [[ ${city} == 5 ]]; then
-                num=5079
-                cityName="南昌"
-        fi
-        if [[ ${city} == 6 ]]; then
-                num=4870
-                cityName="长沙"
-        fi
-        if [[ ${city} == 7 ]]; then
-                num=10201
-                cityName="深圳"
-        fi
-        if [[ ${city} == 8 ]]; then
-                num=3891
-                cityName="广州"
-        fi
-        if [[ ${city} == 9 ]]; then
-                num=5726
-                cityName="重庆"
-        fi
-        if [[ ${city} == 10 ]]; then
-                num=5103
-                cityName="昆明"
-        fi
-        if [[ ${city} == 11 ]]; then
-                num=2461
-                cityName="成都"
-        fi
-    fi
-fi
-
-if [[ ${telecom} == 3 ]]; then
-        telecomName="移动"
-    echo -ne "\n1.北方 2.南方"
-    while :; do echo
-            read -p "请输入数字选择： " pos
-            if [[ ! $pos =~ ^[1-2]$ ]]; then
-                    echo "输入错误! 请输入正确的数字!"
-            else
-                    break
-            fi
-    done
-    echo -e "\n选择最靠近你的城市"
-    if [[ ${pos} == 1 ]]; then
-        echo -ne "1.西安"
-        while :; do echo
-                read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^[1]$ ]]; then
-                        echo "输入错误! 请输入正确的数字!"
-                else
-                        break
-            fi
-        done
-        if [[ ${city} == 1 ]]; then
-                num=5292
-        fi
-    fi
-    if [[ ${pos} == 2 ]]; then
-        echo -ne "1.上海 2.宁波 3.无锡 4.杭州 5.合肥 6.成都"
-        while :; do echo
-                read -p "请输入数字选择： " city
-                if [[ ! $city =~ ^[1-6]$ ]]; then
-                        echo "输入错误! 请输入正确的数字!"
-                else
-                        break
-            fi
-        done
-        if [[ ${city} == 1 ]]; then
-                num=4665
-                cityName="上海"
-        fi
-        if [[ ${city} == 2 ]]; then
-                num=6715
-                cityName="宁波"
-        fi
-        if [[ ${city} == 3 ]]; then
-                num=5122
-                cityName="无锡"
-        fi
-        if [[ ${city} == 4 ]]; then
-                num=4647
-                cityName="杭州"
-        fi
-        if [[ ${city} == 5 ]]; then
-                num=4377 
-                cityName="合肥"
-        fi
-        if [[ ${city} == 6 ]]; then
-                num=4575
-                cityName="成都"
-        fi
-    fi
-fi
+[[ ${telecom} == 2 ]] && exit 1
 
 # install speedtest
 if  [ ! -e '/tmp/speedtest.py' ]; then
@@ -376,44 +99,156 @@ speed_test(){
 	fi
 }
 
-if [[ ${telecom} =~ ^[1-3]$ ]]; then
-    python /tmp/speedtest.py --server ${num} --share 2>/dev/null | tee /tmp/speed.log 2>/dev/null
-    is_down=$(cat /tmp/speed.log | grep 'Download')
-
-    if [[ ${is_down} ]]; then
-        result
-        echo "测试到 ${cityName}${telecomName} 完成！"
-        rm -rf /tmp/speedtest.py
-        rm -rf /tmp/speed.log
-    else
-	    echo -e "\n${RED}ERROR:${PLAIN} 当前节点不可用，请更换其他节点，或换个时间段再测试。"
-	fi
-fi
-
-if [[ ${telecom} == 4 ]]; then
-    python /tmp/speedtest.py | tee /tmp/speed.log
-    result
-    echo "本地测试完成！"
-    rm -rf /tmp/speedtest.py
-    rm -rf /tmp/speed.log
-fi
-
-if [[ ${telecom} == 5 ]]; then
+if [[ ${telecom} == 1 ]]; then
 	echo ""
-	printf "%-14s%-18s%-20s%-12s\n" "Node Name" "Upload Speed" "Download Speed" "Latency"
+	printf "%-18s%-18s%-20s%-12s\n" "节点名称" "上传速度" "下载速度" "延迟"
 	start=$(date +%s) 
-    speed_test '6435' '襄阳电信'
-    speed_test '7509' '昆明电信'
-	speed_test '3633' '上海电信'
-	speed_test '4624' '成都电信'
-	speed_test '5017' '沈阳联通'
-	speed_test '4863' '西安联通'
-	speed_test '5083' '上海联通'
-	speed_test '5726' '重庆联通'
-	speed_test '5292' '西安移动'
-	speed_test '16314' '山东移动'
+    speed_test '6132' '长沙电信'
+    speed_test '3633' '上海电信'
+    speed_test '3973' '兰州电信'
+    speed_test '4751' '北京电信'
+    speed_test '5316' '南京电信'
+    speed_test '10305' '南宁电信1'
+    speed_test '22724' '南宁电信2'
+    speed_test '10192' '南宁电信3'
+    speed_test '16399' '南昌电信1'
+    speed_test '6473' '南昌电信2'
+    speed_test '6345' '南昌电信3'
+    speed_test '7643' '南昌电信4'
+    speed_test '17145' '合肥电信'
+    speed_test '24012' '呼和浩特电信'
+    speed_test '6714' '天津电信'
+    speed_test '10775' '广州电信1'
+    speed_test '9151' '广州电信2'
+    speed_test '17251' '广州电信3'
+    speed_test '5324' '徐州电信'
+    speed_test '4624' '成都电信'
+    speed_test '6168' '昆明电信'
+    speed_test '7509' '杭州电信'
+    speed_test '23844' '武汉电信1'
+    speed_test '20038' '武汉电信2'
+    speed_test '23665' '武汉电信3'
+    speed_test '24011' '武汉电信4'
+    speed_test '5081' '深圳电信'
+    speed_test '5396' '苏州电信'
+    speed_test '6435' '襄阳电信1'
+    speed_test '12637' '襄阳电信2'
+    speed_test '19918' '西宁电信'
+    speed_test '5317' '连云港电信'
+    speed_test '4595' '郑州电信'
+    speed_test '21470' '鄂尔多斯电信'
+    speed_test '19076' '重庆电信1'
+    speed_test '6592' '重庆电信2'
+    speed_test '16983' '重庆电信3'
+    speed_test '5145' '北京联通1'
+    speed_test '18462' '北京联通2'
+    speed_test '5505' '北京联通3'
+    speed_test '9484' '长春联通1'
+    speed_test '10742' '长春联通2'
+    speed_test '4870' '长沙联通'
+    speed_test '2461' '成都联通'
+    speed_test '5726' '重庆联通'
+    speed_test '4884' '福州联通'
+    speed_test '3891' '广州联通'
+    speed_test '5985' '海口联通'
+    speed_test '5300' '杭州联通'
+    speed_test '5460' '哈尔滨联通'
+    speed_test '5724' '合肥联通'
+    speed_test '5465' '呼和浩特联通'
+    speed_test '5039' '济南联通1'
+    speed_test '12538' '济南联通2'
+    speed_test '5103' '昆明联通'
+    speed_test '4690' '兰州联通'
+    speed_test '5750' '拉萨联通'
+    speed_test '7230' '南昌联通1'
+    speed_test '5097' '南昌联通2'
+    speed_test '5446' '南京联通1'
+    speed_test '13704' '南京联通2'
+    speed_test '5674' '南宁联通'
+    speed_test '6245' '宁波联通'
+    speed_test '5509' '宁夏联通'
+    speed_test '5710' '青岛联通'
+    speed_test '21005' '上海联通1'
+    speed_test '24447' '上海联通2'
+    speed_test '5083' '上海联通3'
+    speed_test '5017' '沈阳联通'
+    speed_test '10201' '深圳联通'
+    speed_test '19736' '太原联通1'
+    speed_test '12868' '太原联通2'
+    speed_test '12516' '太原联通3'
+    speed_test '5475' '天津联通'
+    speed_test '6144' '乌鲁木齐联通'
+    speed_test '5485' '武汉联通'
+    speed_test '5506' '厦门联通'
+    speed_test '5992' '西宁联通'
+    speed_test '5131' '郑州联通1'
+    speed_test '6810' '郑州联通2'
+    speed_test '17222' '新疆阿勒泰移动'
+    speed_test '17230' '内蒙古阿拉善移动'
+    speed_test '17227' '新疆和田移动'
+    speed_test '4665' '上海移动1'
+    speed_test '16719' '上海移动2'
+    speed_test '16803' '上海移动3'
+    speed_test '17388' '临沂移动'
+    speed_test '3784' '乌鲁木齐移动1'
+    speed_test '16858' '乌鲁木齐移动2'
+    speed_test '17228' '伊犁移动'
+    speed_test '16145' '兰州移动'
+    speed_test '4713' '北京移动'
+    speed_test '21590' '南京移动'
+    speed_test '15863' '南宁移动'
+    speed_test '16294' '南昌移动1'
+    speed_test '16332' '南昌移动2'
+    speed_test '21530' '南通移动'
+    speed_test '21642' '台州移动'
+    speed_test '4377' '合肥移动'
+    speed_test '17085' '呼和浩特移动'
+    speed_test '17437' '哈尔滨移动'
+    speed_test '10939' '商丘移动'
+    speed_test '17245' '喀什移动'
+    speed_test '17184' '天津移动'
+    speed_test '16005' '太原移动'
     speed_test '6715' '宁波移动'
-	speed_test '4575' '成都移动'
+    speed_test '21722' '宿迁移动'
+    speed_test '21845' '常州移动'
+    speed_test '6611' '广州移动'
+    speed_test '22349' '徐州移动'
+    speed_test '24337' '成都移动1'
+    speed_test '4575' '成都移动2'
+    speed_test '21600' '扬州移动'
+    speed_test '18444' '拉萨移动1'
+    speed_test '17494' '拉萨移动2'
+    speed_test '5122' '无锡移动1'
+    speed_test '21973' '无锡移动2'
+    speed_test '5892' '昆明移动'
+    speed_test '4647' '杭州移动1'
+    speed_test '12278' '杭州移动2'
+    speed_test '16395' '武汉移动'
+    speed_test '16167' '沈阳移动'
+    speed_test '16314' '济南移动1'
+    speed_test '17480' '济南移动2'
+    speed_test '16503' '海口移动'
+    speed_test '22037' '淮安移动'
+    speed_test '4515' '深圳移动'
+    speed_test '21946' '盐城移动'
+    speed_test '17223' '石家庄移动'
+    speed_test '16171' '福州移动'
+    speed_test '3927' '苏州移动1'
+    speed_test '21472' '苏州移动2'
+    speed_test '18504' '西宁移动1'
+    speed_test '16915' '西宁移动2'
+    speed_test '16398' '贵阳移动1'
+    speed_test '7404' '贵阳移动2'
+    speed_test '21584' '连云港移动'
+    speed_test '18970' '郑州移动1'
+    speed_test '4486' '郑州移动2'
+    speed_test '16409' '重庆移动1'
+    speed_test '17584' '重庆移动2'
+    speed_test '16392' '银川移动'
+    speed_test '17320' '镇江移动'
+    speed_test '16375' '长春移动'
+    speed_test '15862' '长沙移动'
+    speed_test '17432' '青岛移动'
 	end=$(date +%s)  
 	rm -rf /tmp/speedtest.py
 	echo ""
