@@ -44,8 +44,7 @@ fi
 
 clear
 echo "测速节点更新日期: 2019/06/09"
-echo "查看当前所有节点:"
-echo "https://github.com/ernisn/superspeed/blob/master/ServerList.md"
+echo "查看当前所有节点: https://github.com/ernisn/superspeed/blob/master/ServerList.md"
 echo "是否进行全面测速? (失效的测速节点会自动跳过)"
 echo -ne "1.确认测速 2.取消测速"
 
@@ -66,20 +65,6 @@ if  [ ! -e '/tmp/speedtest.py' ]; then
 fi
 chmod a+rx /tmp/speedtest.py
 
-result() {
-    download=`cat /tmp/speed.log | awk -F ':' '/Download/{print $2}'`
-    upload=`cat /tmp/speed.log | awk -F ':' '/Upload/{print $2}'`
-    hostby=`cat /tmp/speed.log | awk -F ':' '/Hosted/{print $1}'`
-    latency=`cat /tmp/speed.log | awk -F ':' '/Hosted/{print $2}'`
-    clear
-    echo "$hostby"
-    echo "延迟  : $latency"
-    echo "上传  : $upload"
-    echo "下载  : $download"
-    echo -ne "\n当前时间: "
-    echo $(date +%Y-%m-%d" "%H:%M:%S)
-}
-
 speed_test(){
 	temp=$(python /tmp/speedtest.py --server $1 --share 2>&1)
 	is_down=$(echo "$temp" | grep 'Download') 
@@ -93,15 +78,15 @@ speed_test(){
         fi
         local nodeName=$2
 
-        printf "${YELLOW}%-17s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
+        printf "${YELLOW}%-20s${GREEN}%-20s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
 	else
         local cerror="ERROR"
 	fi
 }
 
 if [[ ${telecom} == 1 ]]; then
-	echo ""
-	printf "%-18s%-18s%-20s%-12s\n" "节点名称" "上传速度" "下载速度" "延迟"
+	echo "———————————————————————————————————————————————————————————————————"
+	printf "%-20s%-20s%-20s%-12s\n" "节点名称         " "上传速度            " "下载速度            " "延迟"
 	start=$(date +%s) 
     speed_test '6132' '长沙电信'
     speed_test '3633' '上海电信'
@@ -251,7 +236,7 @@ if [[ ${telecom} == 1 ]]; then
     speed_test '17432' '青岛移动'
 	end=$(date +%s)  
 	rm -rf /tmp/speedtest.py
-	echo ""
+	echo "———————————————————————————————————————————————————————————————————"
 	time=$(( $end - $start ))
 	if [[ $time -gt 60 ]]; then
 		min=$(expr $time / 60)
