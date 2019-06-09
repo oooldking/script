@@ -43,15 +43,15 @@ fi
 
 
 clear
-echo "测速节点更新日期: 2019/06/09"
+# echo "测速节点更新日期: 2019/06/09"
 echo "查看当前所有节点: https://github.com/ernisn/superspeed/blob/master/ServerList.md"
 echo "是否进行全面测速? (失效的测速节点会自动跳过)"
 echo -ne "1.确认测速 2.取消测速"
 
 while :; do echo
-        read -p "请输入数字选择： " telecom
+        read -p "请输入数字选择: " telecom
         if [[ ! $telecom =~ ^[1-2]$ ]]; then
-                echo "输入错误! 请输入正确的数字!"
+                echo "输入错误, 请输入正确的数字!"
         else
                 break   
         fi
@@ -241,9 +241,9 @@ if [[ ${telecom} == 1 ]]; then
 	if [[ $time -gt 60 ]]; then
 		min=$(expr $time / 60)
 		sec=$(expr $time % 60)
-		echo -ne "花费时间：${min} 分 ${sec} 秒"
+		echo -ne "花费时间: ${min} 分 ${sec} 秒"
 	else
-		echo -ne "花费时间：${time} 秒"
+		echo -ne "花费时间: ${time} 秒"
 	fi
 	echo -ne "\n当前时间: "
     echo $(date +%Y-%m-%d" "%H:%M:%S)
