@@ -43,7 +43,7 @@ fi
 
 
 clear
-# echo "测速节点更新日期: 2019/06/09"
+# echo "测速节点更新日期: 2019/06/10"
 echo "查看当前所有节点: https://github.com/ernisn/superspeed/blob/master/ServerList.md"
 echo "是否进行全面测速? (失效的测速节点会自动跳过)"
 echo -ne "1.确认测速 2.取消测速"
@@ -168,9 +168,9 @@ if [[ ${telecom} == 1 ]]; then
     speed_test '5992' '西宁联通'
     speed_test '5131' '郑州联通1'
     speed_test '6810' '郑州联通2'
-    speed_test '17222' '新疆阿勒泰移动'
-    speed_test '17230' '内蒙古阿拉善移动'
-    speed_test '17227' '新疆和田移动'
+    speed_test '17222' '阿勒泰移动'
+    speed_test '17230' '阿拉善移动'
+    speed_test '17227' '和田移动'
     speed_test '4665' '上海移动1'
     speed_test '16719' '上海移动2'
     speed_test '16803' '上海移动3'
