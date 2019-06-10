@@ -4,6 +4,7 @@
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
+PURPLE="\033[0;35m"
 SKYBLUE='\033[0;36m'
 PLAIN='\033[0m'
 
@@ -44,9 +45,12 @@ fi
 
 clear
 # echo "测速节点更新日期: 2019/06/10"
-echo "查看当前所有节点: https://github.com/ernisn/superspeed/blob/master/ServerList.md"
+echo "———————————————————————————————————————————————————————————————————"
+echo "查看所有测速节点信息: "
+echo "     https://github.com/ernisn/superspeed/blob/master/ServerList.md"
+echo "———————————————————————————————————————————————————————————————————"
 echo "是否进行全面测速? (失效的测速节点会自动跳过)"
-echo -ne "1.确认测速 2.取消测速"
+echo -ne "1. 确认测速	2. 取消测速"
 
 while :; do echo
         read -p "请输入数字选择: " telecom
@@ -74,11 +78,12 @@ speed_test(){
         local relatency=$(echo "$temp" | awk -F ':' '/Hosted/{print $2}')
         temp=$(echo "$relatency" | awk -F '.' '{print $1}')
         if [[ ${temp} -gt 1000 ]]; then
-            relatency=" 000.000 ms"
+            relatency=" > 1 s"
         fi
+		local nodeID=$1
         local nodeName=$2
 
-        printf "${YELLOW}%-20s${GREEN}%-20s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
+        printf "${PURPLE}%-8s${YELLOW}%-16s${GREEN}%-18s${RED}%-18s${SKYBLUE}%-12s${PLAIN}\n" "${nodeID}" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
 	else
         local cerror="ERROR"
 	fi
@@ -86,7 +91,7 @@ speed_test(){
 
 if [[ ${telecom} == 1 ]]; then
 	echo "———————————————————————————————————————————————————————————————————"
-	printf "%-20s%-20s%-20s%-12s\n" "节点名称         " "上传速度            " "下载速度            " "延迟"
+	printf "%-8s%-16s%-18s%-18s%-12s\n" "节点ID  " "节点名称     " "上传速度          " "下载速度          " "延迟"
 	start=$(date +%s) 
     speed_test '6132' '长沙电信'
     speed_test '3633' '上海电信'
@@ -241,11 +246,10 @@ if [[ ${telecom} == 1 ]]; then
 	if [[ $time -gt 60 ]]; then
 		min=$(expr $time / 60)
 		sec=$(expr $time % 60)
-		echo -ne "花费时间: ${min} 分 ${sec} 秒"
+		echo -ne "测试完成, 本次测速耗时: ${min} 分 ${sec} 秒"
 	else
-		echo -ne "花费时间: ${time} 秒"
+		echo -ne "测试完成, 本次测速耗时: ${time} 秒"
 	fi
 	echo -ne "\n当前时间: "
     echo $(date +%Y-%m-%d" "%H:%M:%S)
-	echo "全面测试完成！"
 fi
