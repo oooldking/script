@@ -8,7 +8,7 @@ wget https://raw.githubusercontent.com/ernisn/superspeed/master/superspeed.sh &&
 
 [查看全部节点列表](https://github.com/ernisn/superspeed/blob/master/ServerList.md)
 
-![测速图](https://i.loli.net/2019/06/10/5cfe66bda253d41014.png)
+![测速图](https://i.loli.net/2019/06/11/5cff113b273e210685.png)
 
 ---
 
