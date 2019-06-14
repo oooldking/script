@@ -20,7 +20,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.1.4 (1 Jan 2019)                 / "
+	echo " \                   v1.1.5 (14 Jun 2019)                / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
@@ -177,17 +177,15 @@ print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '5316' 'Nanjing   CT'
-    speed_test '12637' 'Xiangyang CT'
+    speed_test '17251' 'Guangzhou CT'
+    speed_test '23844' 'Wuhan     CT'
     speed_test '7509' 'Hangzhou  CT'
-	speed_test '19076' 'Chongqing CT'
-	speed_test '5083' 'Shanghai  CU'
-	speed_test '4863' "Xi'an     CU"
+	speed_test '3973' 'Lanzhou   CT'
+	speed_test '24447' 'Shanghai  CU'
+	speed_test '5724' "Heifei     CU"
 	speed_test '5726' 'Chongqing CU'
-	speed_test '4665' 'Shanghai  CM'
-	speed_test '4575' 'Chengdu   CM'
-	speed_test '6168' 'Kunming   CM'
-	speed_test '6611' 'Guangzhou CM'
+	speed_test '17228' 'Xinjiang  CM'
+	speed_test '18444' 'Xizang    CM'
 	 
 	rm -rf speedtest.py
 }
@@ -197,8 +195,8 @@ print_speedtest_fast() {
     speed_test '' 'Speedtest.net'
     speed_fast_com
     speed_test '7509' 'Hangzhou  CT'
-	speed_test '5083' 'Shanghai  CU'
-	speed_test '4575' 'Chengdu   CM'
+	speed_test '24447' 'Shanghai  CU'
+	speed_test '18444' 'Xizang    CM'
 	 
 	rm -rf speedtest.py
 }
@@ -469,7 +467,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.4 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.5 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
