@@ -83,7 +83,7 @@ speed_test(){
 		local nodeID=$1
         local nodeName=$2
 
-        printf "${PURPLE}%-8s${YELLOW}%-16s${GREEN}%-18s${RED}%-18s${SKYBLUE}%-12s${PLAIN}\n" "${nodeID}" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
+        printf "${PURPLE}%-8s${YELLOW}%-16s${GREEN}%-18s${RED}%-18s${SKYBLUE}%-10s${PLAIN}\n" "${nodeID}" "${nodeName}" "${reupload}" "${REDownload}" "${relatency}"
 	else
         local cerror="ERROR"
 	fi
@@ -91,7 +91,7 @@ speed_test(){
 
 if [[ ${telecom} == 1 ]]; then
 	echo "———————————————————————————————————————————————————————————————————"
-	printf "%-8s%-16s%-18s%-18s%-12s\n" "节点ID  " "节点名称     " "上传速度          " "下载速度          " "延迟"
+	printf "%-8s%-16s%-18s%-18s%-10s\n" "节点ID  " "节点名称     " "上传速度          " "下载速度          " "延迟"
 	start=$(date +%s) 
     speed_test '6132' '长沙电信'
     speed_test '3633' '上海电信'
