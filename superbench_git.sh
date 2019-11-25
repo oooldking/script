@@ -20,13 +20,12 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.1.5 (14 Jun 2019)                / "
+	echo " \                   v1.1.6 (25 Nov 2019)                / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
 	echo " Intro: https://www.oldking.net/350.html"
 	echo " Copyright (C) 2019 Oldking oooldking@gmail.com"
-	echo -e " ${RED}Happy New Year!${PLAIN}"
 	echo ""
 }
 
@@ -177,15 +176,19 @@ print_speedtest() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '17251' 'Guangzhou CT'
-    speed_test '23844' 'Wuhan     CT'
-    speed_test '7509' 'Hangzhou  CT'
-	speed_test '3973' 'Lanzhou   CT'
-	speed_test '24447' 'Shanghai  CU'
-	speed_test '5724' "Heifei    CU"
-	speed_test '5726' 'Chongqing CU'
-	speed_test '17228' 'Xinjiang  CM'
-	speed_test '18444' 'Xizang    CM'
+    speed_test '27377' 'Beijing 5G   CT'
+    speed_test '26352' 'Nanjing 5G   CT'
+    speed_test '17145' 'Hefei 5G     CT'
+	speed_test '27594' 'Guangzhou 5G CT'
+	speed_test '27154' 'TianJin 5G   CU'
+	speed_test '24447' 'Shanghai 5G  CU'
+	speed_test '26678' 'Guangzhou 5G CU'
+	speed_test '17184' 'Tianjin 5G   CM'
+	speed_test '26850' 'Wuxi 5G      CM'
+	speed_test '27249' 'Nanjing 5G   CM'
+	speed_test '26404' 'Hefei 5G     CM'
+	speed_test '28491' 'Changsha 5G  CM'
+
 	 
 	rm -rf speedtest.py
 }
@@ -194,9 +197,9 @@ print_speedtest_fast() {
 	printf "%-18s%-18s%-20s%-12s\n" " Node Name" "Upload Speed" "Download Speed" "Latency" | tee -a $log
     speed_test '' 'Speedtest.net'
     speed_fast_com
-    speed_test '7509' 'Hangzhou  CT'
-	speed_test '24447' 'Shanghai  CU'
-	speed_test '18444' 'Xizang    CM'
+    speed_test '27377' 'Beijing 5G   CT'
+	speed_test '24447' 'ShangHai 5G  CU'
+	speed_test '27249' 'Nanjing 5G   CM'
 	 
 	rm -rf speedtest.py
 }
@@ -320,6 +323,8 @@ virt_check(){
 		virtual="KVM"
 	elif [[ "$cname" == *KVM* ]]; then
 		virtual="KVM"
+	elif [[ "$cname" == *QEMU* ]]; then
+		virtual="KVM"
 	elif [[ "$virtualx" == *"VMware Virtual Platform"* ]]; then
 		virtual="VMware"
 	elif [[ "$virtualx" == *"Parallels Software International"* ]]; then
@@ -404,7 +409,7 @@ print_io() {
 
 print_system_info() {
 	echo -e " CPU Model            : ${SKYBLUE}$cname${PLAIN}" | tee -a $log
-	echo -e " CPU Cores            : ${YELLOW}$cores Cores ${SKYBLUE}@ $freq MHz $arch${PLAIN}" | tee -a $log
+	echo -e " CPU Cores            : ${YELLOW}$cores Cores ${SKYBLUE}$freq MHz $arch${PLAIN}" | tee -a $log
 	echo -e " CPU Cache            : ${SKYBLUE}$corescache ${PLAIN}" | tee -a $log
 	echo -e " OS                   : ${SKYBLUE}$opsy ($lbit Bit) ${YELLOW}$virtual${PLAIN}" | tee -a $log
 	echo -e " Kernel               : ${SKYBLUE}$kern${PLAIN}" | tee -a $log
@@ -467,7 +472,7 @@ get_system_info() {
 
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
-	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.5 | tee -a $log
+	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.6 | tee -a $log
 	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
 }
 
@@ -477,7 +482,7 @@ sharetest() {
 	log_preupload
 	case $1 in
 	'ubuntu')
-		share_link=$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
+		share_link="https://paste.ubuntu.com".$( curl -v --data-urlencode "content@$log_up" -d "poster=superbench.sh" -d "syntax=text" "https://paste.ubuntu.com" 2>&1 | \
 			grep "Location" | awk '{print $3}' );;
 	'haste' )
 		share_link=$( curl -X POST -s -d "$(cat $log)" https://hastebin.com/documents | awk -F '"' '{print "https://hastebin.com/"$4}' );;
