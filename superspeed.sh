@@ -46,24 +46,25 @@ fi
 
 clear
 
-echo "———————————————————————SuperSpeed 全面测速版———————————————————————"
-echo "    使用方法:      bash <(curl -Lso- https://git.io/superspeed)"
-echo "    查看全部节点:  https://git.io/superspeedList"
-echo "    节点更新日期:  2019/07/02"
-echo "———————————————————————————————————————————————————————————————————"
-echo "是否进行全面测速?  (失效的测速节点会自动跳过)"
-echo -ne "    1. 确认测速    2. 取消测速"
+echo "————————————————————————SuperSpeed 全面测速版—————————————————————————"
+echo "     使用方法:      bash <(curl -Lso- https://git.io/superspeed)"
+echo "     查看全部节点:  https://git.io/superspeedList"
+echo "     节点更新日期:  2019/12/23"
+echo "——————————————————————————————————————————————————————————————————————"
+echo "     选择测速类型: "
+echo "     1. 三网全面测速      2. 取消本次测速"
+echo -ne "     3. 电信节点测速      4. 联通节点测速      5. 移动节点测速"
 
 while :; do echo
-		read -p "请输入数字选择: " telecom
-		if [[ ! $telecom =~ ^[1-2]$ ]]; then
-				echo "输入错误, 请输入正确的数字!"
+		read -p "     请输入数字选择: " selection
+		if [[ ! $selection =~ ^[1-5]$ ]]; then
+				echo "    输入错误, 请输入正确的数字!"
 		else
 				break   
 		fi
 done
 
-[[ ${telecom} == 2 ]] && exit 1
+[[ ${selection} == 2 ]] && exit 1
 
 # install speedtest
 if  [ ! -e '/tmp/speedtest.py' ]; then
@@ -85,178 +86,462 @@ speed_test(){
 		local nodeID=$1
 		local nodeLocation=$2
 		local nodeISP=$3
-
-		printf "${RED}%-8s${YELLOW}%-10s${GREEN}%-10s${CYAN}%-16s${BLUE}%-16s${PURPLE}%-10s${PLAIN}\n" "${nodeID}  " "${nodeISP}  " "${nodeLocation}  " "${reupload}  " "${REDownload}  " "${relatency}"
+		
+		strnodeLocation="${nodeLocation}　　　　　　"
+		
+		#LANG=zh_CN.GB2312
+		#echo $LANG
+		#printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-8s${CYAN}%-16s${BLUE}%-16s${PURPLE}%-10s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:8}" "${reupload}" "${REDownload}" "${relatency}"
+		
+		LANG=C
+		#echo $LANG
+		printf "${RED}%-6s${YELLOW}%s%s${GREEN}%-24s${CYAN}%-16s${BLUE}%-16s${PURPLE}%-10s${PLAIN}\n" "${nodeID}"  "${nodeISP}" "|" "${strnodeLocation:0:24}" "${reupload}" "${REDownload}" "${relatency}"
+		
 	else
 		local cerror="ERROR"
 	fi
 }
 
-if [[ ${telecom} == 1 ]]; then
-	echo "———————————————————————————————————————————————————————————————————"
-	printf "%-8s%-10s%-10s%-16s%-16s%-10s\n" "节点ID  " "运营商  " "位置     " "上传速度        " "下载速度        " "延迟"
+if [[ ${selection} == 1 ]]; then
+	echo "——————————————————————————————————————————————————————————————————————"
+	echo "ID    测速服务器信息        上传速度        下载速度        延迟"
 	start=$(date +%s) 
-	# 电信
-	speed_test '6132' '长沙' '电信'
-	speed_test '3633' '上海' '电信'
-	speed_test '3973' '兰州' '电信'
-	speed_test '4751' '北京' '电信'
-	speed_test '5316' '南京' '电信'
-	speed_test '10305' '南宁1' '电信'
-	speed_test '22724' '南宁2' '电信'
-	speed_test '10192' '南宁3' '电信'
-	speed_test '16399' '南昌1' '电信'
-	speed_test '6473' '南昌2' '电信'
-	speed_test '6345' '南昌3' '电信'
-	speed_test '7643' '南昌4' '电信'
-	speed_test '17145' '合肥' '电信'
-	speed_test '24012' '呼和浩特' '电信'
-	speed_test '6714' '天津' '电信'
-	speed_test '10775' '广州1' '电信'
-	speed_test '9151' '广州2' '电信'
-	speed_test '17251' '广州3' '电信'
-	speed_test '5324' '徐州' '电信'
-	speed_test '4624' '成都' '电信'
-	speed_test '6168' '昆明' '电信'
-	speed_test '7509' '杭州' '电信'
-	speed_test '23844' '武汉1' '电信'
-	speed_test '20038' '武汉2' '电信'
-	speed_test '23665' '武汉3' '电信'
-	speed_test '24011' '武汉4' '电信'
-	speed_test '5081' '深圳' '电信'
-	speed_test '5396' '苏州' '电信'
-	speed_test '6435' '襄阳1' '电信'
-	speed_test '12637' '襄阳2' '电信'
-	speed_test '19918' '西宁' '电信'
-	speed_test '5317' '连云港' '电信'
-	speed_test '4595' '郑州' '电信'
-	speed_test '21470' '鄂尔多斯' '电信'
-	speed_test '19076' '重庆1' '电信'
-	speed_test '6592' '重庆2' '电信'
-	speed_test '16983' '重庆3' '电信'
-	# 联通
-	speed_test '5145' '北京1' '联通'
-	speed_test '18462' '北京2' '联通'
-	speed_test '5505' '北京3' '联通'
-	speed_test '9484' '长春1' '联通'
-	speed_test '10742' '长春2' '联通'
-	speed_test '4870' '长沙' '联通'
-	speed_test '2461' '成都' '联通'
-	speed_test '5726' '重庆' '联通'
-	speed_test '4884' '福州' '联通'
-	speed_test '3891' '广州' '联通'
-	speed_test '5985' '海口' '联通'
-	speed_test '5300' '杭州' '联通'
-	speed_test '5460' '哈尔滨' '联通'
-	speed_test '5724' '合肥' '联通'
-	speed_test '5465' '呼和浩特' '联通'
-	speed_test '5039' '济南1' '联通'
-	speed_test '12538' '济南2' '联通'
-	speed_test '5103' '昆明' '联通'
-	speed_test '4690' '兰州' '联通'
-	speed_test '5750' '拉萨' '联通'
-	speed_test '7230' '南昌1' '联通'
-	speed_test '5097' '南昌2' '联通'
-	speed_test '5446' '南京1' '联通'
-	speed_test '13704' '南京2' '联通'
-	speed_test '5674' '南宁' '联通'
-	speed_test '6245' '宁波' '联通'
-	speed_test '5509' '宁夏' '联通'
-	speed_test '5710' '青岛' '联通'
-	speed_test '21005' '上海1' '联通'
-	speed_test '24447' '上海2' '联通'
-	speed_test '5083' '上海3' '联通'
-	speed_test '5017' '沈阳' '联通'
-	speed_test '10201' '深圳' '联通'
-	speed_test '19736' '太原1' '联通'
-	speed_test '12868' '太原2' '联通'
-	speed_test '12516' '太原3' '联通'
-	speed_test '5475' '天津' '联通'
-	speed_test '6144' '乌鲁木齐' '联通'
-	speed_test '5485' '武汉' '联通'
-	speed_test '5506' '厦门' '联通'
-	speed_test '5992' '西宁' '联通'
-	speed_test '5131' '郑州1' '联通'
-	speed_test '6810' '郑州2' '联通'
-	# 移动
-	speed_test '4665' '上海1' '移动'
-	speed_test '16719' '上海2' '移动'
-	speed_test '16803' '上海3' '移动'
-	speed_test '17388' '临沂' '移动'
-	speed_test '3784' '乌鲁木齐1' '移动'
-	speed_test '16858' '乌鲁木齐2' '移动'
-	speed_test '17228' '伊犁' '移动'
-	speed_test '16145' '兰州' '移动'
-	speed_test '4713' '北京' '移动'
-	speed_test '21590' '南京' '移动'
-	speed_test '15863' '南宁' '移动'
-	speed_test '16294' '南昌1' '移动'
-	speed_test '16332' '南昌2' '移动'
-	speed_test '21530' '南通' '移动'
-	speed_test '21642' '台州' '移动'
-	speed_test '4377' '合肥' '移动'
-	speed_test '17085' '呼和浩特' '移动'
-	speed_test '17437' '哈尔滨' '移动'
-	speed_test '10939' '商丘' '移动'
-	speed_test '17245' '喀什' '移动'
-	speed_test '17184' '天津' '移动'
-	speed_test '16005' '太原' '移动'
-	speed_test '6715' '宁波' '移动'
-	speed_test '21722' '宿迁' '移动'
-	speed_test '21845' '常州' '移动'
-	speed_test '6611' '广州' '移动'
-	speed_test '22349' '徐州' '移动'
-	speed_test '24337' '成都1' '移动'
-	speed_test '4575' '成都2' '移动'
-	speed_test '21600' '扬州' '移动'
-	speed_test '18444' '拉萨1' '移动'
-	speed_test '17494' '拉萨2' '移动'
-	speed_test '5122' '无锡1' '移动'
-	speed_test '21973' '无锡2' '移动'
-	speed_test '5892' '昆明' '移动'
-	speed_test '4647' '杭州1' '移动'
-	speed_test '12278' '杭州2' '移动'
-	speed_test '16395' '武汉' '移动'
-	speed_test '16167' '沈阳' '移动'
-	speed_test '16314' '济南1' '移动'
-	speed_test '17480' '济南2' '移动'
-	speed_test '16503' '海口' '移动'
-	speed_test '22037' '淮安' '移动'
-	speed_test '4515' '深圳' '移动'
-	speed_test '21946' '盐城' '移动'
-	speed_test '17223' '石家庄' '移动'
-	speed_test '16171' '福州' '移动'
-	speed_test '3927' '苏州1' '移动'
-	speed_test '21472' '苏州2' '移动'
-	speed_test '18504' '西宁1' '移动'
-	speed_test '16915' '西宁2' '移动'
-	speed_test '16398' '贵阳1' '移动'
-	speed_test '7404' '贵阳2' '移动'
-	speed_test '21584' '连云港' '移动'
-	speed_test '18970' '郑州1' '移动'
-	speed_test '4486' '郑州2' '移动'
-	speed_test '16409' '重庆1' '移动'
-	speed_test '17584' '重庆2' '移动'
-	speed_test '16392' '银川' '移动'
-	speed_test '17320' '镇江' '移动'
-	speed_test '16375' '长春' '移动'
-	speed_test '15862' '长沙' '移动'
-	speed_test '17432' '青岛' '移动'
-	speed_test '17222' '阿勒泰' '移动'
-	speed_test '17230' '阿拉善' '移动'
-	speed_test '17227' '和田' '移动'
+
+	# speed_test '3633' '上海' '电信'
+	 speed_test '28139' '上海５Ｇ' '电信'
+	# speed_test '6168' '云南昆明' '电信'
+	 speed_test '27539' '云南昆明５Ｇ' '电信'
+	 speed_test '24012' '内蒙古呼和浩特' '电信'
+	 speed_test '21470' '内蒙古鄂尔多斯' '电信'
+	# speed_test '4751' '北京' '电信'
+	 speed_test '27377' '北京５Ｇ' '电信'
+	 speed_test '4624' '四川成都' '电信'
+	 speed_test '6714' '天津' '电信'
+	 speed_test '17145' '安徽安徽合肥' '电信'
+	# speed_test '9151' '广东广州' '电信'
+	# speed_test '10775' '广东广州' '电信'
+	# speed_test '17251' '广东广州' '电信'
+	 speed_test '27594' '广东广州５Ｇ' '电信'
+	 speed_test '5081' '广东深圳' '电信'
+	 speed_test '10192' '广西南宁' '电信'
+	 speed_test '10305' '广西南宁' '电信'
+	 speed_test '22724' '广西南宁' '电信'
+	 speed_test '27810' '广西南宁' '电信'
+	 speed_test '27304' '新疆乌鲁木齐' '电信'
+	 speed_test '27575' '新疆乌鲁木齐' '电信'
+	# speed_test '5316' '江苏南京' '电信'
+	 speed_test '26352' '江苏南京５Ｇ' '电信'
+	 speed_test '5324' '江苏徐州' '电信'
+	 speed_test '5396' '江苏苏州' '电信'
+	 speed_test '5317' '江苏连云港' '电信'
+	 speed_test '6345' '江西南昌' '电信'
+	 speed_test '6473' '江西南昌' '电信'
+	 speed_test '7643' '江西南昌' '电信'
+	 speed_test '16399' '江西南昌' '电信'
+	 speed_test '4595' '河南郑州' '电信'
+	 speed_test '7509' '浙江杭州' '电信'
+	 speed_test '20038' '湖北武汉' '电信'
+	 speed_test '23665' '湖北武汉' '电信'
+	 speed_test '23844' '湖北武汉' '电信'
+	 speed_test '24011' '湖北武汉' '电信'
+	 speed_test '6435' '湖北襄阳' '电信'
+	 speed_test '12637' '湖北襄阳' '电信'
+	 speed_test '6132' '湖南长沙' '电信'
+	 speed_test '28225' '湖南长沙' '电信'
+	 speed_test '3973' '甘肃兰州' '电信'
+	 speed_test '6592' '重庆' '电信'
+	 speed_test '16983' '重庆' '电信'
+	 speed_test '19076' '重庆' '电信'
+	 speed_test '19918' '青海西宁' '电信'
+
+	# speed_test '5083' '上海' '联通'
+	# speed_test '21005' '上海' '联通'
+	 speed_test '24447' '上海５Ｇ' '联通'
+	 speed_test '5103' '云南昆明' '联通'
+	 speed_test '5465' '内蒙古呼和浩特' '联通'
+	 speed_test '5145' '北京' '联通'
+	# speed_test '5505' '北京' '联通'
+	# speed_test '18462' '北京' '联通'
+	 speed_test '9484' '吉林长春' '联通'
+	# speed_test '10742' '吉林长春' '联通'
+	 speed_test '2461' '四川成都' '联通'
+	# speed_test '5475' '天津' '联通'
+	 speed_test '27154' '天津５Ｇ' '联通'
+	 speed_test '5509' '宁夏' '联通'
+	 speed_test '5724' '安徽合肥' '联通'
+	# speed_test '5039' '山东济南' '联通'
+	# speed_test '12538' '山东济南' '联通'
+	 speed_test '26180' '山东济南５Ｇ' '联通'
+	# speed_test '5710' '山东青岛' '联通'
+	 speed_test '12516' '山西太原' '联通'
+	 speed_test '12868' '山西太原' '联通'
+	 speed_test '19736' '山西太原' '联通'
+	# speed_test '3891' '广东广州' '联通'
+	 speed_test '26678' '广东广州' '联通'
+	 speed_test '10201' '广东深圳' '联通'
+	 speed_test '5674' '广西南宁' '联通'
+	 speed_test '6144' '新疆乌鲁木齐' '联通'
+	 speed_test '5446' '江苏南京' '联通'
+	 speed_test '13704' '江苏南京' '联通'
+	 speed_test '5097' '江西南昌' '联通'
+	 speed_test '7230' '江西南昌' '联通'
+	 speed_test '5131' '河南郑州' '联通'
+	 speed_test '6810' '河南郑州' '联通'
+	 speed_test '6245' '浙江宁波' '联通'
+	 speed_test '5300' '浙江杭州' '联通'
+	 speed_test '5985' '海南海口' '联通'
+	 speed_test '5485' '湖北武汉' '联通'
+	 speed_test '26677' '湖南株洲' '联通'
+	# speed_test '4870' '湖南长沙' '联通'
+	 speed_test '4690' '甘肃兰州' '联通'
+	 speed_test '5506' '福建厦门' '联通'
+	 speed_test '4884' '福建福州' '联通'
+	 speed_test '5750' '西藏拉萨' '联通'
+	 speed_test '5017' '辽宁沈阳' '联通'
+	 speed_test '5726' '重庆' '联通'
+	 speed_test '5992' '青海西宁' '联通'
+	 speed_test '5460' '黑龙江哈尔滨' '联通'
+
+	# speed_test '4665' '上海' '移动'
+	# speed_test '16719' '上海' '移动'
+	# speed_test '16803' '上海' '移动'
+	 speed_test '25637' '上海５Ｇ' '移动'
+	# speed_test '5892' '云南昆明' '移动'
+	 speed_test '26728' '云南昆明' '移动'
+	# speed_test '17085' '内蒙古呼和浩特' '移动'
+	 speed_test '27019' '内蒙古呼和浩特' '移动'
+	# speed_test '17230' '内蒙古阿拉善' '移动'
+	# speed_test '4713' '北京' '移动'
+	# speed_test '25858' '北京' '移动'
+	# speed_test '16375' '吉林长春' '移动'
+	# speed_test '4575' '四川成都' '移动'
+	 speed_test '24337' '四川成都' '移动'
+	# speed_test '28211' '四川成都' '移动'
+	 speed_test '17184' '天津' '移动'
+	# speed_test '16392' '宁夏银川' '移动'
+	# speed_test '26940' '宁夏银川' '移动'
+	# speed_test '4377' '安徽合肥' '移动'
+	# speed_test '26404' '安徽合肥' '移动'
+	# speed_test '17388' '山东临沂' '移动'
+	# speed_test '16314' '山东济南' '移动'
+	# speed_test '17480' '山东济南' '移动'
+	# speed_test '25881' '山东济南' '移动'
+	# speed_test '17432' '山东青岛' '移动'
+	# speed_test '16005' '山西太原' '移动'
+	# speed_test '6611' '广东广州' '移动'
+	 speed_test '4515' '广东深圳' '移动'
+	 speed_test '15863' '广西南宁' '移动'
+	# speed_test '3784' '新疆乌鲁木齐' '移动'
+	# speed_test '16858' '新疆乌鲁木齐' '移动'
+	 speed_test '26938' '新疆乌鲁木齐５Ｇ' '移动'
+	# speed_test '17228' '新疆伊犁' '移动'
+	# speed_test '17227' '新疆和田' '移动'
+	# speed_test '17245' '新疆喀什' '移动'
+	# speed_test '17222' '新疆阿勒泰' '移动'
+	# speed_test '21590' '江苏南京' '移动'
+	 speed_test '27249' '江苏南京５Ｇ' '移动'
+	# speed_test '21530' '江苏南通' '移动'
+	# speed_test '21722' '江苏宿迁' '移动'
+	# speed_test '21845' '江苏常州' '移动'
+	# speed_test '22349' '江苏徐州' '移动'
+	# speed_test '21600' '江苏扬州' '移动'
+	# speed_test '5122' '江苏无锡' '移动'
+	# speed_test '21973' '江苏无锡' '移动'
+	# speed_test '26850' '江苏无锡５Ｇ' '移动'
+	# speed_test '21642' '江苏泰州' '移动'
+	# speed_test '22037' '江苏淮安' '移动'
+	# speed_test '21946' '江苏盐城' '移动'
+	# speed_test '3927' '江苏苏州' '移动'
+	# speed_test '21472' '江苏苏州' '移动'
+	# speed_test '21584' '江苏连云港' '移动'
+	# speed_test '17320' '江苏镇江' '移动'
+	# speed_test '16294' '江西南昌' '移动'
+	# speed_test '16332' '江西南昌' '移动'
+	# speed_test '25883' '江西南昌' '移动'
+	# speed_test '17223' '河北石家庄' '移动'
+	# speed_test '10939' '河南商丘' '移动'
+	# speed_test '4486' '河南郑州' '移动'
+	# speed_test '18970' '河南郑州' '移动'
+	 speed_test '26331' '河南郑州５Ｇ' '移动'
+	 speed_test '6715' '浙江宁波' '移动'
+	# speed_test '4647' '浙江杭州' '移动'
+	# speed_test '12278' '浙江杭州' '移动'
+	 speed_test '16503' '海南海口' '移动'
+	# speed_test '16395' '湖北武汉' '移动'
+	# speed_test '26357' '湖北武汉' '移动'
+	# speed_test '26547' '湖北武汉' '移动'
+	# speed_test '15862' '湖南长沙' '移动'
+	 speed_test '28491' '湖南长沙５Ｇ' '移动'
+	 speed_test '16145' '甘肃兰州' '移动'
+	# speed_test '16171' '福建福州' '移动'
+	# speed_test '17494' '西藏拉萨' '移动'
+	 speed_test '18444' '西藏拉萨' '移动'
+	# speed_test '7404' '贵州贵阳' '移动'
+	 speed_test '16398' '贵州贵阳' '移动'
+	# speed_test '25728' '辽宁大连' '移动'
+	# speed_test '16167' '辽宁沈阳' '移动'
+	# speed_test '16409' '重庆' '移动'
+	 speed_test '17584' '重庆' '移动'
+	# speed_test '26380' '陕西西安' '移动'
+	# speed_test '16915' '青海西宁' '移动'
+	# speed_test '18504' '青海西宁' '移动'
+	 speed_test '29083' '青海西宁５Ｇ' '移动'
+	# speed_test '17437' '黑龙江哈尔滨' '移动'
+	 speed_test '26656' '黑龙江哈尔滨５Ｇ' '移动'
 
 	end=$(date +%s)  
 	rm -rf /tmp/speedtest.py
-	echo "———————————————————————————————————————————————————————————————————"
+	echo "——————————————————————————————————————————————————————————————————————"
 	time=$(( $end - $start ))
 	if [[ $time -gt 60 ]]; then
 		min=$(expr $time / 60)
 		sec=$(expr $time % 60)
-		echo -ne "测试完成, 本次测速耗时: ${min} 分 ${sec} 秒"
+		echo -ne "     测试完成, 本次测速耗时: ${min} 分 ${sec} 秒"
 	else
-		echo -ne "测试完成, 本次测速耗时: ${time} 秒"
+		echo -ne "     测试完成, 本次测速耗时: ${time} 秒"
 	fi
-	echo -ne "\n当前时间: "
+	echo -ne "\n     当前时间: "
+	echo $(date +%Y-%m-%d" "%H:%M:%S)
+fi
+
+if [[ ${selection} == 3 ]]; then
+	echo "——————————————————————————————————————————————————————————————————————"
+	echo "ID    测速服务器信息        上传速度        下载速度        延迟"
+	start=$(date +%s) 
+
+	 speed_test '3633' '上海' '电信'
+	 speed_test '28139' '上海５Ｇ' '电信'
+	 speed_test '6168' '云南昆明' '电信'
+	 speed_test '27539' '云南昆明５Ｇ' '电信'
+	 speed_test '24012' '内蒙古呼和浩特' '电信'
+	 speed_test '21470' '内蒙古鄂尔多斯' '电信'
+	 speed_test '4751' '北京' '电信'
+	 speed_test '27377' '北京５Ｇ' '电信'
+	 speed_test '4624' '四川成都' '电信'
+	 speed_test '6714' '天津' '电信'
+	 speed_test '17145' '安徽安徽合肥' '电信'
+	 speed_test '9151' '广东广州' '电信'
+	 speed_test '10775' '广东广州' '电信'
+	 speed_test '17251' '广东广州' '电信'
+	 speed_test '27594' '广东广州５Ｇ' '电信'
+	 speed_test '5081' '广东深圳' '电信'
+	 speed_test '10192' '广西南宁' '电信'
+	 speed_test '10305' '广西南宁' '电信'
+	 speed_test '22724' '广西南宁' '电信'
+	 speed_test '27810' '广西南宁' '电信'
+	 speed_test '27304' '新疆乌鲁木齐' '电信'
+	 speed_test '27575' '新疆乌鲁木齐' '电信'
+	 speed_test '5316' '江苏南京' '电信'
+	 speed_test '26352' '江苏南京５Ｇ' '电信'
+	 speed_test '5324' '江苏徐州' '电信'
+	 speed_test '5396' '江苏苏州' '电信'
+	 speed_test '5317' '江苏连云港' '电信'
+	 speed_test '6345' '江西南昌' '电信'
+	 speed_test '6473' '江西南昌' '电信'
+	 speed_test '7643' '江西南昌' '电信'
+	 speed_test '16399' '江西南昌' '电信'
+	 speed_test '4595' '河南郑州' '电信'
+	 speed_test '7509' '浙江杭州' '电信'
+	 speed_test '20038' '湖北武汉' '电信'
+	 speed_test '23665' '湖北武汉' '电信'
+	 speed_test '23844' '湖北武汉' '电信'
+	 speed_test '24011' '湖北武汉' '电信'
+	 speed_test '6435' '湖北襄阳' '电信'
+	 speed_test '12637' '湖北襄阳' '电信'
+	 speed_test '6132' '湖南长沙' '电信'
+	 speed_test '28225' '湖南长沙' '电信'
+	 speed_test '3973' '甘肃兰州' '电信'
+	 speed_test '6592' '重庆' '电信'
+	 speed_test '16983' '重庆' '电信'
+	 speed_test '19076' '重庆' '电信'
+	 speed_test '19918' '青海西宁' '电信'
+
+	end=$(date +%s)  
+	rm -rf /tmp/speedtest.py
+	echo "——————————————————————————————————————————————————————————————————————"
+	time=$(( $end - $start ))
+	if [[ $time -gt 60 ]]; then
+		min=$(expr $time / 60)
+		sec=$(expr $time % 60)
+		echo -ne "     测试完成, 本次测速耗时: ${min} 分 ${sec} 秒"
+	else
+		echo -ne "     测试完成, 本次测速耗时: ${time} 秒"
+	fi
+	echo -ne "\n     当前时间: "
+	echo $(date +%Y-%m-%d" "%H:%M:%S)
+fi
+
+if [[ ${selection} == 4 ]]; then
+	echo "——————————————————————————————————————————————————————————————————————"
+	echo "ID    测速服务器信息        上传速度        下载速度        延迟"
+	start=$(date +%s) 
+
+	 speed_test '5083' '上海' '联通'
+	 speed_test '21005' '上海' '联通'
+	 speed_test '24447' '上海５Ｇ' '联通'
+	 speed_test '5103' '云南昆明' '联通'
+	 speed_test '5465' '内蒙古呼和浩特' '联通'
+	 speed_test '5145' '北京' '联通'
+	 speed_test '5505' '北京' '联通'
+	 speed_test '18462' '北京' '联通'
+	 speed_test '9484' '吉林长春' '联通'
+	 speed_test '10742' '吉林长春' '联通'
+	 speed_test '2461' '四川成都' '联通'
+	 speed_test '5475' '天津' '联通'
+	 speed_test '27154' '天津５Ｇ' '联通'
+	 speed_test '5509' '宁夏' '联通'
+	 speed_test '5724' '安徽合肥' '联通'
+	 speed_test '5039' '山东济南' '联通'
+	 speed_test '12538' '山东济南' '联通'
+	 speed_test '26180' '山东济南５Ｇ' '联通'
+	 speed_test '5710' '山东青岛' '联通'
+	 speed_test '12516' '山西太原' '联通'
+	 speed_test '12868' '山西太原' '联通'
+	 speed_test '19736' '山西太原' '联通'
+	 speed_test '3891' '广东广州' '联通'
+	 speed_test '26678' '广东广州' '联通'
+	 speed_test '10201' '广东深圳' '联通'
+	 speed_test '5674' '广西南宁' '联通'
+	 speed_test '6144' '新疆乌鲁木齐' '联通'
+	 speed_test '5446' '江苏南京' '联通'
+	 speed_test '13704' '江苏南京' '联通'
+	 speed_test '5097' '江西南昌' '联通'
+	 speed_test '7230' '江西南昌' '联通'
+	 speed_test '5131' '河南郑州' '联通'
+	 speed_test '6810' '河南郑州' '联通'
+	 speed_test '6245' '浙江宁波' '联通'
+	 speed_test '5300' '浙江杭州' '联通'
+	 speed_test '5985' '海南海口' '联通'
+	 speed_test '5485' '湖北武汉' '联通'
+	 speed_test '26677' '湖南株洲' '联通'
+	 speed_test '4870' '湖南长沙' '联通'
+	 speed_test '4690' '甘肃兰州' '联通'
+	 speed_test '5506' '福建厦门' '联通'
+	 speed_test '4884' '福建福州' '联通'
+	 speed_test '5750' '西藏拉萨' '联通'
+	 speed_test '5017' '辽宁沈阳' '联通'
+	 speed_test '5726' '重庆' '联通'
+	 speed_test '5992' '青海西宁' '联通'
+	 speed_test '5460' '黑龙江哈尔滨' '联通'
+
+	end=$(date +%s)  
+	rm -rf /tmp/speedtest.py
+	echo "——————————————————————————————————————————————————————————————————————"
+	time=$(( $end - $start ))
+	if [[ $time -gt 60 ]]; then
+		min=$(expr $time / 60)
+		sec=$(expr $time % 60)
+		echo -ne "     测试完成, 本次测速耗时: ${min} 分 ${sec} 秒"
+	else
+		echo -ne "     测试完成, 本次测速耗时: ${time} 秒"
+	fi
+	echo -ne "\n     当前时间: "
+	echo $(date +%Y-%m-%d" "%H:%M:%S)
+fi
+
+if [[ ${selection} == 5 ]]; then
+	echo "——————————————————————————————————————————————————————————————————————"
+	echo "ID    测速服务器信息        上传速度        下载速度        延迟"
+	start=$(date +%s) 
+
+	 speed_test '4665' '上海' '移动'
+	 speed_test '16719' '上海' '移动'
+	 speed_test '16803' '上海' '移动'
+	 speed_test '25637' '上海５Ｇ' '移动'
+	 speed_test '5892' '云南昆明' '移动'
+	 speed_test '26728' '云南昆明' '移动'
+	 speed_test '17085' '内蒙古呼和浩特' '移动'
+	 speed_test '27019' '内蒙古呼和浩特' '移动'
+	 speed_test '17230' '内蒙古阿拉善' '移动'
+	 speed_test '4713' '北京' '移动'
+	 speed_test '25858' '北京' '移动'
+	 speed_test '16375' '吉林长春' '移动'
+	 speed_test '4575' '四川成都' '移动'
+	 speed_test '24337' '四川成都' '移动'
+	 speed_test '28211' '四川成都' '移动'
+	 speed_test '17184' '天津' '移动'
+	 speed_test '16392' '宁夏银川' '移动'
+	 speed_test '26940' '宁夏银川' '移动'
+	 speed_test '4377' '安徽合肥' '移动'
+	 speed_test '26404' '安徽合肥' '移动'
+	 speed_test '17388' '山东临沂' '移动'
+	 speed_test '16314' '山东济南' '移动'
+	 speed_test '17480' '山东济南' '移动'
+	 speed_test '25881' '山东济南' '移动'
+	 speed_test '17432' '山东青岛' '移动'
+	 speed_test '16005' '山西太原' '移动'
+	 speed_test '6611' '广东广州' '移动'
+	 speed_test '4515' '广东深圳' '移动'
+	 speed_test '15863' '广西南宁' '移动'
+	 speed_test '3784' '新疆乌鲁木齐' '移动'
+	 speed_test '16858' '新疆乌鲁木齐' '移动'
+	 speed_test '26938' '新疆乌鲁木齐５Ｇ' '移动'
+	 speed_test '17228' '新疆伊犁' '移动'
+	 speed_test '17227' '新疆和田' '移动'
+	 speed_test '17245' '新疆喀什' '移动'
+	 speed_test '17222' '新疆阿勒泰' '移动'
+	 speed_test '21590' '江苏南京' '移动'
+	 speed_test '27249' '江苏南京５Ｇ' '移动'
+	 speed_test '21530' '江苏南通' '移动'
+	 speed_test '21722' '江苏宿迁' '移动'
+	 speed_test '21845' '江苏常州' '移动'
+	 speed_test '22349' '江苏徐州' '移动'
+	 speed_test '21600' '江苏扬州' '移动'
+	 speed_test '5122' '江苏无锡' '移动'
+	 speed_test '21973' '江苏无锡' '移动'
+	 speed_test '26850' '江苏无锡５Ｇ' '移动'
+	 speed_test '21642' '江苏泰州' '移动'
+	 speed_test '22037' '江苏淮安' '移动'
+	 speed_test '21946' '江苏盐城' '移动'
+	 speed_test '3927' '江苏苏州' '移动'
+	 speed_test '21472' '江苏苏州' '移动'
+	 speed_test '21584' '江苏连云港' '移动'
+	 speed_test '17320' '江苏镇江' '移动'
+	 speed_test '16294' '江西南昌' '移动'
+	 speed_test '16332' '江西南昌' '移动'
+	 speed_test '25883' '江西南昌' '移动'
+	 speed_test '17223' '河北石家庄' '移动'
+	 speed_test '10939' '河南商丘' '移动'
+	 speed_test '4486' '河南郑州' '移动'
+	 speed_test '18970' '河南郑州' '移动'
+	 speed_test '26331' '河南郑州５Ｇ' '移动'
+	 speed_test '6715' '浙江宁波' '移动'
+	 speed_test '4647' '浙江杭州' '移动'
+	 speed_test '12278' '浙江杭州' '移动'
+	 speed_test '16503' '海南海口' '移动'
+	 speed_test '16395' '湖北武汉' '移动'
+	 speed_test '26357' '湖北武汉' '移动'
+	 speed_test '26547' '湖北武汉' '移动'
+	 speed_test '15862' '湖南长沙' '移动'
+	 speed_test '28491' '湖南长沙５Ｇ' '移动'
+	 speed_test '16145' '甘肃兰州' '移动'
+	 speed_test '16171' '福建福州' '移动'
+	 speed_test '17494' '西藏拉萨' '移动'
+	 speed_test '18444' '西藏拉萨' '移动'
+	 speed_test '7404' '贵州贵阳' '移动'
+	 speed_test '16398' '贵州贵阳' '移动'
+	 speed_test '25728' '辽宁大连' '移动'
+	 speed_test '16167' '辽宁沈阳' '移动'
+	 speed_test '16409' '重庆' '移动'
+	 speed_test '17584' '重庆' '移动'
+	 speed_test '26380' '陕西西安' '移动'
+	 speed_test '16915' '青海西宁' '移动'
+	 speed_test '18504' '青海西宁' '移动'
+	 speed_test '29083' '青海西宁５Ｇ' '移动'
+	 speed_test '17437' '黑龙江哈尔滨' '移动'
+	 speed_test '26656' '黑龙江哈尔滨５Ｇ' '移动'
+
+	end=$(date +%s)  
+	rm -rf /tmp/speedtest.py
+	echo "——————————————————————————————————————————————————————————————————————"
+	time=$(( $end - $start ))
+	if [[ $time -gt 60 ]]; then
+		min=$(expr $time / 60)
+		sec=$(expr $time % 60)
+		echo -ne "     测试完成, 本次测速耗时: ${min} 分 ${sec} 秒"
+	else
+		echo -ne "     测试完成, 本次测速耗时: ${time} 秒"
+	fi
+	echo -ne "\n     当前时间: "
 	echo $(date +%Y-%m-%d" "%H:%M:%S)
 fi
