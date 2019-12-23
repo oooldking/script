@@ -8,7 +8,7 @@ bash <(curl -Lso- https://git.io/superspeed)
 
 [查看全部节点列表](https://git.io/superspeedList)
 
-![测速图](https://i.loli.net/2019/12/23/doBQeKpgH9jfRTw.jpg)
+![测速图](https://sm.ms/image/H8WtjGTgDqVsUaL)
 
 ---
 
