@@ -49,16 +49,16 @@ clear
 echo "————————————————————————SuperSpeed 全面测速版—————————————————————————"
 echo "     使用方法:      bash <(curl -Lso- https://git.io/superspeed)"
 echo "     查看全部节点:  https://git.io/superspeedList"
-echo "     节点更新日期:  2019/12/23"
+echo "     节点更新日期:  2019/12/23       脚本更新日期:  2020/01/15"
 echo "——————————————————————————————————————————————————————————————————————"
 echo "     选择测速类型: "
-echo "     1. 三网全面测速      2. 取消本次测速"
-echo -ne "     3. 电信节点测速      4. 联通节点测速      5. 移动节点测速"
+echo -e "     ${GREEN}1.${PLAIN} 三网测速 (各取部分节点)                ${GREEN}2.${PLAIN} 取消本次测速"
+echo -ne "     ${GREEN}3.${PLAIN} 电信节点测速      ${GREEN}4.${PLAIN} 联通节点测速      ${GREEN}5.${PLAIN} 移动节点测速"
 
 while :; do echo
 		read -p "     请输入数字选择: " selection
 		if [[ ! $selection =~ ^[1-5]$ ]]; then
-				echo "    输入错误, 请输入正确的数字!"
+				echo -ne "     ${RED}输入错误${PLAIN}, 请输入正确的数字!"
 		else
 				break   
 		fi
@@ -107,9 +107,9 @@ if [[ ${selection} == 1 ]]; then
 	echo "ID    测速服务器信息        上传速度        下载速度        延迟"
 	start=$(date +%s) 
 
-	# speed_test '3633' '上海' '电信'
+	 speed_test '3633' '上海' '电信'
 	 speed_test '28139' '上海５Ｇ' '电信'
-	# speed_test '6168' '云南昆明' '电信'
+	 speed_test '6168' '云南昆明' '电信'
 	 speed_test '27539' '云南昆明５Ｇ' '电信'
 	 speed_test '24012' '内蒙古呼和浩特' '电信'
 	 speed_test '21470' '内蒙古鄂尔多斯' '电信'
@@ -239,7 +239,7 @@ if [[ ${selection} == 1 ]]; then
 	# speed_test '17245' '新疆喀什' '移动'
 	# speed_test '17222' '新疆阿勒泰' '移动'
 	# speed_test '21590' '江苏南京' '移动'
-	 speed_test '27249' '江苏南京５Ｇ' '移动'
+	# speed_test '27249' '江苏南京５Ｇ' '移动'
 	# speed_test '21530' '江苏南通' '移动'
 	# speed_test '21722' '江苏宿迁' '移动'
 	# speed_test '21845' '江苏常州' '移动'
@@ -262,7 +262,7 @@ if [[ ${selection} == 1 ]]; then
 	# speed_test '10939' '河南商丘' '移动'
 	# speed_test '4486' '河南郑州' '移动'
 	# speed_test '18970' '河南郑州' '移动'
-	 speed_test '26331' '河南郑州５Ｇ' '移动'
+	# speed_test '26331' '河南郑州５Ｇ' '移动'
 	 speed_test '6715' '浙江宁波' '移动'
 	# speed_test '4647' '浙江杭州' '移动'
 	# speed_test '12278' '浙江杭州' '移动'
@@ -275,7 +275,7 @@ if [[ ${selection} == 1 ]]; then
 	 speed_test '16145' '甘肃兰州' '移动'
 	# speed_test '16171' '福建福州' '移动'
 	# speed_test '17494' '西藏拉萨' '移动'
-	 speed_test '18444' '西藏拉萨' '移动'
+	# speed_test '18444' '西藏拉萨' '移动'
 	# speed_test '7404' '贵州贵阳' '移动'
 	 speed_test '16398' '贵州贵阳' '移动'
 	# speed_test '25728' '辽宁大连' '移动'
@@ -302,6 +302,8 @@ if [[ ${selection} == 1 ]]; then
 	fi
 	echo -ne "\n     当前时间: "
 	echo $(date +%Y-%m-%d" "%H:%M:%S)
+	echo -e "     ${GREEN}# 三网测速中为避免节点数不均及测试过久，每部分未使用所有节点，${PLAIN}"
+	echo -e "     ${GREEN}# 如果需要使用全部节点，可分别选择三网节点检测。${PLAIN}"
 fi
 
 if [[ ${selection} == 3 ]]; then
