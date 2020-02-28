@@ -49,7 +49,7 @@ clear
 echo "————————————————————————SuperSpeed 全面测速版—————————————————————————"
 echo "     使用方法:      bash <(curl -Lso- https://git.io/superspeed)"
 echo "     查看全部节点:  https://git.io/superspeedList"
-echo "     节点更新日期:  2019/12/23       脚本更新日期:  2020/01/28"
+echo "     节点更新日期:  2019/12/23       脚本更新日期:  2020/02/28"
 echo "——————————————————————————————————————————————————————————————————————"
 echo "     选择测速类型: "
 echo -e "     ${GREEN}1.${PLAIN} 三网测速 (各取部分节点)                ${GREEN}2.${PLAIN} 取消本次测速"
@@ -151,7 +151,7 @@ if [[ ${selection} == 1 ]]; then
 	 speed_test '3973' '甘肃兰州' '电信'
 	 speed_test '6592' '重庆' '电信'
 	 speed_test '16983' '重庆' '电信'
-	 speed_test '19076' '重庆' '电信'
+	# speed_test '19076' '重庆' '电信'
 	 speed_test '19918' '青海西宁' '电信'
 
 	# speed_test '5083' '上海' '联通'
@@ -239,7 +239,7 @@ if [[ ${selection} == 1 ]]; then
 	# speed_test '17245' '新疆喀什' '移动'
 	# speed_test '17222' '新疆阿勒泰' '移动'
 	# speed_test '21590' '江苏南京' '移动'
-	 speed_test '27249' '江苏南京５Ｇ' '移动'
+	# speed_test '27249' '江苏南京５Ｇ' '移动'
 	# speed_test '21530' '江苏南通' '移动'
 	# speed_test '21722' '江苏宿迁' '移动'
 	# speed_test '21845' '江苏常州' '移动'
@@ -272,7 +272,7 @@ if [[ ${selection} == 1 ]]; then
 	# speed_test '26547' '湖北武汉' '移动'
 	# speed_test '15862' '湖南长沙' '移动'
 	 speed_test '28491' '湖南长沙５Ｇ' '移动'
-	 speed_test '16145' '甘肃兰州' '移动'
+	# speed_test '16145' '甘肃兰州' '移动'
 	# speed_test '16171' '福建福州' '移动'
 	# speed_test '17494' '西藏拉萨' '移动'
 	# speed_test '18444' '西藏拉萨' '移动'
