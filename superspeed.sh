@@ -271,7 +271,7 @@ if [[ ${selection} == 1 ]]; then
 	# speed_test '26357' '湖北武汉' '移动'
 	# speed_test '26547' '湖北武汉' '移动'
 	# speed_test '15862' '湖南长沙' '移动'
-	 speed_test '28491' '湖南长沙５Ｇ' '移动'
+	# speed_test '28491' '湖南长沙５Ｇ' '移动'
 	# speed_test '16145' '甘肃兰州' '移动'
 	# speed_test '16171' '福建福州' '移动'
 	# speed_test '17494' '西藏拉萨' '移动'
