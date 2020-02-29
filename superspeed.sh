@@ -133,7 +133,7 @@ if [[ ${selection} == 1 ]]; then
 	 speed_test '26352' '江苏南京５Ｇ' '电信'
 	 speed_test '5324' '江苏徐州' '电信'
 	 speed_test '5396' '江苏苏州' '电信'
-	 speed_test '5317' '江苏连云港' '电信'
+	# speed_test '5317' '江苏连云港' '电信'
 	 speed_test '6345' '江西南昌' '电信'
 	 speed_test '6473' '江西南昌' '电信'
 	 speed_test '7643' '江西南昌' '电信'
