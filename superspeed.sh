@@ -49,7 +49,7 @@ clear
 echo "————————————————————————SuperSpeed 全面测速版—————————————————————————"
 echo "     使用方法:      bash <(curl -Lso- https://git.io/superspeed)"
 echo "     查看全部节点:  https://git.io/superspeedList"
-echo "     节点更新日期:  2019/12/23       脚本更新日期:  2020/02/28"
+echo "     节点更新日期:  2019/12/23       脚本更新日期:  2020/03/05"
 echo "——————————————————————————————————————————————————————————————————————"
 echo "     选择测速类型: "
 echo -e "     ${GREEN}1.${PLAIN} 三网测速 (各取部分节点)                ${GREEN}2.${PLAIN} 取消本次测速"
@@ -151,7 +151,7 @@ if [[ ${selection} == 1 ]]; then
 	 speed_test '3973' '甘肃兰州' '电信'
 	 speed_test '6592' '重庆' '电信'
 	 speed_test '16983' '重庆' '电信'
-	# speed_test '19076' '重庆' '电信'
+	 speed_test '19076' '重庆' '电信'
 	 speed_test '19918' '青海西宁' '电信'
 
 	# speed_test '5083' '上海' '联通'
@@ -167,7 +167,7 @@ if [[ ${selection} == 1 ]]; then
 	 speed_test '2461' '四川成都' '联通'
 	# speed_test '5475' '天津' '联通'
 	 speed_test '27154' '天津５Ｇ' '联通'
-	 speed_test '5509' '宁夏' '联通'
+	# speed_test '5509' '宁夏' '联通'
 	 speed_test '5724' '安徽合肥' '联通'
 	# speed_test '5039' '山东济南' '联通'
 	# speed_test '12538' '山东济南' '联通'
