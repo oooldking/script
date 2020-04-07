@@ -557,7 +557,7 @@ fast_bench(){
 log="$HOME/superbench.log"
 true > $log
 speedLog="./speedtest.log"
-true > speedLog
+true > $speedLog
 
 case $1 in
 	'info'|'-i'|'--i'|'-info'|'--info' )
