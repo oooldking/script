@@ -758,7 +758,7 @@ fast_bench(){
 
 
 
-log="$HOME/superbench.log"
+log="./superbench.log"
 true > $log
 speedLog="./speedtest.log"
 true > $speedLog
