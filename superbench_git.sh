@@ -20,7 +20,7 @@ about() {
 	echo " ========================================================= "
 	echo " \                 Superbench.sh  Script                 / "
 	echo " \       Basic system info, I/O test and speedtest       / "
-	echo " \                   v1.1.7 (7 Apr 2020)                / "
+	echo " \                   v1.1.7 (7 Apr 2020)                 / "
 	echo " \                   Created by Oldking                  / "
 	echo " ========================================================= "
 	echo ""
