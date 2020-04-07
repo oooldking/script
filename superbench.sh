@@ -652,7 +652,7 @@ get_system_info() {
 print_intro() {
 	printf ' Superbench.sh -- https://www.oldking.net/350.html\n' | tee -a $log
 	printf " Mode  : \e${GREEN}%s\e${PLAIN}    Version : \e${GREEN}%s${PLAIN}\n" $mode_name 1.1.7 | tee -a $log
-	printf ' Usage : wget -qO- git.io/superbench.sh | bash\n' | tee -a $log
+	printf ' Usage : wget -qO- sb.oldking.net | bash\n' | tee -a $log
 }
 
 sharetest() {
