@@ -2,7 +2,7 @@
 #
 # Description: Auto system info & I/O test & network to China script
 #
-# Copyright (C) 2017 - 2018 Oldking <oooldking@gmail.com>
+# Copyright (C) 2017 - 2020 Oldking <oooldking@gmail.com>
 #
 # Thanks: Bench.sh <i@teddysun.com>
 #
