@@ -74,7 +74,7 @@ checkwget() {
 checkspeedtest() {
 	if  [ ! -e './speedtest-cli/speedtest' ]; then
 		echo "正在安装 Speedtest-cli"
-		wget --no-check-certificate -qO speedtest.tgz https://cdn.jsdelivr.net/gh/oooldking/script@1.1.7/speedtest_cli/ookla-speedtest-1.0.0-$(uname -m)-linux.tgz > /dev/null 2>&1
+		wget --no-check-certificate -qO speedtest.tgz https://bintray.com/ookla/download/download_file?file_path=ookla-speedtest-1.0.0-$(uname -m)-linux.tgz > /dev/null 2>&1
 	fi
 	mkdir -p speedtest-cli && tar zxvf speedtest.tgz -C ./speedtest-cli/ > /dev/null 2>&1 && chmod a+rx ./speedtest-cli/speedtest
 }
@@ -115,11 +115,10 @@ preinfo() {
 }
 
 selecttest() {
-	echo -e "  选择测速类型:      ${GREEN}1.${PLAIN} 三网测速         ${GREEN}3.${PLAIN} 电信节点测速"
-	echo -e "                     ${GREEN}2.${PLAIN} 取消本次测速     ${GREEN}4.${PLAIN} 联通节点测速"
-	echo -ne "                                         ${GREEN}5.${PLAIN} 移动节点测速"
+	echo -e "  测速类型:    ${GREEN}1.${PLAIN} 三网测速    ${GREEN}2.${PLAIN} 取消测速"
+	echo -ne "               ${GREEN}3.${PLAIN} 电信节点    ${GREEN}4.${PLAIN} 联通节点    ${GREEN}5.${PLAIN} 移动节点"
 	while :; do echo
-			read -p "  请输入数字选择: " selection
+			read -p "  请输入数字选择测速类型: " selection
 			if [[ ! $selection =~ ^[1-5]$ ]]; then
 					echo -ne "  ${RED}输入错误${PLAIN}, 请输入正确的数字!"
 			else
