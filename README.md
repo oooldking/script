@@ -12,6 +12,4 @@ bash <(curl -Lso- https://git.io/superspeed)
 
 ---
 
-Modified from Oldking's script. Original Info:
-- Description: Test your server's network with Speedtest to China
-- Copyright (C) 2018 Oldking <oooldking@gmail.com>
+Modified from Oldking's script.
