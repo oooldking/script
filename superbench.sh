@@ -131,7 +131,7 @@ next() {
 
 speed_test(){
 	if [[ $1 == '' ]]; then
-		speedtest-cli/speedtest -p no --accept-license > $speedLog 2>&1
+		speedtest-cli/speedtest -p no -u MB/s --accept-license > $speedLog 2>&1
 		is_upload=$(cat $speedLog | grep 'Upload')
 		result_speed=$(cat $speedLog | awk -F ' ' '/Result/{print $3}')
 		if [[ ${is_upload} ]]; then
@@ -147,13 +147,13 @@ speed_test(){
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload} Mbit/s" "${REDownload} Mbit/s" "${relatency} ms" | tee -a $log
+	        	printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload} MB/s" "${REDownload} MB/s" "${relatency} ms" | tee -a $log
 	        fi
 		else
 	        local cerror="ERROR"
 		fi
 	else
-		speedtest-cli/speedtest -p no -s $1 --accept-license > $speedLog 2>&1
+		speedtest-cli/speedtest -p no -s $1 -u MB/s --accept-license > $speedLog 2>&1
 		is_upload=$(cat $speedLog | grep 'Upload')
 		if [[ ${is_upload} ]]; then
 	        local REDownload=$(cat $speedLog | awk -F ' ' '/Download/{print $3}')
@@ -163,7 +163,7 @@ speed_test(){
 
 	        temp=$(echo "${REDownload}" | awk -F ' ' '{print $1}')
 	        if [[ $(awk -v num1=${temp} -v num2=0 'BEGIN{print(num1>num2)?"1":"0"}') -eq 1 ]]; then
-	        	printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload} Mbit/s" "${REDownload} Mbit/s" "${relatency} ms" | tee -a $log
+	        	printf "${YELLOW}%-18s${GREEN}%-18s${RED}%-20s${SKYBLUE}%-12s${PLAIN}\n" " ${nodeName}" "${reupload} MB/s" "${REDownload} MB/s" "${relatency} ms" | tee -a $log
 			fi
 		else
 	        local cerror="ERROR"
