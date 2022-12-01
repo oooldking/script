@@ -53,6 +53,7 @@ next() {
     printf "%-20s\n" "-" | sed 's/\s/-/g'
 }
 
+# prepate environment
 init() {
     # Check OS
     arch=$( uname -m )
@@ -74,7 +75,7 @@ init() {
 
 clear
 
-## start to use besttrace
+## trace route
 trace() {
     for i in {0..11}
     do
@@ -87,6 +88,7 @@ trace() {
     done
 }
 
+# calculate and print time
 print_end_time() {
     end=$(date +%s) 
     time=$(( $end - $start ))
@@ -109,10 +111,12 @@ print_end_time() {
     echo -e "${SKYBLUE}End${PLAIN}"
 }
 
+# clean trash
 cleanup() {
     rm -f supertrace*
 }
 
+# start
 about
 init
 trace
