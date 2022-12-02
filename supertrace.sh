@@ -6,7 +6,7 @@
 #
 # Thanks: Besttrace
 #
-# URL: https://www.oldking.net/1360.html
+# URL: https://www.oldking.net/1359.html
 #
 
 # Color
@@ -29,7 +29,7 @@ about() {
     echo " \                   Created by Oldking                  / "
     echo " ========================================================= "
     echo ""
-    echo " Intro: https://www.oldking.net/1360.html"
+    echo " Intro: https://www.oldking.net/1359.html"
     echo " Copyright (C) 2022 Oldking oooldking@gmail.com"
     echo -e " Version: ${GREEN}v$VERSION${PLAIN} (1 Dec 2022)"
     echo -e " ${SKYBLUE}Usage : wget -qO- oldking.net/supertrace.sh | bash${PLAIN}"
