@@ -1,7 +1,7 @@
 # Some Linux scripts
 ## SuperTrace.sh
 - Description: Auto Traceroute to China Network
-- Intro:  https://www.oldking.net/1360.html
+- Intro:  https://www.oldking.net/1359.html
 - Copyright (C) 2017-2022 Oldking <oooldking@gmail.com>
  
 ```bash
